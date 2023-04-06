@@ -1,8 +1,10 @@
 import { Express, Router, json } from 'express';
 import morgan from 'morgan';
 import auth from './auth';
+import config from 'config';
 
 const router = Router();
+const baseUri = config.get('baseUri');
 
 function routes(app: Express) {
   app.use(json());
@@ -13,7 +15,7 @@ function routes(app: Express) {
 
   const defaultRoutes = [
     {
-      path: '/auth',
+      path: `/auth`,
       handle: auth
     }
   ];
@@ -21,6 +23,8 @@ function routes(app: Express) {
   defaultRoutes.forEach((route) => {
     router.use(route.path, route.handle);
   });
+
+  return app.use(`${baseUri}`, router);
 }
 
 export default routes;

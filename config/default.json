@@ -1,0 +1,5 @@
+{
+  "baseUri": "/api/v1",
+  "jwtPrivateKey": "mySecureDevKey",
+  "db": "mongodb://localhost/rocketmonDevDB"
+}
