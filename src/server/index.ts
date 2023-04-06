@@ -1,7 +1,12 @@
 import express from 'express';
+import routes from '../routes/v1';
 
 const app = express();
 
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
+routes(app);
+
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
