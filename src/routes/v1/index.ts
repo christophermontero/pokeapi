@@ -1,6 +1,6 @@
 import { Express, Router, json } from 'express';
 import morgan from 'morgan';
-import auth from './auth';
+import auth from '../../controllers/auth';
 import config from 'config';
 
 const router = Router();
