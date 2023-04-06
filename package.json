@@ -1,0 +1,23 @@
+{
+  "name": "rocketmon-api",
+  "version": "1.0.0",
+  "description": "This is an API for visualize all pokemons with their stats",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/christophermontero/rocketmon-api.git"
+  },
+  "keywords": [
+    "API",
+    "Pokemon"
+  ],
+  "author": "giocom",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/christophermontero/rocketmon-api/issues"
+  },
+  "homepage": "https://github.com/christophermontero/rocketmon-api#readme"
+}
