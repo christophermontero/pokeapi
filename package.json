@@ -4,6 +4,7 @@
   "description": "This is an API for visualize all pokemons with their stats",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,5 +20,16 @@
   "bugs": {
     "url": "https://github.com/christophermontero/rocketmon-api/issues"
   },
-  "homepage": "https://github.com/christophermontero/rocketmon-api#readme"
+  "homepage": "https://github.com/christophermontero/rocketmon-api#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "helmet": "^6.0.1",
+    "mongoose": "^7.0.3"
+  },
+  "devDependencies": {
+    "jest": "^29.5.0",
+    "nodemon": "^2.0.22",
+    "supertest": "^6.3.3",
+    "ts-node": "^10.9.1"
+  }
 }
