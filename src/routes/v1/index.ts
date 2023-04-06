@@ -6,7 +6,7 @@ import config from 'config';
 const router = Router();
 const baseUri = config.get('baseUri');
 
-function routes(app: Express) {
+const routes = (app: Express) => {
   app.use(json());
 
   if (app.get('env') === 'development') {
@@ -25,6 +25,6 @@ function routes(app: Express) {
   });
 
   return app.use(`${baseUri}`, router);
-}
+};
 
 export default routes;
