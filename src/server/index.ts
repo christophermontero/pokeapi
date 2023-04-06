@@ -1,7 +1,7 @@
 import express from 'express';
 import routes from '../routes/v1';
 import colors from 'colors';
-import connectDB from '../domain/orm/mongoDb';
+import connectDB from '../domain/repositories/mongoDb';
 import logger from '../utils/logger';
 
 const app = express();
