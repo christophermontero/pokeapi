@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import httpResponses from '../../utils/constants/responses';
+import httpResponses from '../constants/responses';
 
 const validate =
   (validator: any) => (req: Request, res: Response, next: NextFunction) => {

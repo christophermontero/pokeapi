@@ -1,13 +1,16 @@
 import express from 'express';
 import routes from '../routes/v1';
 import colors from 'colors';
+import connectDB from '../domain/orm/mongoDb';
+import logger from '../utils/logger';
 
 const app = express();
 
 routes(app);
+connectDB(app);
 
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
-  console.log(colors.yellow.bold(`Server is running on port ${port}`));
+  logger.Info(colors.yellow.bold(`Server is running on port ${port}`));
 });
