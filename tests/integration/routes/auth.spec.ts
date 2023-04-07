@@ -1,8 +1,9 @@
-import request from 'supertest';
+import bcrypt from 'bcrypt';
 import mongoose from 'mongoose';
+import request from 'supertest';
+import httpResponses from '../../../src/constants/responses';
 import Trainer from '../../../src/domain/entities/Trainer';
 import server from '../../../src/server/index';
-import httpResponses from '../../../src/constants/responses';
 
 describe('/api/v1/auth', () => {
   afterAll(async () => {
@@ -43,7 +44,7 @@ describe('/api/v1/auth', () => {
       });
     });
 
-    it('should return bad request error if the request is invalid', async () => {
+    it('should failed if password is invalid', async () => {
       password = '12345678';
       const res = await exec();
 
@@ -55,7 +56,7 @@ describe('/api/v1/auth', () => {
       );
     });
 
-    it('should return conflict error if user already exists', async () => {
+    it('should falied if user already exists', async () => {
       await Trainer.collection.insertOne({
         name,
         nickname,
@@ -74,25 +75,65 @@ describe('/api/v1/auth', () => {
     });
   });
 
-  // describe('POST /signup', () => {
-  //   let name: string, password: string;
+  describe('POST /signup', () => {
+    let name: string, password: string;
 
-  //   const exec = () => {
-  //     return request(server).post('/api/v1/auth/signin').send({
-  //       name,
-  //       password
-  //     });
-  //   };
+    const exec = () => {
+      return request(server).post('/api/v1/auth/signin').send({
+        name,
+        password
+      });
+    };
 
-  //   beforeEach(() => {
-  //     name = 'ashketchum';
-  //     password = 'Test*2023#';
-  //   });
+    beforeEach(async () => {
+      name = 'ashketchum';
+      password = 'Test*2023#';
 
-  //   afterAll(async () => {
-  //     if (mongoose.connection.readyState === 2) {
-  //       await Trainer.deleteMany({});
-  //     }
-  //   });
-  // });
+      await Trainer.collection.insertOne({
+        name: 'ashketchum',
+        nickname: 'Golden boy',
+        team: 'rojo',
+        password: await bcrypt.hash(password, 10)
+      });
+    });
+
+    afterEach(async () => {
+      await Trainer.deleteMany({});
+    });
+
+    it('should login successfully', async () => {
+      const res = await exec();
+
+      expect(res.status).toBe(httpResponses.OK.httpCode);
+      expect(res.body).toHaveProperty('code', httpResponses.OK.code);
+      expect(res.body).toHaveProperty('message', httpResponses.OK.message);
+    });
+
+    it('should falied if name is invalid', async () => {
+      name = 'John Doe';
+      const res = await exec();
+
+      expect(res.status).toBe(httpResponses.BAD_REQUEST.httpCode);
+      expect(res.body).toHaveProperty('code', httpResponses.BAD_REQUEST.code);
+      expect(res.body).toHaveProperty(
+        'message',
+        httpResponses.BAD_REQUEST.message
+      );
+    });
+
+    it('should failed if password not matches', async () => {
+      password = 'Test*2023';
+      const res = await exec();
+
+      expect(res.status).toBe(httpResponses.INVALID_PASSWORD.httpCode);
+      expect(res.body).toHaveProperty(
+        'code',
+        httpResponses.INVALID_PASSWORD.code
+      );
+      expect(res.body).toHaveProperty(
+        'message',
+        httpResponses.INVALID_PASSWORD.message
+      );
+    });
+  });
 });
