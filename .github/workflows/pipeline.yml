@@ -33,7 +33,7 @@ jobs:
       - name: Print env vars
         run: echo $ROCKETMON_BASE_API_URI
         env:
-          ROCKETMON_BASE_API_URI: ${{ env.ROCKETMON_BASE_API_URI }}
+          ROCKETMON_BASE_API_URI: ${{ vars.ROCKETMON_BASE_API_URI }}
       - name: Install dependencies 🔧
         run: npm install
       - name: Test 🧪
@@ -53,9 +53,9 @@ jobs:
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: ${{ env.HEROKU_APP_NAME }}
-          heroku_email: ${{ env.HEROKU_EMAIL }}
+          heroku_app_name: ${{ vars.HEROKU_APP_NAME }}
+          heroku_email: ${{ vars.HEROKU_EMAIL }}
         env:
-          HD_BASE_API_URI: ${{ env.ROCKETMON_BASE_API_URI }}
+          HD_BASE_API_URI: ${{ vars.ROCKETMON_BASE_API_URI }}
           HD_JWT_PRIVATE_KEY: ${{ secrets.ROCKETMON_JWT_PRIVATE_KEY }}
-          HD_DB_URI: ${{ env.ROCKETMON_DB_URI }}
+          HD_DB_URI: ${{ vars.ROCKETMON_DB_URI }}
