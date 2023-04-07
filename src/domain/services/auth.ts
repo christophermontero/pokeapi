@@ -26,9 +26,9 @@ export const AuthService = {
 
       await TrainerORM.Store(name, nickname, hashedPassword, team);
 
-      return res.status(httpResponses.OK.httpCode).json({
-        code: httpResponses.OK.code,
-        message: httpResponses.OK.message
+      return res.status(httpResponses.CREATED.httpCode).json({
+        code: httpResponses.CREATED.code,
+        message: httpResponses.CREATED.message
       });
     } catch (error: any) {
       logger.Danger(`${error.message}`);
@@ -44,6 +44,7 @@ export const AuthService = {
       name = req.body.name;
     try {
       const trainer = await TrainerORM.FindByName(name);
+      console.log(trainer);
 
       if (!trainer) {
         return res.status(httpResponses.USER_NOT_EXISTS.httpCode).json({

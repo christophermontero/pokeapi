@@ -1,0 +1,30 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CD-vidly
+
+# Controls when the action will run.
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  heroku:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+
+      - name: Deploy to Heroku 📡
+        if: ${{ github.event_name != 'pull_request' }}
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
+        env:
+          HD_VIDLY_JWTPRIVATEKEY: ${{ secrets.VIDLY_JWTPRIVATEKEY }}
+          HD_VIDLY_DB: ${{ secrets.VIDLY_DB }}
+          

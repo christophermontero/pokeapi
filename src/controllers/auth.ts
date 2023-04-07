@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import { AuthService } from '../domain/services/auth';
 import { hashingPassword, validate } from '../middlewares';
-import validateTrainer from '../validators/trainer';
 import validateLogin from '../validators/login';
+import validateTrainer from '../validators/trainer';
 
 const auth = Router();
 

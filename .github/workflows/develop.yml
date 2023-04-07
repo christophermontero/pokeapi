@@ -1,0 +1,45 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI-rocketmon
+
+# Controls when the action will run.
+on:
+  # Triggers the workflow on push or pull request events but only for the develop branch
+  push:
+    branches: [develop]
+  pull_request:
+    branches: [develop]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js 🚨
+        uses: actions/setup-node@v2
+        with:
+          node-version: "18.x"
+
+      - name: Start MongoDB 💾
+        uses: supercharge/mongodb-github-action@1.6.0
+        with:
+          mongodb-version: "4"
+
+      - name: Cache Node.js modules ⏰
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-node-
+            ${{ runner.OS }}-
+
+      - name: Install dependencies 🔧
+        run: npm install
+
+      - name: Test 🧪
+        run: npm test
+        env:
+          CI: true

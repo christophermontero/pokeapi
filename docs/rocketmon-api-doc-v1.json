@@ -130,6 +130,9 @@
             "$ref": "#/components/responses/BAD_REQUEST"
           },
           "409": {
+            "$ref": "#/components/responses/USER_TAKEN"
+          },
+          "422": {
             "$ref": "#/components/responses/INVALID_PASSWORD"
           },
           "500": {
@@ -280,7 +283,7 @@
         }
       },
       "INVALID_PASSWORD": {
-        "description": "Unauthorized",
+        "description": "Unprocessable entity",
         "content": {
           "application/json": {
             "schema": {
