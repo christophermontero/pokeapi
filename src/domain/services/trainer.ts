@@ -5,7 +5,7 @@ import { TrainerORM } from '../orm/trainer';
 import { SecurityService } from './security';
 
 export const TrainerService = {
-  Store: async (req: Request, res: Response) => {
+  Signup: async (req: Request, res: Response) => {
     try {
       const name = req.body.name,
         nickname = req.body.nickname,
@@ -18,7 +18,7 @@ export const TrainerService = {
 
       await TrainerORM.Store(name, nickname, hashedPassword, team, pepper);
 
-      return res.status(200).json({
+      return res.status(201).json({
         code: httpResponses.OK.code,
         message: httpResponses.OK.message
       });
@@ -30,5 +30,6 @@ export const TrainerService = {
         message: httpResponses.INTERNAL_ERROR.message
       });
     }
-  }
+  },
+  Singin: async (req: Request, res: Response) => {}
 };

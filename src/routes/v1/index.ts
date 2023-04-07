@@ -1,17 +1,15 @@
-import { Express, Router, json } from 'express';
-import morgan from 'morgan';
+import { Express, Router } from 'express';
 import auth from '../../controllers/auth';
 import config from 'config';
+import { serve, setup } from 'swagger-ui-express';
+import * as swaggerDocument from '../../../docs/rocketmon-api-doc-v1.json';
 
 const router = Router();
 const baseUri = config.get('baseUri');
 
 const routes = (app: Express) => {
-  app.use(json());
-
-  if (app.get('env') === 'development') {
-    app.use(morgan('dev'));
-  }
+  router.use('/docs', serve);
+  router.get('/docs', setup(swaggerDocument));
 
   const defaultRoutes = [
     {

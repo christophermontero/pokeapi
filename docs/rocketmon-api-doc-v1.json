@@ -1,0 +1,133 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Rocketmon API",
+    "version": "1.0",
+    "description": "# Introduction\nRocketmon is a backend for visualize pokemons",
+    "contact": {
+      "name": "Christopher Ortiz Montero",
+      "email": "cgortizm21@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "termsOfService": "http://swagger.io/terms"
+  },
+  "servers": [
+    {
+      "url": "https://rocketmon-api.herokuapp.com",
+      "description": "production"
+    },
+    {
+      "url": "http://localhost:3000/api/v1",
+      "description": "development"
+    }
+  ],
+  "paths": {
+    "/auth": {
+      "post": {
+        "summary": "Sign up",
+        "operationId": "post-auth-register-trainer",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "code": "SUCCESS",
+                      "message": "The request has completed successfully"
+                    }
+                  },
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "example": "SUCCESS"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "The request has completed successfully"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "auth"
+        ],
+        "description": "This service allows register a new trainer.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Trainer"
+              }
+            }
+          },
+          "description": ""
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "token": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "requestBodies": {},
+    "schemas": {
+      "Trainer": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "name": "Ash Ketchum",
+            "nickname": "panzerfaust",
+            "password": "Test*2023#",
+            "team": "azul"
+          }
+        },
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Ash Ketchum",
+            "minLength": 2,
+            "maxLength": 80
+          },
+          "nickname": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 80,
+            "example": "Golden boy"
+          },
+          "password": {
+            "type": "string",
+            "pattern": "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{6,10}$",
+            "example": "Test*2023#"
+          },
+          "team": {
+            "type": "string",
+            "example": "azul",
+            "enum": [
+              "azul",
+              "rojo",
+              "amarillo"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "auth",
+      "description": "Authorization domain"
+    }
+  ]
+}
