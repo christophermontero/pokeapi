@@ -33,12 +33,12 @@ export const TrainerORM = {
     }
   },
   UpdateTrainer: async (trainer: ITrainer) => {
-    const lastLogin = new Date();
+    const lastConnection = new Date();
     try {
       return await Trainer.findOneAndUpdate(
         { name: trainer.name },
         {
-          lastLogin
+          lastConnection
         },
         {
           new: true

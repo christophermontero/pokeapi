@@ -39,8 +39,8 @@ export const AuthService = {
     }
   },
   Singin: async (req: Request, res: Response) => {
-    const enteredPassword = req.body.password;
-    const name = req.body.name.toLowerCase();
+    const enteredPassword = req.body.password,
+      name = req.body.name;
     try {
       const trainer = await TrainerORM.FindByName(name);
 
