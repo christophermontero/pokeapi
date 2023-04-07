@@ -5,6 +5,6 @@ import { TrainerService } from '../domain/services/trainer';
 
 const auth = Router();
 
-auth.post('/', [validate(validateTrainer)], TrainerService.Signup);
+auth.post('/signup', [validate(validateTrainer)], TrainerService.Signup);
 
 export default auth;

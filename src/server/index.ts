@@ -5,7 +5,6 @@ import connectDB from '../domain/repositories/mongoDb';
 import logger from '../utils/logger';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import { serve, setup } from 'swagger-ui-express';
 
 const app = express();
 
@@ -21,6 +20,8 @@ routes(app);
 
 const port = process.env.PORT || 3000;
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   logger.Info(colors.yellow.bold(`Server is running on port ${port}`));
 });
+
+export default server;
