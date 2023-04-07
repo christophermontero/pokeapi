@@ -29,19 +29,17 @@ describe('/api/v1/auth', () => {
       password = 'Test*2023#';
     });
 
-    afterAll(async () => {
-      if (mongoose.connection.readyState === 2) {
-        await Trainer.deleteMany({});
-      }
+    afterEach(async () => {
+      await Trainer.deleteMany({});
     });
 
     it('should register a new trainer successfully', async () => {
       const res = await exec();
 
-      expect(res.status).toBe(201);
+      expect(res.status).toBe(httpResponses.CREATED.httpCode);
       expect(res.body).toMatchObject({
-        code: httpResponses.OK.code,
-        message: httpResponses.OK.message
+        code: httpResponses.CREATED.code,
+        message: httpResponses.CREATED.message
       });
     });
 
@@ -49,7 +47,7 @@ describe('/api/v1/auth', () => {
       password = '12345678';
       const res = await exec();
 
-      expect(res.status).toBe(400);
+      expect(res.status).toBe(httpResponses.BAD_REQUEST.httpCode);
       expect(res.body).toHaveProperty('code', httpResponses.BAD_REQUEST.code);
       expect(res.body).toHaveProperty(
         'message',
@@ -57,19 +55,44 @@ describe('/api/v1/auth', () => {
       );
     });
 
-    it('should return internal error if database is down', async () => {
-      await mongoose.disconnect();
+    it('should return conflict error if user already exists', async () => {
+      await Trainer.collection.insertOne({
+        name,
+        nickname,
+        team,
+        password
+      });
+
       const res = await exec();
 
-      expect(res.status).toBe(500);
-      expect(res.body).toHaveProperty(
-        'code',
-        httpResponses.INTERNAL_ERROR.code
-      );
+      expect(res.status).toBe(httpResponses.USER_TAKEN.httpCode);
+      expect(res.body).toHaveProperty('code', httpResponses.USER_TAKEN.code);
       expect(res.body).toHaveProperty(
         'message',
-        httpResponses.INTERNAL_ERROR.message
+        httpResponses.USER_TAKEN.message
       );
     });
   });
+
+  // describe('POST /signup', () => {
+  //   let name: string, password: string;
+
+  //   const exec = () => {
+  //     return request(server).post('/api/v1/auth/signin').send({
+  //       name,
+  //       password
+  //     });
+  //   };
+
+  //   beforeEach(() => {
+  //     name = 'ashketchum';
+  //     password = 'Test*2023#';
+  //   });
+
+  //   afterAll(async () => {
+  //     if (mongoose.connection.readyState === 2) {
+  //       await Trainer.deleteMany({});
+  //     }
+  //   });
+  // });
 });
