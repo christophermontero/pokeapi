@@ -30,10 +30,6 @@ jobs:
           restore-keys: |
             ${{ runner.OS }}-node-
             ${{ runner.OS }}-
-      - name: Print branch name 📝
-        run: echo $GITHUB_REF
-        env:
-          GITHUB_REF: ${{ github.ref }}
       - name: Install dependencies 🔧
         run: npm install
       - name: Test 🧪
@@ -48,6 +44,13 @@ jobs:
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
+      - name: Print variables names 📝
+        run: echo $GITHUB_REF, $HD_BASE_API_URI, $HD_DB_URI, $HEROKU_EMAIL
+        env:
+          GITHUB_REF: ${{ github.ref }}
+          HD_BASE_API_URI: ${{ vars.ROCKETMON_BASE_API_URI }}
+          HD_DB_URI: ${{ vars.ROCKETMON_DB_URI }}
+          HEROKU_EMAIL: ${{ vars.HEROKU_EMAIL }}
       - name: Deploy to Heroku 📡
         if: ${{ github.event_name != 'pull_request' }}
         uses: akhileshns/heroku-deploy@v3.12.12
