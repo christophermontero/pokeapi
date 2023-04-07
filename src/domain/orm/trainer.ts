@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import Trainer from '../entities/Trainer';
 import logger from '../../utils/logger';
+import { ITrainer } from '../models/trainer';
 
 export const TrainerORM = {
   Store: async (
@@ -10,19 +11,19 @@ export const TrainerORM = {
     team: string,
     pepper: string
   ) => {
-    try {
-      const trainer = new Trainer({
+    const trainer: ITrainer = {
         name,
         nickname,
         password,
         team,
-        pepper,
-        createdAt: Date.now()
-      });
-
-      return await trainer.save();
+        pepper
+      },
+      document = new Trainer(trainer);
+    try {
+      return await document.save();
     } catch (error: any) {
       logger.Danger(`${error.message}`);
+      throw error;
     }
   }
 };

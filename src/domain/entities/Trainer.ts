@@ -28,12 +28,12 @@ const Trainer = mongoose.model(
     },
     createdAt: {
       type: Date,
-      required: true
+      required: true,
+      default: Date.now
     },
     lastConnection: {
       type: Date,
-      required: true,
-      default: Date.now
+      required: false
     }
   })
 );

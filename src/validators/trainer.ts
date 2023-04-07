@@ -1,7 +1,7 @@
 import Joi from 'joi';
-import { Trainer } from '../domain/models/trainer';
+import { ITrainer } from '../domain/models/trainer';
 
-const validateTrainer = (trainer: Trainer) => {
+const validateTrainer = (trainer: ITrainer) => {
   const trainerSchema = Joi.object({
     name: Joi.string().min(2).max(80).required(),
     password: Joi.string()
