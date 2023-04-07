@@ -6,6 +6,7 @@ import _ from 'lodash';
 import httpResponses from '../../constants/responses';
 import logger from '../../utils/logger';
 import { TrainerORM } from '../orm/trainer';
+import generateToken from '../../utils/jwt';
 
 export const AuthService = {
   Signup: async (req: Request, res: Response) => {
@@ -65,11 +66,7 @@ export const AuthService = {
         });
       }
 
-      const token = jwt.sign({ id: trainer._id }, config.get('jwtPrivateKey'), {
-        expiresIn: 86400,
-        algorithm: 'HS256',
-        issuer: 'RocketmonApi'
-      });
+      const token = generateToken(trainer);
 
       await TrainerORM.UpdateTrainer(trainer);
 
