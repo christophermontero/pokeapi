@@ -109,6 +109,21 @@ describe('/api/v1/auth', () => {
       expect(res.body).toHaveProperty('message', httpResponses.OK.message);
     });
 
+    it('should falied if trainer not exists', async () => {
+      name = 'johndoe';
+      const res = await exec();
+
+      expect(res.status).toBe(httpResponses.USER_NOT_EXISTS.httpCode);
+      expect(res.body).toHaveProperty(
+        'code',
+        httpResponses.USER_NOT_EXISTS.code
+      );
+      expect(res.body).toHaveProperty(
+        'message',
+        httpResponses.USER_NOT_EXISTS.message
+      );
+    });
+
     it('should falied if name is invalid', async () => {
       name = 'John Doe';
       const res = await exec();
