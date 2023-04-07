@@ -22,9 +22,9 @@ This is an API for visualize all pokemons with their stats.
 ### Endpoints
 
 ```
-* Proyecto: http://localhost:8080/proyectos
-* Módulos: http://localhost:8080/modulos
-* Funciones: http://localhost:8080/funciones
+* Auth:
+  * POST /api/v1/auth/signup
+  * POST /api/v1/auth/signin
 ```
 
 ### MongoDB documents structure
@@ -142,7 +142,7 @@ Describe the structure of the project and its architecture.
 └── tsconfig.json
 ```
 
-Chekc the API documentation [here](https://www.apache.org/licenses/LICENSE-2.0F)
+Chekc the API documentation [here]()
 
 ## Install guide
 

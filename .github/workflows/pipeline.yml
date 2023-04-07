@@ -42,6 +42,10 @@ jobs:
     needs: build
     if: github.ref == 'refs/heads/master'
     steps:
+      - name: Print branch name 📝
+        run: echo $GITHUB_REF
+        env:
+          GITHUB_REF: ${{ github.ref }}
       - name: Checkout 🛎️
         uses: actions/checkout@v3
       - name: Deploy to Heroku 📡
