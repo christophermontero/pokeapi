@@ -1,0 +1,58 @@
+name: rocketmon-pipeline
+
+on:
+  push:
+    branches:
+      - feature/*
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+      - name: Set up Node.js 🚨
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+      - name: Start MongoDB 💾
+        uses: supercharge/mongodb-github-action@1.6.0
+        with:
+          mongodb-version: '4'
+      - name: Cache Node.js modules ⏰
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-node-
+            ${{ runner.OS }}-
+      - name: Install dependencies 🔧
+        run: npm install
+      - name: Test 🧪
+        run: npm test
+        env:
+          CI: true
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+      - name: Deploy to Heroku 📡
+        if: ${{ github.event_name != 'pull_request' }}
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ${{ vars.HEROKU_APP_NAME }}
+          heroku_email: ${{ vars.HEROKU_EMAIL }}
+        env:
+          HD_BASE_API_URI: ${{ vars.ROCKETMON_BASE_API_URI }}
+          HD_JWT_PRIVATE_KEY: ${{ secrets.ROCKETMON_JWT_PRIVATE_KEY }}
+          HD_DB_URI: ${{ vars.ROCKETMON_DB_URI }}
+          HD_DB_NAME: ${{ secrets.ROCKETMON_DB_NAME }}

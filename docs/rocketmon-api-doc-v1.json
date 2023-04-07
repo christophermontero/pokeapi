@@ -1,0 +1,448 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Rocketmon API",
+    "version": "1.0",
+    "description": "# Introduction\nRocketmon is a backend for visualize pokemons",
+    "contact": {
+      "name": "Christopher Ortiz Montero",
+      "email": "cgortizm21@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "termsOfService": "http://swagger.io/terms"
+  },
+  "servers": [
+    {
+      "url": "https://rocketmon-api.herokuapp.com",
+      "description": "production"
+    },
+    {
+      "url": "http://localhost:3000/api/v1",
+      "description": "development"
+    }
+  ],
+  "paths": {
+    "/auth/signup": {
+      "post": {
+        "summary": "Sign up",
+        "operationId": "post-auth-register-trainer",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "code": "SUCCESS",
+                      "message": "The request has completed successfully"
+                    }
+                  },
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "example": "SUCCESS"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "The request has completed successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BAD_REQUEST"
+          },
+          "409": {
+            "$ref": "#/components/responses/USER_TAKEN"
+          },
+          "500": {
+            "$ref": "#/components/responses/INTERNAL_ERROR"
+          }
+        },
+        "tags": [
+          "auth"
+        ],
+        "description": "This service allows register a new trainer.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Trainer"
+              }
+            }
+          },
+          "description": ""
+        }
+      },
+      "parameters": []
+    },
+    "/auth/signin": {
+      "post": {
+        "summary": "",
+        "operationId": "post-auth-trainer-login",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "code": "",
+                      "message": "",
+                      "data": {
+                        "token": ""
+                      }
+                    }
+                  },
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "example": "SUCCESS"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "The request has completed successfully"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "token": {
+                          "type": "string",
+                          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MzA3MDc4ZTM1ZTBkZDUxZTM3ODBkMCIsIm5hbWUiOiJhc2hrZXRjaHVtIiwiaWF0IjoxNjgwODk4MTYxLCJleHAiOjE2ODA5ODQ1NjEsImlzcyI6IlJvY2tldG1vbkFwaSJ9.KBphgC9VRIe9Xwl9Aky_0t8QfbGyiOrjTFFZHroGFgo"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BAD_REQUEST"
+          },
+          "409": {
+            "$ref": "#/components/responses/USER_TAKEN"
+          },
+          "422": {
+            "$ref": "#/components/responses/INVALID_PASSWORD"
+          },
+          "500": {
+            "$ref": "#/components/responses/INTERNAL_ERROR"
+          }
+        },
+        "tags": [
+          "auth"
+        ],
+        "description": "This service it is responsible of login a pokemon trainer.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-examples": {
+                  "Example 1": {
+                    "name": "",
+                    "password": ""
+                  }
+                },
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "ashketchum",
+                    "pattern": "^[a-zA-Z0-9]{2,50}$",
+                    "minLength": 2,
+                    "maxLength": 50
+                  },
+                  "password": {
+                    "type": "string",
+                    "pattern": "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{6,10}$",
+                    "example": "Test*2023#",
+                    "minLength": 6,
+                    "maxLength": 10
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "token": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "requestBodies": {},
+    "schemas": {
+      "Trainer": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "name": "Ash Ketchum",
+            "nickname": "panzerfaust",
+            "password": "Test*2023#",
+            "team": "azul"
+          }
+        },
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "ashketchum",
+            "minLength": 2,
+            "pattern": "^[a-zA-Z0-9]{2,50}$",
+            "maxLength": 50
+          },
+          "nickname": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "example": "Golden boy"
+          },
+          "password": {
+            "type": "string",
+            "pattern": "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{6,10}$",
+            "example": "Test*2023#",
+            "minLength": 6,
+            "maxLength": 10
+          },
+          "team": {
+            "type": "string",
+            "example": "azul",
+            "enum": [
+              "azul",
+              "rojo",
+              "amarillo"
+            ]
+          }
+        }
+      }
+    },
+    "responses": {
+      "USER_TAKEN": {
+        "description": "Conflict",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "Example 1": {
+                  "code": "",
+                  "message": ""
+                }
+              },
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "example": "USER_TAKEN"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "User already exists"
+                }
+              }
+            }
+          }
+        }
+      },
+      "INTERNAL_ERROR": {
+        "description": "Internal error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "Example 1": {
+                  "code": "",
+                  "message": ""
+                }
+              },
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "example": "INTERNAL_SERVER_ERROR"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Internal server error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "INVALID_PASSWORD": {
+        "description": "Unprocessable entity",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "Example 1": {
+                  "code": "",
+                  "message": ""
+                }
+              },
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "example": "INVALID_PASSWORD"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Invalid password"
+                }
+              }
+            }
+          }
+        }
+      },
+      "USER_NOT_EXISTS": {
+        "description": "Not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "Example 1": {
+                  "code": "",
+                  "message": ""
+                }
+              },
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "example": "USER_NOT_EXISTS"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "User not exists"
+                }
+              }
+            }
+          }
+        }
+      },
+      "BAD_REQUEST": {
+        "description": "Bad request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "Example 1": {
+                  "code": "",
+                  "message": "",
+                  "detail": ""
+                }
+              },
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "example": "BAD_REQUEST"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Bad request"
+                },
+                "detail": {
+                  "type": "array",
+                  "description": "Description with invalid fields",
+                  "items": {
+                    "x-stoplight": {
+                      "id": "7j71z728sugbo"
+                    },
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "spily8o7yi8c3"
+                        },
+                        "example": "\\\"field\\\" is not allowed"
+                      },
+                      "path": {
+                        "type": "array",
+                        "x-stoplight": {
+                          "id": "1warffjbk845s"
+                        },
+                        "items": {
+                          "x-stoplight": {
+                            "id": "i8098dfxpzphc"
+                          },
+                          "type": "string",
+                          "example": "field"
+                        }
+                      },
+                      "type": {
+                        "type": "string",
+                        "x-stoplight": {
+                          "id": "dcx78zoa9vsrj"
+                        },
+                        "example": "object.unknown"
+                      },
+                      "context": {
+                        "type": "object",
+                        "x-stoplight": {
+                          "id": "gdzcu0ah2tywx"
+                        },
+                        "additionalProperties": false,
+                        "properties": {
+                          "child": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "zm4fzft0at8t5"
+                            },
+                            "example": "field"
+                          },
+                          "label": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "czbj3ybihxi7j"
+                            },
+                            "example": "field"
+                          },
+                          "value": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "20ijqqozki7b0"
+                            }
+                          },
+                          "key": {
+                            "type": "string",
+                            "x-stoplight": {
+                              "id": "0apux1yey3la6"
+                            },
+                            "example": "field"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "auth",
+      "description": "Authorization domain"
+    }
+  ]
+}

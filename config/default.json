@@ -1,0 +1,8 @@
+{
+  "baseUri": "/api/v1",
+  "jwtPrivateKey": "mySecureDevKey",
+  "db": {
+    "uri": "mongodb://localhost:27017",
+    "name": "RocketmonDevDb"
+  }
+}

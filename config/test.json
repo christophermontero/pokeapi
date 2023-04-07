@@ -1,0 +1,8 @@
+{
+  "baseUri": "/api/v1",
+  "jwtPrivateKey": "mySecureTestKey",
+  "db": {
+    "uri": "mongodb://localhost:27017",
+    "name": "RocketmonTestDb"
+  }
+}
