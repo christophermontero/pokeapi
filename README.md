@@ -142,7 +142,7 @@ Describe the structure of the project and its architecture.
 └── tsconfig.json
 ```
 
-Puede consultar la documentación del API [aquí](https://documenter.getpostman.com/view/7032390/TzY4gb3F)
+Chekc the API documentation [here](https://www.apache.org/licenses/LICENSE-2.0F)
 
 ## Install guide
 
@@ -167,4 +167,4 @@ npm run dev
 
 ## License
 
-This project is under [Apache Licence](http://opensource.org/licenses/mit-license.php).
+This project is under [Apache License](https://www.apache.org/licenses/LICENSE-2.0).
