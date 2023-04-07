@@ -1,10 +1,6 @@
-# This is a basic workflow to help you get started with Actions
-
 name: rocketmon-pipeline
 
-# Controls when the action will run.
 on:
-  # Triggers the workflow on push or pull request events but only for the develop branch
   push:
     branches:
       - feature/*
@@ -18,17 +14,14 @@ jobs:
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v2
-
       - name: Set up Node.js 🚨
         uses: actions/setup-node@v2
         with:
           node-version: '18.x'
-
       - name: Start MongoDB 💾
         uses: supercharge/mongodb-github-action@1.6.0
         with:
           mongodb-version: '4'
-
       - name: Cache Node.js modules ⏰
         uses: actions/cache@v2
         with:
@@ -37,14 +30,15 @@ jobs:
           restore-keys: |
             ${{ runner.OS }}-node-
             ${{ runner.OS }}-
-
+      - name: Print env vars
+        run: echo ${{ env.ROCKETMON_BASE_API_URI }}
       - name: Install dependencies 🔧
         run: npm install
-
       - name: Test 🧪
         run: npm test
         env:
           CI: true
+
   deploy:
     runs-on: ubuntu-latestç
     needs: build
@@ -52,15 +46,14 @@ jobs:
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v2
-
       - name: Deploy to Heroku 📡
         if: ${{ github.event_name != 'pull_request' }}
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
-          heroku_email: ${{ secrets.HEROKU_EMAIL }}
+          heroku_app_name: ${{ env.HEROKU_APP_NAME }}
+          heroku_email: ${{ env.HEROKU_EMAIL }}
         env:
-          HD_BASE_API_URI: ${{ secrets.ROCKETMON_BASE_API_URI }}
+          HD_BASE_API_URI: ${{ env.ROCKETMON_BASE_API_URI }}
           HD_JWT_PRIVATE_KEY: ${{ secrets.ROCKETMON_JWT_PRIVATE_KEY }}
-          HD_DB_URI: ${{ secrets.ROCKETMON_DB_URI }}
+          HD_DB_URI: ${{ env.ROCKETMON_DB_URI }}
