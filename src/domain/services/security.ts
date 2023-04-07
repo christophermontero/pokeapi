@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import config from 'config';
 
 export const SecurityService = {
-  Hashing: async (password: string) => {
+  generateJWT: async (password: string) => {
     const saltRounds = 10;
     try {
       const salt = await bcrypt.genSalt(saltRounds);

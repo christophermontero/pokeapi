@@ -2,19 +2,15 @@ import { Request, Response } from 'express';
 import logger from '../../utils/logger';
 import httpResponses from '../../constants/responses';
 import { TrainerORM } from '../orm/trainer';
-import { SecurityService } from './security';
 
 export const TrainerService = {
   Signup: async (req: Request, res: Response) => {
     try {
       const name = req.body.name,
         nickname = req.body.nickname,
-        password = req.body.password,
-        team = req.body.team;
-
-      const { hashedPassword, pepper } = await SecurityService.Hashing(
-        password
-      );
+        team = req.body.team,
+        hashedPassword = req.body.hashedPassword,
+        pepper = req.body.pepper;
 
       await TrainerORM.Store(name, nickname, hashedPassword, team, pepper);
 
