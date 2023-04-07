@@ -31,7 +31,9 @@ jobs:
             ${{ runner.OS }}-node-
             ${{ runner.OS }}-
       - name: Print env vars
-        run: echo ${{ env.ROCKETMON_BASE_API_URI }}
+        run: echo $ROCKETMON_BASE_API_URI
+        env:
+          ROCKETMON_BASE_API_URI: ${{ env.ROCKETMON_BASE_API_URI }}
       - name: Install dependencies 🔧
         run: npm install
       - name: Test 🧪
