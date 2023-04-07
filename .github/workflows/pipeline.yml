@@ -30,6 +30,10 @@ jobs:
           restore-keys: |
             ${{ runner.OS }}-node-
             ${{ runner.OS }}-
+      - name: Print branch name 📝
+        run: echo $GITHUB_REF
+        env:
+          GITHUB_REF: ${{ github.ref }}
       - name: Install dependencies 🔧
         run: npm install
       - name: Test 🧪
