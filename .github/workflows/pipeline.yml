@@ -1,16 +1,15 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI-rocketmon
+name: rocketmon-pipeline
 
 # Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the develop branch
   push:
-    branches: 
+    branches:
       - feature/*
   pull_request:
-    branches: 
-      - develop
+    branches:
       - master
 
 jobs:
@@ -23,12 +22,12 @@ jobs:
       - name: Set up Node.js 🚨
         uses: actions/setup-node@v2
         with:
-          node-version: "18.x"
+          node-version: '18.x'
 
       - name: Start MongoDB 💾
         uses: supercharge/mongodb-github-action@1.6.0
         with:
-          mongodb-version: "4"
+          mongodb-version: '4'
 
       - name: Cache Node.js modules ⏰
         uses: actions/cache@v2

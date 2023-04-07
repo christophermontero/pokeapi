@@ -1,12 +1,10 @@
 import bcrypt from 'bcrypt';
-import config from 'config';
 import { Request, Response } from 'express';
-import jwt from 'jsonwebtoken';
 import _ from 'lodash';
 import httpResponses from '../../constants/responses';
+import generateToken from '../../utils/jwt';
 import logger from '../../utils/logger';
 import { TrainerORM } from '../orm/trainer';
-import generateToken from '../../utils/jwt';
 
 export const AuthService = {
   Signup: async (req: Request, res: Response) => {
@@ -44,7 +42,6 @@ export const AuthService = {
       name = req.body.name;
     try {
       const trainer = await TrainerORM.FindByName(name);
-      console.log(trainer);
 
       if (!trainer) {
         return res.status(httpResponses.USER_NOT_EXISTS.httpCode).json({
