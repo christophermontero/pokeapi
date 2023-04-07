@@ -40,7 +40,7 @@ jobs:
           CI: true
 
   deploy:
-    runs-on: ubuntu-latestç
+    runs-on: ubuntu-latest
     needs: build
     if: github.ref == 'refs/heads/master'
     steps:
