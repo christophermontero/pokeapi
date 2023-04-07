@@ -5,10 +5,14 @@ const Trainer = mongoose.model(
   new mongoose.Schema({
     name: {
       type: String,
+      trim: true,
+      lowercase: true,
       required: true
     },
     nickname: {
       type: String,
+      trim: true,
+      lowercase: true,
       required: false
     },
     password: {
