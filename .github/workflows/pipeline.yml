@@ -6,9 +6,12 @@ name: CI-rocketmon
 on:
   # Triggers the workflow on push or pull request events but only for the develop branch
   push:
-    branches: [develop]
+    branches: 
+      - feature/*
   pull_request:
-    branches: [develop]
+    branches: 
+      - develop
+      - master
 
 jobs:
   build:
@@ -43,3 +46,22 @@ jobs:
         run: npm test
         env:
           CI: true
+  deploy:
+    runs-on: ubuntu-latestç
+    needs: build
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+
+      - name: Deploy to Heroku 📡
+        if: ${{ github.event_name != 'pull_request' }}
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
+        env:
+          HD_BASE_API_URI: ${{ secrets.ROCKETMON_BASE_API_URI }}
+          HD_JWT_PRIVATE_KEY: ${{ secrets.ROCKETMON_JWT_PRIVATE_KEY }}
+          HD_DB_URI: ${{ secrets.ROCKETMON_DB_URI }}
