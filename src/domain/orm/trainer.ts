@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import Trainer from '../entities/trainer';
+import Trainer from '../entities/Trainer';
 import logger from '../../utils/logger';
 
 export const TrainerORM = {
@@ -7,14 +7,17 @@ export const TrainerORM = {
     name: string,
     nickname: string,
     password: string,
-    team: string
+    team: string,
+    pepper: string
   ) => {
     try {
       const trainer = new Trainer({
         name,
         nickname,
         password,
-        team
+        team,
+        pepper,
+        createdAt: Date.now()
       });
 
       return await trainer.save();

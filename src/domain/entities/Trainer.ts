@@ -19,6 +19,21 @@ const Trainer = mongoose.model(
       type: String,
       enum: ['rojo', 'azul', 'amarillo'],
       required: true
+    },
+    pepper: {
+      type: String,
+      required: true,
+      min: 8,
+      max: 8
+    },
+    createdAt: {
+      type: Date,
+      required: true
+    },
+    lastConnection: {
+      type: Date,
+      required: true,
+      default: Date.now
     }
   })
 );
