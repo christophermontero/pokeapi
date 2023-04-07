@@ -30,10 +30,6 @@ jobs:
           restore-keys: |
             ${{ runner.OS }}-node-
             ${{ runner.OS }}-
-      - name: Print env vars
-        run: echo $ROCKETMON_BASE_API_URI
-        env:
-          ROCKETMON_BASE_API_URI: ${{ vars.ROCKETMON_BASE_API_URI }}
       - name: Install dependencies 🔧
         run: npm install
       - name: Test 🧪
