@@ -60,9 +60,9 @@ export const AuthService = {
       );
 
       if (!isPasswordValid) {
-        return res.status(httpResponses.INVALID_TOKEN.httpCode).json({
-          code: httpResponses.INVALID_TOKEN.code,
-          message: httpResponses.INVALID_TOKEN.message
+        return res.status(httpResponses.INVALID_PASSWORD.httpCode).json({
+          code: httpResponses.INVALID_PASSWORD.code,
+          message: httpResponses.INVALID_PASSWORD.message
         });
       }
 

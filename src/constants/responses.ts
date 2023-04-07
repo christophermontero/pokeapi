@@ -19,9 +19,9 @@ const httpResponses = {
     code: 'USER_NOT_EXISTS',
     message: 'User not exists'
   },
-  INVALID_TOKEN: {
+  INVALID_PASSWORD: {
     httpCode: 401,
-    code: 'INVALID_TOKEN',
+    code: 'INVALID_PASSWORD',
     message: 'Invalid token'
   },
   INTERNAL_ERROR: {
