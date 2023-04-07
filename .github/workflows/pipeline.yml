@@ -55,3 +55,4 @@ jobs:
           HD_BASE_API_URI: ${{ vars.ROCKETMON_BASE_API_URI }}
           HD_JWT_PRIVATE_KEY: ${{ secrets.ROCKETMON_JWT_PRIVATE_KEY }}
           HD_DB_URI: ${{ vars.ROCKETMON_DB_URI }}
+          HD_DB_NAME: ${{ secrets.ROCKETMON_DB_NAME }}
