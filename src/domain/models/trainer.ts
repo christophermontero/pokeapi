@@ -3,7 +3,6 @@ export interface ITrainer {
   password: string;
   team: string;
   nickname?: string;
-  pepper?: string;
   createdAt?: Date;
   lastLogin?: Date;
 }

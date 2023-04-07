@@ -9,6 +9,21 @@ const httpResponses = {
     code: 'BAD_REQUEST',
     message: 'Bad request'
   },
+  USER_TAKEN: {
+    httpCode: 409,
+    code: 'USER_TAKEN',
+    message: 'User already exists'
+  },
+  USER_NOT_EXISTS: {
+    httpCode: 404,
+    code: 'USER_NOT_EXISTS',
+    message: 'User not exists'
+  },
+  INVALID_TOKEN: {
+    httpCode: 401,
+    code: 'INVALID_TOKEN',
+    message: 'Invalid token'
+  },
   INTERNAL_ERROR: {
     httpCode: 500,
     code: 'INTERNAL_SERVER_ERROR',

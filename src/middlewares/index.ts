@@ -1,7 +1,7 @@
-import { Request, Response, NextFunction } from 'express';
+import bcrypt from 'bcrypt';
+import { NextFunction, Request, Response } from 'express';
 import httpResponses from '../constants/responses';
 import logger from '../utils/logger';
-import bcrypt from 'bcrypt';
 
 export const validate =
   (validator: any) => (req: Request, res: Response, next: NextFunction) => {
@@ -20,12 +20,8 @@ export const hashingPassword =
     const saltRounds = 10;
     try {
       const salt = await bcrypt.genSalt(saltRounds);
-      const pepper = Math.random().toString(36).substring(2, 10);
-      const hashedPassword = await bcrypt.hash(
-        req.body.password + pepper,
-        salt
-      );
-      req.body = { ...req.body, hashedPassword, pepper };
+      const hashedPassword = await bcrypt.hash(req.body.password, salt);
+      req.body = { ...req.body, hashedPassword };
       next();
     } catch (error: any) {
       logger.Danger(`${error.message}`);

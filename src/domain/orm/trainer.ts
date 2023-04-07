@@ -8,19 +8,42 @@ export const TrainerORM = {
     name: string,
     nickname: string,
     password: string,
-    team: string,
-    pepper: string
+    team: string
   ) => {
     const trainer: ITrainer = {
         name,
         nickname,
         password,
-        team,
-        pepper
+        team
       },
       document = new Trainer(trainer);
     try {
       return await document.save();
+    } catch (error: any) {
+      logger.Danger(`${error.message}`);
+      throw error;
+    }
+  },
+  FindByName: async (name: string) => {
+    try {
+      return await Trainer.findOne({ name });
+    } catch (error: any) {
+      logger.Danger(`${error.message}`);
+      throw error;
+    }
+  },
+  UpdateTrainer: async (trainer: ITrainer) => {
+    const lastLogin = new Date();
+    try {
+      return await Trainer.findOneAndUpdate(
+        { name: trainer.name },
+        {
+          lastLogin
+        },
+        {
+          new: true
+        }
+      );
     } catch (error: any) {
       logger.Danger(`${error.message}`);
       throw error;
