@@ -22,7 +22,7 @@ const httpResponses = {
   INVALID_PASSWORD: {
     httpCode: 401,
     code: 'INVALID_PASSWORD',
-    message: 'Invalid token'
+    message: 'Invalid password'
   },
   INTERNAL_ERROR: {
     httpCode: 500,
