@@ -47,7 +47,7 @@ jobs:
       - name: Print variables names 📝
         run: |
           echo "GITHUB_BASE_REF: ${{ github.base_ref }}"
-          echo "ROCKETMON_BASE_API_URI=${{ secrets.ROCKETMON_BASE_API_URI }}"
+          echo "ROCKETMON_BASE_API_URI=${{ vars.ROCKETMON_BASE_API_URI }}"
           echo "HEROKU_APP_NAME=${{ vars.HEROKU_APP_NAME }}"
           echo "HEROKU_EMAIL=${{ vars.HEROKU_EMAIL }}"
       - name: Deploy to Heroku 📡
