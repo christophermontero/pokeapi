@@ -26,6 +26,11 @@ This is an API for visualize all pokemons with their stats.
 * Auth:
   * POST /api/v1/auth/signup
   * POST /api/v1/auth/signin
+* Pokemons:
+  * GET /api/v1/pokemons
+  * GET /api/v1/pokemons/:id
+  * GET /api/v1/pokemons/:id/evolution
+  * GET /api/v1/pokemons/:id/evolution/chain
 ```
 
 ### MongoDB documents structure
