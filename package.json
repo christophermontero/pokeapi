@@ -4,7 +4,7 @@
   "description": "This is an API for visualize all pokemons with their stats",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=production node src/server/index.ts",
+    "start": "NODE_ENV=production node dist/src/server/index.js",
     "build": "tsc",
     "dev": "NODE_ENV=development nodemon",
     "test": "NODE_ENV=test jest --detectOpenHandles"

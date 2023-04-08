@@ -44,6 +44,22 @@ jobs:
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
+      - name: Set up Node.js 🚨
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+      - name: Cache Node.js modules ⏰
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-node-
+            ${{ runner.OS }}-
+      - name: Install dependencies 🔧
+        run: npm install
+      - name: Build the project 🏗️
+        run: npm run build        
       - name: Print variables names 📝
         run: |
           echo "GITHUB_BASE_REF: ${{ github.base_ref }}"
