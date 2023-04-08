@@ -16,7 +16,7 @@
   },
   "servers": [
     {
-      "url": "https://rocketmon-api.herokuapp.com",
+      "url": "https://rocketmon-api.herokuapp.com/api/v1",
       "description": "production"
     },
     {
@@ -74,7 +74,51 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Trainer"
+                "type": "object",
+                "x-examples": {
+                  "Example 1": {
+                    "name": "Ashketchum",
+                    "nickname": "panzerfaust",
+                    "password": "Test*2023#",
+                    "team": "azul"
+                  }
+                },
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "ashketchum",
+                    "minLength": 2,
+                    "maxLength": 50,
+                    "pattern": "^[a-zA-Z0-9]{2,50}$"
+                  },
+                  "nickname": {
+                    "type": "string",
+                    "example": "golden boy",
+                    "minLength": 2,
+                    "maxLength": 50
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "Test*2023#",
+                    "minLength": 6,
+                    "maxLength": 10,
+                    "pattern": "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{6,10}$"
+                  },
+                  "team": {
+                    "type": "string",
+                    "enum": [
+                      "azul",
+                      "rojo",
+                      "amarillo"
+                    ],
+                    "example": "azul"
+                  }
+                },
+                "required": [
+                  "name",
+                  "password",
+                  "team"
+                ]
               }
             }
           },
@@ -85,7 +129,7 @@
     },
     "/auth/signin": {
       "post": {
-        "summary": "",
+        "summary": "Sign in",
         "operationId": "post-auth-trainer-login",
         "responses": {
           "200": {
@@ -185,50 +229,7 @@
       }
     },
     "requestBodies": {},
-    "schemas": {
-      "Trainer": {
-        "type": "object",
-        "x-examples": {
-          "Example 1": {
-            "name": "Ash Ketchum",
-            "nickname": "panzerfaust",
-            "password": "Test*2023#",
-            "team": "azul"
-          }
-        },
-        "properties": {
-          "name": {
-            "type": "string",
-            "example": "ashketchum",
-            "minLength": 2,
-            "pattern": "^[a-zA-Z0-9]{2,50}$",
-            "maxLength": 50
-          },
-          "nickname": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 50,
-            "example": "Golden boy"
-          },
-          "password": {
-            "type": "string",
-            "pattern": "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{6,10}$",
-            "example": "Test*2023#",
-            "minLength": 6,
-            "maxLength": 10
-          },
-          "team": {
-            "type": "string",
-            "example": "azul",
-            "enum": [
-              "azul",
-              "rojo",
-              "amarillo"
-            ]
-          }
-        }
-      }
-    },
+    "schemas": {},
     "responses": {
       "USER_TAKEN": {
         "description": "Conflict",

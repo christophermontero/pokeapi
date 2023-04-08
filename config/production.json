@@ -1,0 +1,8 @@
+{
+  "baseUri": "",
+  "jwtPrivateKey": "",
+  "db": {
+    "uri": "",
+    "name": ""
+  }
+}

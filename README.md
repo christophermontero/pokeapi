@@ -1,9 +1,10 @@
 # Rocketmon API
 
-[![Build Status](https://travis-ci.com/christophermontero/rocketmon-api.svg?branch=master)](https://travis-ci.com/christophermontero/rocketmon-api)
-[![Coverage Status](https://coveralls.io/repos/github/christophermontero/rocketmon-api/badge.svg?branch=master)](https://coveralls.io/github/christophermontero/rocketmon-api?branch=master)
-[![Maintainability](https://api.codeclimate.com/v1/badges/7b5f9b0b7b5f9b0b7b5f/maintainability)](https://codeclimate.com/github/christophermontero/rocketmon-api/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/7b5f9b0b7b5f9b0b7b5f/test_coverage)](https://codeclimate.com/github/christophermontero/rocketmon-api/test_coverage)
+![last commit](https://img.shields.io/github/last-commit/christophermontero/rocketmon-api)
+![license](https://img.shields.io/github/license/christophermontero/rocketmon-api)
+![build](https://img.shields.io/github/actions/workflow/status/christophermontero/rocketmon-api/pipeline.yml)
+![repo size](https://img.shields.io/github/repo-size/christophermontero/rocketmon-api)
+![watchers](https://img.shields.io/github/watchers/christophermontero/rocketmon-api?style=social)
 
 - [Content:](#content)
 - [Project description](#project-description)
@@ -25,6 +26,11 @@ This is an API for visualize all pokemons with their stats.
 * Auth:
   * POST /api/v1/auth/signup
   * POST /api/v1/auth/signin
+* Pokemons:
+  * GET /api/v1/pokemons
+  * GET /api/v1/pokemons/:id
+  * GET /api/v1/pokemons/:id/evolution
+  * GET /api/v1/pokemons/:id/evolution/chain
 ```
 
 ### MongoDB documents structure
@@ -37,7 +43,7 @@ This is an API for visualize all pokemons with their stats.
 
 ## User guide
 
-Describe the structure of the project and its architecture.
+Describe the project structure and how to use it.
 
 ```bash
 .
@@ -149,7 +155,7 @@ Chekc the API documentation [here]()
 Below are the instructions to install and run the project en development mode.
 
 ```bash
-git clone https://github.com/christophermontero/estima-tu-proyecto.git
+git clone https://github.com/christophermontero/rocketmon-api.git
 cd rocketmon-api
 npm install
 npm run dev
