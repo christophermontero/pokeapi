@@ -39,7 +39,7 @@ This is an API for visualize all pokemons with their stats.
 
 ## User guide
 
-Describe the structure of the project and its architecture.
+Describe the project structure and how to use it.
 
 ```bash
 .
@@ -151,7 +151,7 @@ Chekc the API documentation [here]()
 Below are the instructions to install and run the project en development mode.
 
 ```bash
-git clone https://github.com/christophermontero/estima-tu-proyecto.git
+git clone https://github.com/christophermontero/rocketmon-api.git
 cd rocketmon-api
 npm install
 npm run dev
