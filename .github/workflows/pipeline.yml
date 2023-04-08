@@ -45,11 +45,11 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
       - name: Print variables names 📝
-        env:
-          GITHUB_BASE_REF: ${{ github.base_ref }}
-          HD_BASE_API_URI: ${{ vars.ROCKETMON_BASE_API_URI }}
-          HEROKU_APP_NAME: ${{ vars.HEROKU_APP_NAME }}
-          HEROKU_APP_NAME: ${{ vars.HEROKU_EMAIL }}
+        run: |
+          echo "GITHUB_BASE_REF: ${{ github.base_ref }}"
+          echo "ROCKETMON_BASE_API_URI=${{ secrets.ROCKETMON_BASE_API_URI }}"
+          echo "HEROKU_APP_NAME=${{ vars.HEROKU_APP_NAME }}"
+          echo "HEROKU_EMAIL=${{ vars.HEROKU_EMAIL }}"
       - name: Deploy to Heroku 📡
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
