@@ -2,9 +2,8 @@
 
 ![last commit](https://img.shields.io/github/last-commit/christophermontero/rocketmon-api)
 ![license](https://img.shields.io/github/license/christophermontero/rocketmon-api)
+![build](https://img.shields.io/github/actions/workflow/status/christophermontero/rocketmon-api/pipeline.yml)
 ![repo size](https://img.shields.io/github/repo-size/christophermontero/rocketmon-api)
-![dirs](https://img.shields.io/github/directory-file-count/christophermontero/rocketmon-api?type=dir)
-![files](https://img.shields.io/github/directory-file-count/christophermontero/rocketmon-api)
 ![watchers](https://img.shields.io/github/watchers/christophermontero/rocketmon-api?style=social)
 
 - [Content:](#content)
