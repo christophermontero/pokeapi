@@ -40,7 +40,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    if: github.ref == 'refs/pull/*/merge'
+    if: github.event_name == 'pull_request' && github.base_ref == 'main' && github.event.action == 'closed' && github.event.pull_request.merged == true
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
@@ -52,7 +52,6 @@ jobs:
           HD_DB_URI: ${{ vars.ROCKETMON_DB_URI }}
           HEROKU_EMAIL: ${{ vars.HEROKU_EMAIL }}
       - name: Deploy to Heroku 📡
-        if: ${{ github.event_name != 'pull_request' }}
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
