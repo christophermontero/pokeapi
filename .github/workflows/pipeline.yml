@@ -59,7 +59,7 @@ jobs:
       - name: Install dependencies 🔧
         run: npm install
       - name: Build the project 🏗️
-        run: npm run build        
+        run: npm run build
       - name: Print variables names 📝
         run: |
           echo "GITHUB_BASE_REF: ${{ github.base_ref }}"
