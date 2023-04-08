@@ -4,6 +4,8 @@
   "description": "This is an API for visualize all pokemons with their stats",
   "main": "index.js",
   "scripts": {
+    "start": "NODE_ENV=production node src/server/index.ts",
+    "build": "tsc",
     "dev": "NODE_ENV=development nodemon",
     "test": "NODE_ENV=test jest --detectOpenHandles"
   },
@@ -51,6 +53,7 @@
     "nodemon": "^2.0.22",
     "supertest": "^6.3.3",
     "ts-jest": "^29.1.0",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
   }
 }
