@@ -27,10 +27,8 @@ This is an API for visualize all pokemons with their stats.
   * POST /api/v1/auth/signup
   * POST /api/v1/auth/signin
 * Pokemons:
-  * GET /api/v1/pokemons
-  * GET /api/v1/pokemons/:id
-  * GET /api/v1/pokemons/:id/evolution
-  * GET /api/v1/pokemons/:id/evolution/chain
+  * GET /api/v1/pokemon
+  * GET /api/v1/pokemon/:name
 ```
 
 ### MongoDB documents structure
@@ -50,59 +48,8 @@ Describe the project structure and how to use it.
 ├── config
 │   ├── custom-environment-variables.json
 │   ├── default.json
+│   ├── production.json
 │   └── test.json
-├── coverage
-│   ├── clover.xml
-│   ├── coverage-final.json
-│   ├── lcov.info
-│   └── lcov-report
-│       ├── base.css
-│       ├── block-navigation.js
-│       ├── constants
-│       │   ├── index.html
-│       │   └── responses.ts.html
-│       ├── controllers
-│       │   ├── auth.ts.html
-│       │   └── index.html
-│       ├── domain
-│       │   ├── entities
-│       │   │   ├── index.html
-│       │   │   └── Trainer.ts.html
-│       │   ├── orm
-│       │   │   ├── index.html
-│       │   │   └── trainer.ts.html
-│       │   ├── repositories
-│       │   │   ├── index.html
-│       │   │   └── mongoDb.ts.html
-│       │   └── services
-│       │       ├── auth.ts.html
-│       │       ├── index.html
-│       │       ├── security.ts.html
-│       │       └── trainer.ts.html
-│       ├── favicon.png
-│       ├── index.html
-│       ├── middlewares
-│       │   ├── index.html
-│       │   └── index.ts.html
-│       ├── prettify.css
-│       ├── prettify.js
-│       ├── routes
-│       │   └── v1
-│       │       ├── index.html
-│       │       └── index.ts.html
-│       ├── server
-│       │   ├── index.html
-│       │   └── index.ts.html
-│       ├── sort-arrow-sprite.png
-│       ├── sorter.js
-│       ├── utils
-│       │   ├── index.html
-│       │   ├── jwt.ts.html
-│       │   └── logger.ts.html
-│       └── validators
-│           ├── index.html
-│           ├── login.ts.html
-│           └── trainer.ts.html
 ├── docs
 │   └── rocketmon-api-doc-v1.json
 ├── jest.config.ts
@@ -115,19 +62,23 @@ Describe the project structure and how to use it.
 │   ├── constants
 │   │   └── responses.ts
 │   ├── controllers
-│   │   └── auth.ts
+│   │   ├── auth.ts
+│   │   └── pokemonBridge.ts
 │   ├── domain
 │   │   ├── entities
 │   │   │   └── Trainer.ts
 │   │   ├── models
+│   │   │   ├── getPokemons.ts
 │   │   │   ├── login.ts
 │   │   │   └── trainer.ts
 │   │   ├── orm
+│   │   │   ├── pokemon.ts
 │   │   │   └── trainer.ts
 │   │   ├── repositories
 │   │   │   └── mongoDb.ts
 │   │   └── services
-│   │       └── auth.ts
+│   │       ├── auth.ts
+│   │       └── pokemon.ts
 │   ├── middlewares
 │   │   └── index.ts
 │   ├── routes
@@ -137,18 +88,21 @@ Describe the project structure and how to use it.
 │   │   └── index.ts
 │   ├── utils
 │   │   ├── jwt.ts
-│   │   └── logger.ts
+│   │   ├── logger.ts
+│   │   └── pokemon.ts
 │   └── validators
 │       ├── login.ts
+│       ├── pokemon.ts
 │       └── trainer.ts
 ├── tests
 │   └── integration
 │       └── routes
-│           └── auth.spec.ts
+│           ├── auth.spec.ts
+│           └── pokemon.spec.ts
 └── tsconfig.json
 ```
 
-Chekc the API documentation [here]()
+Chekc the API documentation [here](https://rocketmon-api.herokuapp.com/api/v1/docs)
 
 ## Install guide
 
@@ -163,9 +117,9 @@ npm run dev
 
 ### Requeriments
 
-- [Node.js](https://nodejs.org/en/)
-- [NPM](https://www.npmjs.com/)
-- [MongoDB](https://www.mongodb.com/)
+- Node.js version 18 or higher [Node.js](https://nodejs.org/en/)
+- NPM version 8 or higher [NPM](https://www.npmjs.com/)
+- MongoDB version 4 or higher [MongoDB](https://www.mongodb.com/)
 
 ## Author
 
