@@ -1,5 +1,5 @@
 {
-  "baseUri": "ROCKETMON_BASE_API_URI",
+  "baseApiUrl": "ROCKETMON_BASE_API_URI",
   "jwtPrivateKey": "ROCKETMON_JWT_PRIVATE_KEY",
   "db": {
     "uri": "ROCKETMON_DB_URI",

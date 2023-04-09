@@ -3,9 +3,21 @@ import { NextFunction, Request, Response } from 'express';
 import httpResponses from '../constants/responses';
 import logger from '../utils/logger';
 
-export const validate =
+export const validateBody =
   (validator: any) => (req: Request, res: Response, next: NextFunction) => {
     const { error } = validator(req.body);
+    if (error)
+      return res.status(400).json({
+        code: httpResponses.BAD_REQUEST.code,
+        message: httpResponses.BAD_REQUEST.message,
+        detail: error
+      });
+    next();
+  };
+
+export const validateQuery =
+  (validator: any) => (req: Request, res: Response, next: NextFunction) => {
+    const { error } = validator(req.query);
     if (error)
       return res.status(400).json({
         code: httpResponses.BAD_REQUEST.code,
