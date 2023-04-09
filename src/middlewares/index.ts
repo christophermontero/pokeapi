@@ -27,6 +27,18 @@ export const validateQuery =
     next();
   };
 
+export const validateParam =
+  (validator: any) => (req: Request, res: Response, next: NextFunction) => {
+    const { error } = validator(req.params);
+    if (error)
+      return res.status(400).json({
+        code: httpResponses.BAD_REQUEST.code,
+        message: httpResponses.BAD_REQUEST.message,
+        detail: error
+      });
+    next();
+  };
+
 export const hashingPassword =
   () => async (req: Request, res: Response, next: NextFunction) => {
     const saltRounds = 10;

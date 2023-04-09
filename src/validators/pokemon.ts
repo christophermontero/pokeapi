@@ -1,7 +1,7 @@
 import Joi from 'joi';
-import { IGetPokemons } from '../domain/models/getPokemons';
+import { IGetPokemon, IGetPokemons } from '../domain/models/getPokemons';
 
-const validateGetPokemons = (getPokemons: IGetPokemons) => {
+export const validateGetPokemons = (getPokemons: IGetPokemons) => {
   const getPokemonsSchema = Joi.object({
     limit: Joi.number().integer().multiple(10).min(10).max(100).default(10),
     offset: Joi.number().integer().min(0).default(0)
@@ -10,4 +10,12 @@ const validateGetPokemons = (getPokemons: IGetPokemons) => {
   return getPokemonsSchema.validate(getPokemons);
 };
 
-export default validateGetPokemons;
+export const validateGetPokemonByName = (getPokemon: IGetPokemon) => {
+  const getPokemonSchema = Joi.object({
+    name: Joi.string()
+      .regex(/^[a-z]+$/)
+      .required()
+  }).required();
+
+  return getPokemonSchema.validate(getPokemon);
+};

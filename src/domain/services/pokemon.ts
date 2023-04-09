@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 import httpResponses from '../../constants/responses';
 import logger from '../../utils/logger';
-import { IPokemonGeneralInfo } from '../models/getPokemons';
+import { buildPokemonDetails } from '../../utils/pokemon';
+import { IPokemonDetails, IPokemonGeneralInfo } from '../models/getPokemons';
 import { PokemonORM } from '../orm/pokemon';
 
 export const PokemonService = {
@@ -13,7 +14,9 @@ export const PokemonService = {
       );
 
       const pokemonsGeneralInfo: IPokemonGeneralInfo[] = await Promise.all(
-        pokemons.results.map((pokemon: any) => PokemonORM.FindByName(pokemon))
+        pokemons.results.map((pokemon: any) =>
+          PokemonORM.FindByName(pokemon.name)
+        )
       );
 
       const processedPokemonsGeneralInfo: IPokemonGeneralInfo[] =
@@ -39,5 +42,49 @@ export const PokemonService = {
       });
     }
   },
-  GetPokemonDetails: async (req: Request, res: Response) => {}
+  GetPokemonDetails: async (req: Request, res: Response) => {
+    try {
+      const pokemon = await PokemonORM.FindByName(req.params.name);
+
+      const pokemonTypes = await Promise.all(
+          pokemon.types.map((type: any) =>
+            PokemonORM.FindTypeByName(type.type.name)
+          )
+        ),
+        pokemonSpecies = await PokemonORM.FindPokemonSpeciesById(pokemon.id),
+        evolChain = await PokemonORM.FindPokemonEvolChainById(
+          pokemonSpecies.evolution_chain.url.split('/').slice(-2).shift()
+        );
+
+      const { abilities, evolution, stats, strengths, types, weaknesses } =
+        buildPokemonDetails(pokemon, pokemonTypes, evolChain);
+
+      const pokemonDetails: IPokemonDetails = {
+        id: pokemon.id,
+        name: pokemon.name,
+        experience: pokemon.base_experience,
+        abilities,
+        height: Number(pokemon.height),
+        weight: Number(pokemon.weight),
+        types,
+        strengths,
+        weaknesses,
+        stats,
+        evolution
+      };
+
+      return res.status(httpResponses.OK.httpCode).json({
+        code: httpResponses.OK.code,
+        message: httpResponses.OK.message,
+        data: pokemonDetails
+      });
+    } catch (error: any) {
+      logger.Danger(`${error.message}`);
+
+      return res.status(httpResponses.INTERNAL_ERROR.httpCode).json({
+        code: httpResponses.INTERNAL_ERROR.code,
+        message: httpResponses.INTERNAL_ERROR.message
+      });
+    }
+  }
 };
