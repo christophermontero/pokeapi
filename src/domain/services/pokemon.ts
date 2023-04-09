@@ -9,8 +9,8 @@ export const PokemonService = {
   GetPokemons: async (req: Request, res: Response) => {
     try {
       const pokemons = await PokemonORM.FindAll(
-        Number(req.query.limit) || 10,
-        Number(req.query.offset) || 0
+        req.query.limit?.toString() || '10',
+        req.query.offset?.toString() || '0'
       );
 
       const pokemonsGeneralInfo: IPokemonGeneralInfo[] = await Promise.all(
@@ -45,6 +45,13 @@ export const PokemonService = {
   GetPokemonDetails: async (req: Request, res: Response) => {
     try {
       const pokemon = await PokemonORM.FindByName(req.params.name);
+
+      if (!pokemon) {
+        return res.status(httpResponses.POKEMON_NOT_EXISTS.httpCode).json({
+          code: httpResponses.POKEMON_NOT_EXISTS.code,
+          message: httpResponses.POKEMON_NOT_EXISTS.message
+        });
+      }
 
       const pokemonTypes = await Promise.all(
           pokemon.types.map((type: any) =>

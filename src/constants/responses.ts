@@ -19,6 +19,11 @@ const httpResponses = {
     code: 'USER_NOT_EXISTS',
     message: 'User not exists'
   },
+  POKEMON_NOT_EXISTS: {
+    httpCode: 404,
+    code: 'POKEMON_NOT_EXISTS',
+    message: 'Pokemon not exists'
+  },
   USER_TAKEN: {
     httpCode: 409,
     code: 'USER_TAKEN',

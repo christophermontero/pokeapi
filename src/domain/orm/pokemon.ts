@@ -4,7 +4,7 @@ import logger from '../../utils/logger';
 const pokemonBaseUrl = config.get('pokemonBaseUrl');
 
 export const PokemonORM = {
-  FindAll: async (limit: number, offset: number) => {
+  FindAll: async (limit: string, offset: string) => {
     logger.Info(`PokemonORM.FindAll(limit: ${limit}, offset: ${offset})`);
     try {
       const pokemons = await fetch(
@@ -31,7 +31,7 @@ export const PokemonORM = {
         headers: {
           'Content-Type': 'application/json'
         }
-      }).then((response) => response.json());
+      }).then((response) => response.status === 200 && response.json());
 
       return pokemonDetails;
     } catch (error: any) {

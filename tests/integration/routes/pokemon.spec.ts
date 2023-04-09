@@ -27,10 +27,21 @@ describe('/api/v1/pokemon', () => {
       const res = await exec();
 
       expect(res.status).toBe(httpResponses.OK.httpCode);
-      expect(res.body).toMatchObject({
-        code: httpResponses.OK.code,
-        message: httpResponses.OK.message
-      });
+      expect(res.body).toHaveProperty('code', httpResponses.OK.code);
+      expect(res.body).toHaveProperty('message', httpResponses.OK.message);
+      expect(Array.isArray(res.body.data)).toBeTruthy();
+    });
+
+    it('should failed if limit is invalid', async () => {
+      limit = '15';
+      const res = await exec();
+
+      expect(res.status).toBe(httpResponses.BAD_REQUEST.httpCode);
+      expect(res.body).toHaveProperty('code', httpResponses.BAD_REQUEST.code);
+      expect(res.body).toHaveProperty(
+        'message',
+        httpResponses.BAD_REQUEST.message
+      );
     });
   });
 
@@ -41,7 +52,7 @@ describe('/api/v1/pokemon', () => {
       return request(server).get(`/api/v1/pokemon/${name}`).send();
     };
 
-    beforeEach(async () => {
+    beforeEach(() => {
       name = 'omanyte';
     });
 
@@ -51,6 +62,22 @@ describe('/api/v1/pokemon', () => {
       expect(res.status).toBe(httpResponses.OK.httpCode);
       expect(res.body).toHaveProperty('code', httpResponses.OK.code);
       expect(res.body).toHaveProperty('message', httpResponses.OK.message);
+      expect(typeof res.body.data === 'object').toBeTruthy();
+    });
+
+    it('should failed if pokemon not exists', async () => {
+      name = 'omanyt';
+      const res = await exec();
+
+      expect(res.status).toBe(httpResponses.POKEMON_NOT_EXISTS.httpCode);
+      expect(res.body).toHaveProperty(
+        'code',
+        httpResponses.POKEMON_NOT_EXISTS.code
+      );
+      expect(res.body).toHaveProperty(
+        'message',
+        httpResponses.POKEMON_NOT_EXISTS.message
+      );
     });
   });
 });
