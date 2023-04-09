@@ -1,19 +1,22 @@
 import { Router } from 'express';
 import { PokemonService } from '../domain/services/pokemon';
-import { validateParam, validateQuery } from '../middlewares';
-import { validateGetPokemonByName, validateGetPokemons } from '../validators/pokemon';
+import { validateParam, validateQuery, validateToken } from '../middlewares';
+import {
+  validateGetPokemonByName,
+  validateGetPokemons
+} from '../validators/pokemon';
 
 const pokemonBridge = Router();
 
 pokemonBridge.get(
   '/',
-  [validateQuery(validateGetPokemons)],
+  [validateToken, validateQuery(validateGetPokemons)],
   PokemonService.GetPokemons
 );
 
 pokemonBridge.get(
   '/:name',
-  [validateParam(validateGetPokemonByName)],
+  [validateToken, validateParam(validateGetPokemonByName)],
   PokemonService.GetPokemonDetails
 );
 

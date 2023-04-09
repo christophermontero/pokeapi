@@ -4,10 +4,20 @@ import logger from '../../utils/logger';
 import { buildPokemonDetails } from '../../utils/pokemon';
 import { IPokemonDetails, IPokemonGeneralInfo } from '../models/pokemon';
 import { PokemonORM } from '../orm/pokemon';
+import { TrainerORM } from '../orm/trainer';
 
 export const PokemonService = {
   GetPokemons: async (req: Request, res: Response) => {
     try {
+      const trainer = await TrainerORM.FindByName(req.body.user.name);
+
+      if (!trainer) {
+        return res.status(httpResponses.TRAINER_NOT_EXISTS.httpCode).json({
+          code: httpResponses.TRAINER_NOT_EXISTS.code,
+          message: httpResponses.TRAINER_NOT_EXISTS.message
+        });
+      }
+
       const pokemons = await PokemonORM.FindAll(
         req.query.limit?.toString() || '10',
         req.query.offset?.toString() || '0'
@@ -44,6 +54,15 @@ export const PokemonService = {
   },
   GetPokemonDetails: async (req: Request, res: Response) => {
     try {
+      const trainer = await TrainerORM.FindByName(req.body.user.name);
+
+      if (!trainer) {
+        return res.status(httpResponses.TRAINER_NOT_EXISTS.httpCode).json({
+          code: httpResponses.TRAINER_NOT_EXISTS.code,
+          message: httpResponses.TRAINER_NOT_EXISTS.message
+        });
+      }
+
       const pokemon = await PokemonORM.FindByName(req.params.name);
 
       if (!pokemon) {

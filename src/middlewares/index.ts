@@ -1,5 +1,7 @@
 import bcrypt from 'bcrypt';
+import config from 'config';
 import { NextFunction, Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
 import httpResponses from '../constants/responses';
 import logger from '../utils/logger';
 
@@ -56,3 +58,23 @@ export const hashingPassword =
       });
     }
   };
+
+export const validateToken = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const authHeader = req.header('Authorization');
+
+  if (!authHeader) {
+    return res.status(401).json({
+      code: httpResponses.UNAUTHORIZED.code,
+      message: httpResponses.UNAUTHORIZED.message
+    });
+  }
+
+  const token = authHeader.split(' ')[1];
+  const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
+  req.body.user = decoded;
+  next();
+};
