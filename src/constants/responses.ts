@@ -19,11 +19,6 @@ const httpResponses = {
     code: 'UNAUTHORIZED',
     message: 'Token is not valid'
   },
-  USER_NOT_EXISTS: {
-    httpCode: 404,
-    code: 'USER_NOT_EXISTS',
-    message: 'User not exists'
-  },
   POKEMON_NOT_EXISTS: {
     httpCode: 404,
     code: 'POKEMON_NOT_EXISTS',

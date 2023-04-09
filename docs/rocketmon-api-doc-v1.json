@@ -1048,7 +1048,7 @@
           }
         }
       },
-      "USER_NOT_EXISTS": {
+      "TRAINER_NOT_EXISTS": {
         "description": "Not found",
         "content": {
           "application/json": {
@@ -1063,7 +1063,7 @@
               "properties": {
                 "code": {
                   "type": "string",
-                  "example": "USER_NOT_EXISTS"
+                  "example": "TRAINER_NOT_EXISTS"
                 },
                 "message": {
                   "type": "string",

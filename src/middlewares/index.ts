@@ -73,8 +73,15 @@ export const validateToken = (
     });
   }
 
-  const token = authHeader.split(' ')[1];
-  const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
-  req.body.user = decoded;
-  next();
+  try {
+    const token = authHeader.split(' ')[1];
+    const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
+    req.body.user = decoded;
+    next();
+  } catch (error: any) {
+    return res.status(401).json({
+      code: httpResponses.UNAUTHORIZED.code,
+      message: httpResponses.UNAUTHORIZED.message
+    });
+  }
 };

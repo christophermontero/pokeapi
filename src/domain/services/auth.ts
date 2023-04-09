@@ -44,9 +44,9 @@ export const AuthService = {
       const trainer = await TrainerORM.FindByName(name);
 
       if (!trainer) {
-        return res.status(httpResponses.USER_NOT_EXISTS.httpCode).json({
-          code: httpResponses.USER_NOT_EXISTS.code,
-          message: httpResponses.USER_NOT_EXISTS.message
+        return res.status(httpResponses.TRAINER_NOT_EXISTS.httpCode).json({
+          code: httpResponses.TRAINER_NOT_EXISTS.code,
+          message: httpResponses.TRAINER_NOT_EXISTS.message
         });
       }
 
