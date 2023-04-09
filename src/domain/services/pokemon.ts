@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import httpResponses from '../../constants/responses';
 import logger from '../../utils/logger';
-import { PokemonORM } from '../orm/pokemon';
 import { IPokemonGeneralInfo } from '../models/getPokemons';
+import { PokemonORM } from '../orm/pokemon';
 
 export const PokemonService = {
   GetPokemons: async (req: Request, res: Response) => {
@@ -12,23 +12,23 @@ export const PokemonService = {
         Number(req.query.offset) || 0
       );
 
-      const pokemonsGeneralInfo: IPokemonGeneralInfo[] = [];
-      for (const pokemon of pokemons.results) {
-        const pokemonDetails = await PokemonORM.FindByName(pokemon);
+      const pokemonsGeneralInfo: IPokemonGeneralInfo[] = await Promise.all(
+        pokemons.results.map((pokemon: any) => PokemonORM.FindByName(pokemon))
+      );
 
-        pokemonsGeneralInfo.push({
-          id: pokemonDetails.id,
-          name: pokemonDetails.name,
-          url: pokemonDetails.url,
-          sprite: pokemonDetails.sprites.front_default,
-          types: pokemonDetails.types.map((type: any) => type.type.name)
-        });
-      }
+      const processedPokemonsGeneralInfo: IPokemonGeneralInfo[] =
+        pokemonsGeneralInfo.map((pokemon: any) => ({
+          id: pokemon.id,
+          name: pokemon.name,
+          url: pokemon.url,
+          sprite: pokemon.sprites.front_default,
+          types: pokemon.types.map((type: any) => type.type.name)
+        }));
 
       return res.status(httpResponses.OK.httpCode).json({
         code: httpResponses.OK.code,
         message: httpResponses.OK.message,
-        data: pokemonsGeneralInfo
+        data: processedPokemonsGeneralInfo
       });
     } catch (error: any) {
       logger.Danger(`${error.message}`);
