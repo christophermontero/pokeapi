@@ -62,6 +62,7 @@ export const PokemonService = {
       const pokemonDetails: IPokemonDetails = {
         id: pokemon.id,
         name: pokemon.name,
+        sprite: pokemon.sprites.other['official-artwork'].front_default,
         experience: pokemon.base_experience,
         abilities,
         height: Number(pokemon.height),

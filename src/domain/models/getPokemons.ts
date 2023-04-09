@@ -18,6 +18,7 @@ export interface IPokemonGeneralInfo {
 export interface IPokemonDetails {
   id: number;
   name: string;
+  sprite: string;
   experience: number;
   abilities: string[];
   height: number;
