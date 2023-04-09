@@ -17,7 +17,7 @@ const httpResponses = {
   UNAUTHORIZED: {
     httpCode: 401,
     code: 'UNAUTHORIZED',
-    message: 'Token is not valid'
+    message: 'Token is invalid'
   },
   POKEMON_NOT_EXISTS: {
     httpCode: 404,

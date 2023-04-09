@@ -706,6 +706,12 @@
           },
           "400": {
             "$ref": "#/components/responses/BAD_REQUEST"
+          },
+          "401": {
+            "$ref": "#/components/responses/UNAUTHORIZED"
+          },
+          "422": {
+            "$ref": "#/components/responses/TRAINER_NOT_EXISTS"
           }
         },
         "operationId": "get-pokemon-paginated",
@@ -946,8 +952,14 @@
           "400": {
             "$ref": "#/components/responses/BAD_REQUEST"
           },
+          "401": {
+            "$ref": "#/components/responses/UNAUTHORIZED"
+          },
           "404": {
             "$ref": "#/components/responses/POKEMON_NOT_EXISTS"
+          },
+          "422": {
+            "$ref": "#/components/responses/TRAINER_NOT_EXISTS"
           }
         },
         "operationId": "get-pokemon-details",
@@ -1048,7 +1060,7 @@
           }
         }
       },
-      "TRAINER_NOT_EXISTS": {
+      "USER_NOT_EXISTS": {
         "description": "Not found",
         "content": {
           "application/json": {
@@ -1063,7 +1075,7 @@
               "properties": {
                 "code": {
                   "type": "string",
-                  "example": "TRAINER_NOT_EXISTS"
+                  "example": "USER_NOT_EXISTS"
                 },
                 "message": {
                   "type": "string",
@@ -1197,6 +1209,58 @@
                 "message": {
                   "type": "string",
                   "example": "Pokemon not exists"
+                }
+              }
+            }
+          }
+        }
+      },
+      "TRAINER_NOT_EXISTS": {
+        "description": "Unprocessable entity",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "Example 1": {
+                  "code": "",
+                  "message": ""
+                }
+              },
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "example": "TRAINER_NOT_EXISTS"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Trainer not exists"
+                }
+              }
+            }
+          }
+        }
+      },
+      "UNAUTHORIZED": {
+        "description": "Unauthorized",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "Example 1": {
+                  "code": "",
+                  "message": ""
+                }
+              },
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "example": "UNAUTHORIZED"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Token is invalid"
                 }
               }
             }

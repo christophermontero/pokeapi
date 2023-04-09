@@ -50,6 +50,61 @@ Describe the project structure and how to use it.
 │   ├── default.json
 │   ├── production.json
 │   └── test.json
+├── coverage
+│   ├── clover.xml
+│   ├── coverage-final.json
+│   ├── lcov.info
+│   └── lcov-report
+│       ├── base.css
+│       ├── block-navigation.js
+│       ├── constants
+│       │   ├── index.html
+│       │   └── responses.ts.html
+│       ├── controllers
+│       │   ├── auth.ts.html
+│       │   ├── index.html
+│       │   └── pokemonBridge.ts.html
+│       ├── domain
+│       │   ├── entities
+│       │   │   ├── index.html
+│       │   │   └── Trainer.ts.html
+│       │   ├── orm
+│       │   │   ├── index.html
+│       │   │   ├── pokemon.ts.html
+│       │   │   └── trainer.ts.html
+│       │   ├── repositories
+│       │   │   ├── index.html
+│       │   │   └── mongoDb.ts.html
+│       │   └── services
+│       │       ├── auth.ts.html
+│       │       ├── index.html
+│       │       └── pokemon.ts.html
+│       ├── favicon.png
+│       ├── index.html
+│       ├── middlewares
+│       │   ├── index.html
+│       │   └── index.ts.html
+│       ├── prettify.css
+│       ├── prettify.js
+│       ├── routes
+│       │   └── v1
+│       │       ├── index.html
+│       │       └── index.ts.html
+│       ├── server
+│       │   ├── index.html
+│       │   └── index.ts.html
+│       ├── sort-arrow-sprite.png
+│       ├── sorter.js
+│       ├── utils
+│       │   ├── index.html
+│       │   ├── jwt.ts.html
+│       │   ├── logger.ts.html
+│       │   └── pokemon.ts.html
+│       └── validators
+│           ├── index.html
+│           ├── login.ts.html
+│           ├── pokemon.ts.html
+│           └── trainer.ts.html
 ├── docs
 │   └── rocketmon-api-doc-v1.json
 ├── jest.config.ts
@@ -68,8 +123,8 @@ Describe the project structure and how to use it.
 │   │   ├── entities
 │   │   │   └── Trainer.ts
 │   │   ├── models
-│   │   │   ├── pokemon.ts
 │   │   │   ├── login.ts
+│   │   │   ├── pokemon.ts
 │   │   │   └── trainer.ts
 │   │   ├── orm
 │   │   │   ├── pokemon.ts
@@ -100,6 +155,7 @@ Describe the project structure and how to use it.
 │           ├── auth.spec.ts
 │           └── pokemon.spec.ts
 └── tsconfig.json
+
 ```
 
 Chekc the API documentation [here](https://rocketmon-api.herokuapp.com/api/v1/docs)
