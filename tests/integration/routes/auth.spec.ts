@@ -113,14 +113,14 @@ describe('/api/v1/auth', () => {
       name = 'johndoe';
       const res = await exec();
 
-      expect(res.status).toBe(httpResponses.USER_NOT_EXISTS.httpCode);
+      expect(res.status).toBe(httpResponses.TRAINER_NOT_EXISTS.httpCode);
       expect(res.body).toHaveProperty(
         'code',
-        httpResponses.USER_NOT_EXISTS.code
+        httpResponses.TRAINER_NOT_EXISTS.code
       );
       expect(res.body).toHaveProperty(
         'message',
-        httpResponses.USER_NOT_EXISTS.message
+        httpResponses.TRAINER_NOT_EXISTS.message
       );
     });
 

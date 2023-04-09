@@ -6,11 +6,7 @@ const generateToken = (trainer: ITrainer) =>
   jwt.sign(
     { id: trainer._id, name: trainer.name },
     config.get('jwtPrivateKey'),
-    {
-      expiresIn: 86400,
-      algorithm: 'HS256',
-      issuer: 'RocketmonApi'
-    }
+    { expiresIn: 86400, algorithm: 'HS256', issuer: 'RocketmonAPI' }
   );
 
 export default generateToken;

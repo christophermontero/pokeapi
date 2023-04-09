@@ -14,10 +14,15 @@ const httpResponses = {
     code: 'BAD_REQUEST',
     message: 'Bad request'
   },
-  USER_NOT_EXISTS: {
+  UNAUTHORIZED: {
+    httpCode: 401,
+    code: 'UNAUTHORIZED',
+    message: 'Token is invalid'
+  },
+  POKEMON_NOT_EXISTS: {
     httpCode: 404,
-    code: 'USER_NOT_EXISTS',
-    message: 'User not exists'
+    code: 'POKEMON_NOT_EXISTS',
+    message: 'Pokemon not exists'
   },
   USER_TAKEN: {
     httpCode: 409,
@@ -28,6 +33,11 @@ const httpResponses = {
     httpCode: 422,
     code: 'INVALID_PASSWORD',
     message: 'Invalid password'
+  },
+  TRAINER_NOT_EXISTS: {
+    httpCode: 422,
+    code: 'TRAINER_NOT_EXISTS',
+    message: 'Trainer not exists'
   },
   INTERNAL_ERROR: {
     httpCode: 500,
