@@ -1,10 +1,11 @@
-import logger from '../../utils/logger';
 import config from 'config';
+import logger from '../../utils/logger';
 
 const pokemonBaseUrl = config.get('pokemonBaseUrl');
 
 export const PokemonORM = {
   FindAll: async (limit: number, offset: number) => {
+    logger.Info(`PokemonORM.FindAll(limit: ${limit}, offset: ${offset})`);
     try {
       const pokemons = await fetch(
         `${pokemonBaseUrl}/pokemon?limit=${limit}&offset=${offset}`,
@@ -14,15 +15,27 @@ export const PokemonORM = {
             'Content-Type': 'application/json'
           }
         }
-      );
+      ).then((response) => response.json());
 
-      const pokemonsGeneralData = await pokemons.json();
-
-      return pokemonsGeneralData;
+      return pokemons;
     } catch (error: any) {
       logger.Danger(`${error.message}`);
       throw error;
     }
   },
-  FindByName: async (name: string) => {}
+  FindByName: async (pokemon: any) => {
+    try {
+      const pokemonDetails = await fetch(pokemon.url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then((response) => response.json());
+
+      return pokemonDetails;
+    } catch (error: any) {
+      logger.Danger(`${error.message}`);
+      throw error;
+    }
+  }
 };
