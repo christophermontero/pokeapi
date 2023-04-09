@@ -46,8 +46,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Print variables names 📝
         run: |
-          echo "GITHUB_BASE_REF: ${{ github.base_ref }}"
           echo "ROCKETMON_BASE_API_URI=${{ vars.ROCKETMON_BASE_API_URI }}"
+          echo "POKE_BASE_API_URI=${{ vars.POKE_BASE_API_URI }}"
           echo "HEROKU_APP_NAME=${{ vars.HEROKU_APP_NAME }}"
           echo "HEROKU_EMAIL=${{ vars.HEROKU_EMAIL }}"
       - name: Deploy to Heroku 📡
@@ -61,3 +61,4 @@ jobs:
           HD_ROCKETMON_JWT_PRIVATE_KEY: ${{ secrets.ROCKETMON_JWT_PRIVATE_KEY }}
           HD_ROCKETMON_DB_URI: ${{ secrets.ROCKETMON_DB_URI }}
           HD_ROCKETMON_DB_NAME: ${{ secrets.ROCKETMON_DB_NAME }}
+          HD_POKE_BASE_API_URI: ${{ vars.POKE_BASE_API_URI }}
