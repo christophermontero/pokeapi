@@ -68,7 +68,7 @@ Describe the project structure and how to use it.
 │   │   ├── entities
 │   │   │   └── Trainer.ts
 │   │   ├── models
-│   │   │   ├── getPokemons.ts
+│   │   │   ├── pokemon.ts
 │   │   │   ├── login.ts
 │   │   │   └── trainer.ts
 │   │   ├── orm

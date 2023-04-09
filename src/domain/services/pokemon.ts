@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import httpResponses from '../../constants/responses';
 import logger from '../../utils/logger';
 import { buildPokemonDetails } from '../../utils/pokemon';
-import { IPokemonDetails, IPokemonGeneralInfo } from '../models/getPokemons';
+import { IPokemonDetails, IPokemonGeneralInfo } from '../models/pokemon';
 import { PokemonORM } from '../orm/pokemon';
 
 export const PokemonService = {

@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { IGetPokemon, IGetPokemons } from '../domain/models/getPokemons';
+import { IGetPokemon, IGetPokemons } from '../domain/models/pokemon';
 
 export const validateGetPokemons = (getPokemons: IGetPokemons) => {
   const getPokemonsSchema = Joi.object({
