@@ -23,6 +23,17 @@ This is an API for visualize all pokemons with their stats.
 
 ### Architecture
 
+#### Use case diagram
+
+![use case diagram](./docs/use-case-diagram.png)
+
+#### Component diagram
+
+![component diagram](./docs/component-diagram.png)
+
+#### Deployment diagram
+
+![deployment diagram](./docs/deployment-diagram.png)
 
 ### Endpoints
 
