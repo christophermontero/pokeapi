@@ -25,15 +25,15 @@ This is an API for visualize all pokemons with their stats.
 
 #### Use case diagram
 
-![use case diagram](https://github.com/christophermontero/rocketmon-api/blob/feature/register-trainer/docs/diagrams/use-case-diagram.jpg?raw=true)
+![use case diagram](https://github.com/christophermontero/rocketmon-api/blob/master/docs/diagrams/use-case-diagram.jpg?raw=true)
 
 #### Component diagram
 
-![component diagram](https://github.com/christophermontero/rocketmon-api/blob/feature/register-trainer/docs/diagrams/component-diagram.jpg?raw=true)
+![component diagram](https://github.com/christophermontero/rocketmon-api/blob/master/docs/diagrams/component-diagram.jpg?raw=true)
 
 #### Deployment diagram
 
-![deployment diagram](https://github.com/christophermontero/rocketmon-api/blob/feature/register-trainer/docs/diagrams/deployment-diagram.jpg?raw=true)
+![deployment diagram](https://github.com/christophermontero/rocketmon-api/blob/master/docs/diagrams/deployment-diagram.jpg?raw=true)
 
 ### Endpoints
 
