@@ -8,6 +8,7 @@
 
 - [Content:](#content)
 - [Project description](#project-description)
+  - [Architecture](#architecture)
   - [Endpoints](#endpoints)
   - [MongoDB documents structure](#mongodb-documents-structure)
 - [User guide](#user-guide)
@@ -19,6 +20,9 @@
 ## Project description
 
 This is an API for visualize all pokemons with their stats.
+
+### Architecture
+
 
 ### Endpoints
 
