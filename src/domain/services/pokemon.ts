@@ -34,7 +34,7 @@ export const PokemonService = {
           id: pokemon.id,
           name: pokemon.name,
           url: pokemon.url,
-          sprite: pokemon.sprites.front_default,
+          sprite: pokemon.sprites.other['official-artwork'].front_default,
           types: pokemon.types.map((type: any) => type.type.name)
         }));
 

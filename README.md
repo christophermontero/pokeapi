@@ -8,6 +8,7 @@
 
 - [Content:](#content)
 - [Project description](#project-description)
+  - [Architecture](#architecture)
   - [Endpoints](#endpoints)
   - [MongoDB documents structure](#mongodb-documents-structure)
 - [User guide](#user-guide)
@@ -19,6 +20,20 @@
 ## Project description
 
 This is an API for visualize all pokemons with their stats.
+
+### Architecture
+
+#### Use case diagram
+
+![use case diagram](https://github.com/christophermontero/rocketmon-api/blob/feature/register-trainer/docs/diagrams/use-case-diagram.jpg?raw=true)
+
+#### Component diagram
+
+![component diagram](https://github.com/christophermontero/rocketmon-api/blob/feature/register-trainer/docs/diagrams/component-diagram.jpg?raw=true)
+
+#### Deployment diagram
+
+![deployment diagram](https://github.com/christophermontero/rocketmon-api/blob/feature/register-trainer/docs/diagrams/deployment-diagram.jpg?raw=true)
 
 ### Endpoints
 
@@ -106,6 +121,10 @@ Describe the project structure and how to use it.
 │           ├── pokemon.ts.html
 │           └── trainer.ts.html
 ├── docs
+│   ├── diagrams
+│   │   ├── component-diagram.jpg
+│   │   ├── deployment-diagram.jpg
+│   │   └── use-case-diagram.jpg
 │   └── rocketmon-api-doc-v1.json
 ├── jest.config.ts
 ├── LICENSE
@@ -155,7 +174,6 @@ Describe the project structure and how to use it.
 │           ├── auth.spec.ts
 │           └── pokemon.spec.ts
 └── tsconfig.json
-
 ```
 
 Chekc the API documentation [here](https://rocketmon-api.herokuapp.com/api/v1/docs)
