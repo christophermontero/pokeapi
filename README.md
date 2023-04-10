@@ -121,6 +121,10 @@ Describe the project structure and how to use it.
 │           ├── pokemon.ts.html
 │           └── trainer.ts.html
 ├── docs
+│   ├── diagrams
+│   │   ├── component-diagram.jpg
+│   │   ├── deployment-diagram.jpg
+│   │   └── use-case-diagram.jpg
 │   └── rocketmon-api-doc-v1.json
 ├── jest.config.ts
 ├── LICENSE
@@ -170,7 +174,6 @@ Describe the project structure and how to use it.
 │           ├── auth.spec.ts
 │           └── pokemon.spec.ts
 └── tsconfig.json
-
 ```
 
 Chekc the API documentation [here](https://rocketmon-api.herokuapp.com/api/v1/docs)
