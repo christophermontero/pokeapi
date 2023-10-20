@@ -40,9 +40,9 @@ jobs:
       - name: Test 🧪
         run: npm test
         env:
-          HD_JWT_SECRET: ${{ secrets.ROCKETMON_JWT_PRIVATE_KEY }}
-          HD_MONGODB_URL: ${{ secrets.ROCKETMON_DB_URI }}
-          HD_POKEMON_BASE_URL: ${{ vars.POKE_BASE_API_URI }}
+          JWT_SECRET: ${{ secrets.ROCKETMON_JWT_PRIVATE_KEY }}
+          MONGODB_URL: ${{ secrets.ROCKETMON_DB_URI }}
+          POKEMON_BASE_URL: ${{ vars.POKE_BASE_API_URI }}
 
   deploy:
     runs-on: ubuntu-latest
