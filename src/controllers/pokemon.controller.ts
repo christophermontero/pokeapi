@@ -4,14 +4,15 @@ import logger from '../config/logger';
 import httpResponses from '../constants/responses';
 import { IPokemonDetails, IPokemonGeneralInfo } from '../interfaces/pokemon';
 import pokemonService from '../services/pokemon.service';
+import trainerService from '../services/trainer.service';
 import { buildPokemonDetails } from '../utils/pokemon';
 
 const getPokemons = async (req: Request, res: Response) => {
   try {
-    const trainer = {};
+    const trainer = await trainerService.findByName(req.body.user.name);
 
     if (!trainer) {
-      return res.status(httpStatus.NOT_ACCEPTABLE).json({
+      return res.status(httpStatus.UNPROCESSABLE_ENTITY).json({
         code: httpResponses.TRAINER_NOT_EXISTS.code,
         message: httpResponses.TRAINER_NOT_EXISTS.message
       });
@@ -54,7 +55,7 @@ const getPokemons = async (req: Request, res: Response) => {
 
 const getPokemonsDetails = async (req: Request, res: Response) => {
   try {
-    const trainer = {};
+    const trainer = await trainerService.findByName(req.body.user.name);
 
     if (!trainer) {
       return res.status(httpResponses.TRAINER_NOT_EXISTS.httpCode).json({

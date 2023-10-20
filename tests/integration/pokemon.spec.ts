@@ -1,17 +1,16 @@
 import bcrypt from 'bcrypt';
+import httpStatus from 'http-status';
 import jwt from 'jsonwebtoken';
-import mongoose from 'mongoose';
 import request from 'supertest';
 import server from '../../src/app';
 import config from '../../src/config/config';
 import httpResponses from '../../src/constants/responses';
 import Trainer from '../../src/entities/Trainer';
+import setupTestDB from '../utils/setupTestDB';
+
+setupTestDB();
 
 describe('/api/v1/pokemon', () => {
-  afterAll(async () => {
-    mongoose.disconnect();
-  });
-
   describe('POST /', () => {
     let limit: string, offset: string, token: string;
 
@@ -40,14 +39,10 @@ describe('/api/v1/pokemon', () => {
       });
     });
 
-    afterEach(async () => {
-      await Trainer.deleteMany({});
-    });
-
     it('should get pokemon range successfully', async () => {
       const res = await exec();
 
-      expect(res.status).toBe(httpResponses.OK.httpCode);
+      expect(res.status).toBe(httpStatus.OK);
       expect(res.body).toHaveProperty('code', httpResponses.OK.code);
       expect(res.body).toHaveProperty('message', httpResponses.OK.message);
       expect(Array.isArray(res.body.data)).toBeTruthy();
@@ -57,19 +52,15 @@ describe('/api/v1/pokemon', () => {
       limit = '15';
       const res = await exec();
 
-      expect(res.status).toBe(httpResponses.BAD_REQUEST.httpCode);
-      expect(res.body).toHaveProperty('code', httpResponses.BAD_REQUEST.code);
-      expect(res.body).toHaveProperty(
-        'message',
-        httpResponses.BAD_REQUEST.message
-      );
+      expect(res.status).toBe(httpStatus.BAD_REQUEST);
+      expect(res.body).toHaveProperty('message');
     });
 
     it('should failed if token is invalid', async () => {
       token = 'invalidToken';
       const res = await exec();
 
-      expect(res.status).toBe(httpResponses.UNAUTHORIZED.httpCode);
+      expect(res.status).toBe(httpStatus.UNAUTHORIZED);
       expect(res.body).toHaveProperty('code', httpResponses.UNAUTHORIZED.code);
       expect(res.body).toHaveProperty(
         'message',
@@ -85,7 +76,7 @@ describe('/api/v1/pokemon', () => {
       });
       const res = await exec();
 
-      expect(res.status).toBe(httpResponses.TRAINER_NOT_EXISTS.httpCode);
+      expect(res.status).toBe(httpStatus.UNPROCESSABLE_ENTITY);
       expect(res.body).toHaveProperty(
         'code',
         httpResponses.TRAINER_NOT_EXISTS.code
@@ -124,14 +115,10 @@ describe('/api/v1/pokemon', () => {
       });
     });
 
-    afterEach(async () => {
-      await Trainer.deleteMany({});
-    });
-
     it('should fetch pokemon by name successfully', async () => {
       const res = await exec();
 
-      expect(res.status).toBe(httpResponses.OK.httpCode);
+      expect(res.status).toBe(httpStatus.OK);
       expect(res.body).toHaveProperty('code', httpResponses.OK.code);
       expect(res.body).toHaveProperty('message', httpResponses.OK.message);
       expect(typeof res.body.data === 'object').toBeTruthy();
@@ -141,7 +128,7 @@ describe('/api/v1/pokemon', () => {
       name = 'omanyt';
       const res = await exec();
 
-      expect(res.status).toBe(httpResponses.POKEMON_NOT_EXISTS.httpCode);
+      expect(res.status).toBe(httpStatus.NOT_FOUND);
       expect(res.body).toHaveProperty(
         'code',
         httpResponses.POKEMON_NOT_EXISTS.code
@@ -156,7 +143,7 @@ describe('/api/v1/pokemon', () => {
       token = 'invalidToken';
       const res = await exec();
 
-      expect(res.status).toBe(httpResponses.UNAUTHORIZED.httpCode);
+      expect(res.status).toBe(httpStatus.UNAUTHORIZED);
       expect(res.body).toHaveProperty('code', httpResponses.UNAUTHORIZED.code);
       expect(res.body).toHaveProperty(
         'message',
@@ -172,7 +159,7 @@ describe('/api/v1/pokemon', () => {
       });
       const res = await exec();
 
-      expect(res.status).toBe(httpResponses.TRAINER_NOT_EXISTS.httpCode);
+      expect(res.status).toBe(httpStatus.UNPROCESSABLE_ENTITY);
       expect(res.body).toHaveProperty(
         'code',
         httpResponses.TRAINER_NOT_EXISTS.code

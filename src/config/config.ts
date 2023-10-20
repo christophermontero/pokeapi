@@ -12,6 +12,7 @@ const envVarsSchema = Joi.object()
     PORT: Joi.number().default(3000),
     POKEMON_BASE_URL: Joi.string().required().description('Pokemon base url'),
     MONGODB_URL: Joi.string().required().description('Mongo DB url'),
+    MONGODB_TIMEOUT: Joi.number().default(10000),
     JWT_SECRET: Joi.string().required().description('JWT secret key'),
     JWT_ACCESS_EXPIRATION_MINUTES: Joi.number()
       .default(30)
@@ -50,7 +51,10 @@ export default {
     baseUrl: envVars.POKEMON_BASE_URL
   },
   mongoose: {
-    url: envVars.MONGODB_URL + (envVars.NODE_ENV === 'test' ? '-test' : '')
+    url: envVars.MONGODB_URL + (envVars.NODE_ENV === 'test' ? '-test' : ''),
+    options: {
+      connectTimeoutMS: envVars.MONGODB_TIMEOUT
+    }
   },
   jwt: {
     secret: envVars.JWT_SECRET,
