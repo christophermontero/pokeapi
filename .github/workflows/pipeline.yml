@@ -36,6 +36,9 @@ jobs:
         run: npm test
         env:
           CI: true
+          HD_JWT_SECRET: ${{ secrets.ROCKETMON_JWT_PRIVATE_KEY }}
+          HD_MONGODB_URL: ${{ secrets.ROCKETMON_DB_URI }}
+          HD_POKEMON_BASE_URL: ${{ vars.POKE_BASE_API_URI }}
 
   deploy:
     runs-on: ubuntu-latest
@@ -57,8 +60,6 @@ jobs:
           heroku_app_name: ${{ vars.HEROKU_APP_NAME }}
           heroku_email: ${{ vars.HEROKU_EMAIL }}
         env:
-          HD_ROCKETMON_BASE_API_URI: ${{ vars.ROCKETMON_BASE_API_URI }}
-          HD_ROCKETMON_JWT_PRIVATE_KEY: ${{ secrets.ROCKETMON_JWT_PRIVATE_KEY }}
-          HD_ROCKETMON_DB_URI: ${{ secrets.ROCKETMON_DB_URI }}
-          HD_ROCKETMON_DB_NAME: ${{ secrets.ROCKETMON_DB_NAME }}
-          HD_POKE_BASE_API_URI: ${{ vars.POKE_BASE_API_URI }}
+          HD_JWT_SECRET: ${{ secrets.ROCKETMON_JWT_PRIVATE_KEY }}
+          HD_MONGODB_URL: ${{ secrets.ROCKETMON_DB_URI }}
+          HD_POKEMON_BASE_URL: ${{ vars.POKE_BASE_API_URI }}
