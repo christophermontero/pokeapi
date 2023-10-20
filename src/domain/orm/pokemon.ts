@@ -1,14 +1,12 @@
-import config from 'config';
+import config from '../../config/config';
 import logger from '../../utils/logger';
-
-const pokemonBaseUrl = config.get('pokemonBaseUrl');
 
 export const PokemonORM = {
   FindAll: async (limit: string, offset: string) => {
     logger.Info(`PokemonORM.FindAll(limit: ${limit}, offset: ${offset})`);
     try {
       const pokemons = await fetch(
-        `${pokemonBaseUrl}/pokemon?limit=${limit}&offset=${offset}`,
+        `${config.pokemon.baseUrl}/pokemon?limit=${limit}&offset=${offset}`,
         {
           method: 'GET',
           headers: {
@@ -26,12 +24,15 @@ export const PokemonORM = {
   FindByName: async (name: any) => {
     logger.Info(`PokemonORM.FindByName(name: ${name})`);
     try {
-      const pokemonDetails = await fetch(`${pokemonBaseUrl}/pokemon/${name}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
+      const pokemonDetails = await fetch(
+        `${config.pokemon.baseUrl}/pokemon/${name}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
         }
-      }).then((response) => response.status === 200 && response.json());
+      ).then((response) => response.status === 200 && response.json());
 
       return pokemonDetails;
     } catch (error: any) {
@@ -42,12 +43,15 @@ export const PokemonORM = {
   FindTypeByName: async (name: string) => {
     logger.Info(`PokemonORM.FindTypeByName(name: ${name})`);
     try {
-      const typeDetails = await fetch(`${pokemonBaseUrl}/type/${name}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
+      const typeDetails = await fetch(
+        `${config.pokemon.baseUrl}/type/${name}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
         }
-      }).then((response) => response.json());
+      ).then((response) => response.json());
 
       return typeDetails;
     } catch (error: any) {
@@ -59,7 +63,7 @@ export const PokemonORM = {
     logger.Info(`PokemonORM.FindPokemonSpeciesById(id: ${id})`);
     try {
       const pokemonSpeciesDetails = await fetch(
-        `${pokemonBaseUrl}/pokemon-species/${id}`,
+        `${config.pokemon.baseUrl}/pokemon-species/${id}`,
         {
           method: 'GET',
           headers: {
@@ -78,7 +82,7 @@ export const PokemonORM = {
     logger.Info(`PokemonORM.FindPokemonEvolChainById(id: ${id})`);
     try {
       const pokemonEvolutionChainDetails = await fetch(
-        `${pokemonBaseUrl}/evolution-chain/${id}`,
+        `${config.pokemon.baseUrl}/evolution-chain/${id}`,
         {
           method: 'GET',
           headers: {

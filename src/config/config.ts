@@ -2,8 +2,6 @@ import dotenv from 'dotenv';
 import Joi from 'joi';
 import path from 'path';
 
-console.log('dirname', __dirname);
-
 dotenv.config({ path: path.join(__dirname, '../../.env') });
 
 const envVarsSchema = Joi.object()
