@@ -32,6 +32,8 @@ describe('/api/v1/pokemon', () => {
         password: await bcrypt.hash('Test*2023#', 10)
       });
 
+      console.log(config.pokemon.baseUrl);
+
       token = jwt.sign({ id: '1', name: 'ashketchum' }, config.jwt.secret, {
         expiresIn: 86400,
         algorithm: 'HS256',
