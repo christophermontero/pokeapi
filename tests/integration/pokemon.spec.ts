@@ -1,15 +1,14 @@
 import bcrypt from 'bcrypt';
-import config from 'config';
 import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 import request from 'supertest';
-import httpResponses from '../../../src/constants/responses';
-import Trainer from '../../../src/domain/entities/Trainer';
-import server from '../../../src/server/index';
+import server from '../../src/app';
+import config from '../../src/config/config';
+import httpResponses from '../../src/constants/responses';
+import Trainer from '../../src/entities/Trainer';
 
 describe('/api/v1/pokemon', () => {
   afterAll(async () => {
-    await server.close();
     mongoose.disconnect();
   });
 
@@ -34,11 +33,11 @@ describe('/api/v1/pokemon', () => {
         password: await bcrypt.hash('Test*2023#', 10)
       });
 
-      token = jwt.sign(
-        { id: '1', name: 'ashketchum' },
-        config.get('jwtPrivateKey'),
-        { expiresIn: 86400, algorithm: 'HS256', issuer: 'RocketmonAPI' }
-      );
+      token = jwt.sign({ id: '1', name: 'ashketchum' }, config.jwt.secret, {
+        expiresIn: 86400,
+        algorithm: 'HS256',
+        issuer: 'RocketmonAPI'
+      });
     });
 
     afterEach(async () => {
@@ -79,11 +78,11 @@ describe('/api/v1/pokemon', () => {
     });
 
     it('should failed if user not exists', async () => {
-      token = jwt.sign(
-        { id: '1', name: 'profesoroak' },
-        config.get('jwtPrivateKey'),
-        { expiresIn: 86400, algorithm: 'HS256', issuer: 'RocketmonAPI' }
-      );
+      token = jwt.sign({ id: '1', name: 'profesoroak' }, config.jwt.secret, {
+        expiresIn: 86400,
+        algorithm: 'HS256',
+        issuer: 'RocketmonAPI'
+      });
       const res = await exec();
 
       expect(res.status).toBe(httpResponses.TRAINER_NOT_EXISTS.httpCode);
@@ -118,11 +117,11 @@ describe('/api/v1/pokemon', () => {
         password: await bcrypt.hash('Test*2023#', 10)
       });
 
-      token = jwt.sign(
-        { id: '1', name: 'ashketchum' },
-        config.get('jwtPrivateKey'),
-        { expiresIn: 86400, algorithm: 'HS256', issuer: 'RocketmonAPI' }
-      );
+      token = jwt.sign({ id: '1', name: 'ashketchum' }, config.jwt.secret, {
+        expiresIn: 86400,
+        algorithm: 'HS256',
+        issuer: 'RocketmonAPI'
+      });
     });
 
     afterEach(async () => {
@@ -166,11 +165,11 @@ describe('/api/v1/pokemon', () => {
     });
 
     it('should failed if user not exists', async () => {
-      token = jwt.sign(
-        { id: '1', name: 'profesoroak' },
-        config.get('jwtPrivateKey'),
-        { expiresIn: 86400, algorithm: 'HS256', issuer: 'RocketmonAPI' }
-      );
+      token = jwt.sign({ id: '1', name: 'profesoroak' }, config.jwt.secret, {
+        expiresIn: 86400,
+        algorithm: 'HS256',
+        issuer: 'RocketmonAPI'
+      });
       const res = await exec();
 
       expect(res.status).toBe(httpResponses.TRAINER_NOT_EXISTS.httpCode);
