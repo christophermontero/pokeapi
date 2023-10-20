@@ -16,7 +16,6 @@ jobs:
         uses: actions/checkout@v3
       - name: Print variables names 📝
         run: |
-          echo "ROCKETMON_BASE_API_URI=${{ vars.ROCKETMON_BASE_API_URI }}"
           echo "POKE_BASE_API_URI=${{ vars.POKE_BASE_API_URI }}"
           echo "HEROKU_APP_NAME=${{ vars.HEROKU_APP_NAME }}"
           echo "HEROKU_EMAIL=${{ vars.HEROKU_EMAIL }}"
@@ -41,7 +40,6 @@ jobs:
       - name: Test 🧪
         run: npm test
         env:
-          CI: true
           HD_JWT_SECRET: ${{ secrets.ROCKETMON_JWT_PRIVATE_KEY }}
           HD_MONGODB_URL: ${{ secrets.ROCKETMON_DB_URI }}
           HD_POKEMON_BASE_URL: ${{ vars.POKE_BASE_API_URI }}
@@ -55,7 +53,6 @@ jobs:
         uses: actions/checkout@v3
       - name: Print variables names 📝
         run: |
-          echo "ROCKETMON_BASE_API_URI=${{ vars.ROCKETMON_BASE_API_URI }}"
           echo "POKE_BASE_API_URI=${{ vars.POKE_BASE_API_URI }}"
           echo "HEROKU_APP_NAME=${{ vars.HEROKU_APP_NAME }}"
           echo "HEROKU_EMAIL=${{ vars.HEROKU_EMAIL }}"
