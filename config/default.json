@@ -1,9 +1,0 @@
-{
-  "baseApiUrl": "/api/v1",
-  "pokemonBaseUrl": "https://pokeapi.co/api/v2",
-  "jwtPrivateKey": "mySecureDevKey",
-  "db": {
-    "uri": "mongodb://localhost:27017",
-    "name": "RocketmonDevDb"
-  }
-}

@@ -1,9 +1,0 @@
-{
-  "baseApiUrl": "",
-  "pokemonBaseUrl": "",
-  "jwtPrivateKey": "",
-  "db": {
-    "uri": "",
-    "name": ""
-  }
-}
