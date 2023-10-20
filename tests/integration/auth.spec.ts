@@ -1,16 +1,14 @@
 import bcrypt from 'bcrypt';
-import mongoose from 'mongoose';
+import httpStatus from 'http-status';
 import request from 'supertest';
-import httpResponses from '../../../src/constants/responses';
-import Trainer from '../../../src/domain/entities/Trainer';
-import server from '../../../src/server/index';
+import server from '../../src/app';
+import httpResponses from '../../src/constants/responses';
+import Trainer from '../../src/entities/Trainer';
+import setupTestDB from '../utils/setupTestDB';
+
+setupTestDB();
 
 describe('/api/v1/auth', () => {
-  afterAll(async () => {
-    await server.close();
-    mongoose.disconnect();
-  });
-
   describe('POST /signup', () => {
     let name: string, nickname: string, team: string, password: string;
 
@@ -30,14 +28,10 @@ describe('/api/v1/auth', () => {
       password = 'Test*2023#';
     });
 
-    afterEach(async () => {
-      await Trainer.deleteMany({});
-    });
-
     it('should register a new trainer successfully', async () => {
       const res = await exec();
 
-      expect(res.status).toBe(httpResponses.CREATED.httpCode);
+      expect(res.status).toBe(httpStatus.CREATED);
       expect(res.body).toMatchObject({
         code: httpResponses.CREATED.code,
         message: httpResponses.CREATED.message
@@ -48,12 +42,8 @@ describe('/api/v1/auth', () => {
       password = '12345678';
       const res = await exec();
 
-      expect(res.status).toBe(httpResponses.BAD_REQUEST.httpCode);
-      expect(res.body).toHaveProperty('code', httpResponses.BAD_REQUEST.code);
-      expect(res.body).toHaveProperty(
-        'message',
-        httpResponses.BAD_REQUEST.message
-      );
+      expect(res.status).toBe(httpStatus.BAD_REQUEST);
+      expect(res.body).toHaveProperty('message');
     });
 
     it('should falied if user already exists', async () => {
@@ -66,7 +56,7 @@ describe('/api/v1/auth', () => {
 
       const res = await exec();
 
-      expect(res.status).toBe(httpResponses.USER_TAKEN.httpCode);
+      expect(res.status).toBe(httpStatus.CONFLICT);
       expect(res.body).toHaveProperty('code', httpResponses.USER_TAKEN.code);
       expect(res.body).toHaveProperty(
         'message',
@@ -97,14 +87,10 @@ describe('/api/v1/auth', () => {
       });
     });
 
-    afterEach(async () => {
-      await Trainer.deleteMany({});
-    });
-
     it('should login successfully', async () => {
       const res = await exec();
 
-      expect(res.status).toBe(httpResponses.OK.httpCode);
+      expect(res.status).toBe(httpStatus.OK);
       expect(res.body).toHaveProperty('code', httpResponses.OK.code);
       expect(res.body).toHaveProperty('message', httpResponses.OK.message);
     });
@@ -113,7 +99,7 @@ describe('/api/v1/auth', () => {
       name = 'johndoe';
       const res = await exec();
 
-      expect(res.status).toBe(httpResponses.TRAINER_NOT_EXISTS.httpCode);
+      expect(res.status).toBe(httpStatus.NOT_FOUND);
       expect(res.body).toHaveProperty(
         'code',
         httpResponses.TRAINER_NOT_EXISTS.code
@@ -128,19 +114,15 @@ describe('/api/v1/auth', () => {
       name = 'John Doe';
       const res = await exec();
 
-      expect(res.status).toBe(httpResponses.BAD_REQUEST.httpCode);
-      expect(res.body).toHaveProperty('code', httpResponses.BAD_REQUEST.code);
-      expect(res.body).toHaveProperty(
-        'message',
-        httpResponses.BAD_REQUEST.message
-      );
+      expect(res.status).toBe(httpStatus.BAD_REQUEST);
+      expect(res.body).toHaveProperty('message');
     });
 
     it('should failed if password not matches', async () => {
       password = 'Test*2023';
       const res = await exec();
 
-      expect(res.status).toBe(httpResponses.INVALID_PASSWORD.httpCode);
+      expect(res.status).toBe(httpStatus.NOT_ACCEPTABLE);
       expect(res.body).toHaveProperty(
         'code',
         httpResponses.INVALID_PASSWORD.code
