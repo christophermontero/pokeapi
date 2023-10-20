@@ -53,7 +53,8 @@ export default {
   mongoose: {
     url: envVars.MONGODB_URL + (envVars.NODE_ENV === 'test' ? '-test' : ''),
     options: {
-      connectTimeoutMS: envVars.MONGODB_TIMEOUT
+      connectTimeoutMS: envVars.MONGODB_TIMEOUT,
+      w: 'majority'
     }
   },
   jwt: {
