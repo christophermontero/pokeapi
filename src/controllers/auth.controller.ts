@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import colors from 'colors';
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 import _ from 'lodash';
@@ -11,7 +12,6 @@ import {
 import generateToken from '../utils/jwt';
 
 const signup = async (req: Request, res: Response) => {
-  console.log(req.body.password);
   const name = req.body.name,
     nickname = req.body.nickname,
     team = req.body.team,
@@ -33,7 +33,7 @@ const signup = async (req: Request, res: Response) => {
       message: httpResponses.CREATED.message
     });
   } catch (error: any) {
-    logger.error(`${error.message}`);
+    logger.error(error.message);
 
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
       code: httpResponses.INTERNAL_ERROR.code,
@@ -81,7 +81,7 @@ const signin = async (req: Request, res: Response) => {
       }
     });
   } catch (error: any) {
-    logger.error(`${error.message}`);
+    logger.error(error.message);
 
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
       code: httpResponses.INTERNAL_ERROR.code,

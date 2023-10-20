@@ -1,9 +1,8 @@
 import bcrypt from 'bcrypt';
 import mongoose from 'mongoose';
 import request from 'supertest';
+import server from '../../../src/app';
 import httpResponses from '../../../src/constants/responses';
-import Trainer from '../../../src/domain/entities/Trainer';
-import server from '../../../src/server/index';
 
 describe('/api/v1/auth', () => {
   afterAll(async () => {

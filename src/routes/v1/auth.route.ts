@@ -2,15 +2,15 @@ import { Router } from 'express';
 import authController from '../../controllers/auth.controller';
 import hashingPassword from '../../middlewares/hashing';
 import validate from '../../middlewares/validate';
-import authValidation from '../../validators/auth.validation';
+import authValidator from '../../validators/auth.validator';
 
 const auth = Router();
 
 auth.post(
   '/signup',
-  [validate(authValidation.signup), hashingPassword()],
+  [validate(authValidator.signup), hashingPassword()],
   authController.signup
 );
-auth.post('/signin', [validate(authValidation.signin)], authController.signin);
+auth.post('/signin', [validate(authValidator.signin)], authController.signin);
 
 export default auth;

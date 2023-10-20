@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import config from '../config/config';
 import logger from '../config/logger';
 import ApiError from '../utils/ApiError';
+import colors from 'colors';
 
 const errorConverter = (
   err: any | mongoose.Error,
@@ -44,7 +45,7 @@ const errorHandler = (
   };
 
   if (config.env === 'development') {
-    logger.error(err);
+    logger.error(colors.red.bold(err));
   }
 
   res.status(statusCode).send(response);

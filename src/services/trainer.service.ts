@@ -1,12 +1,12 @@
 import logger from '../config/logger';
-import Trainer from '../domain/entities/Trainer';
-import { ITrainer } from '../domain/models/trainer';
+import Trainer from '../entities/Trainer';
+import { ITrainer } from '../interfaces/trainer';
 
 const findByName = async (name: string) => {
   try {
     return await Trainer.findOne({ name });
   } catch (error: any) {
-    logger.error(`${error.message}`);
+    logger.error(error.message);
     throw error;
   }
 };
@@ -27,7 +27,7 @@ const save = async (
   try {
     return await document.save();
   } catch (error: any) {
-    logger.error(`${error.message}`);
+    logger.error(error.message);
     throw error;
   }
 };
@@ -45,7 +45,7 @@ const update = async (trainer: ITrainer) => {
       }
     );
   } catch (error: any) {
-    logger.error(`${error.message}`);
+    logger.error(error.message);
     throw error;
   }
 };
