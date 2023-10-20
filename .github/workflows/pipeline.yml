@@ -14,6 +14,12 @@ jobs:
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
+      - name: Print variables names 📝
+        run: |
+          echo "ROCKETMON_BASE_API_URI=${{ vars.ROCKETMON_BASE_API_URI }}"
+          echo "POKE_BASE_API_URI=${{ vars.POKE_BASE_API_URI }}"
+          echo "HEROKU_APP_NAME=${{ vars.HEROKU_APP_NAME }}"
+          echo "HEROKU_EMAIL=${{ vars.HEROKU_EMAIL }}"
       - name: Set up Node.js 🚨
         uses: actions/setup-node@v3
         with:
