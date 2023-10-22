@@ -6,7 +6,7 @@ const setupTestDB = () => {
     await mongoose.connect(config.mongoose.url);
   });
 
-  beforeEach(async () => {
+  afterAll(async () => {
     await Promise.all(
       Object.values(mongoose.connection.collections).map(async (collection) =>
         collection.deleteMany()
