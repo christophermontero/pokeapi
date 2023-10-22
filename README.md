@@ -6,7 +6,7 @@
 ![repo size](https://img.shields.io/github/repo-size/christophermontero/rocketmon-api)
 ![watchers](https://img.shields.io/github/watchers/christophermontero/rocketmon-api?style=social)
 
-## Table of content
+- [Content:](#content)
 - [Project description](#project-description)
   - [Architecture](#architecture)
   - [Endpoints](#endpoints)
@@ -14,7 +14,7 @@
 - [User guide](#user-guide)
 - [Install guide](#install-guide)
   - [Requeriments](#requeriments)
-- [Author](#author)
+- [Author](#autores)
 - [License](#License)
 
 ## Project description
@@ -60,17 +60,7 @@ Describe the project structure and how to use it.
 
 ```bash
 .
-├── config
-│   ├── custom-environment-variables.json
-│   ├── default.json
-│   ├── production.json
-│   └── test.json
-├── docs
-│   ├── diagrams
-│   │   ├── component-diagram.jpg
-│   │   ├── deployment-diagram.jpg
-│   │   └── use-case-diagram.jpg
-│   └── rocketmon-api-doc-v1.json
+├── ecosystem.config.js
 ├── jest.config.ts
 ├── LICENSE
 ├── nodemon.json
@@ -78,46 +68,48 @@ Describe the project structure and how to use it.
 ├── package-lock.json
 ├── README.md
 ├── src
+│   ├── app.ts
+│   ├── config
+│   │   ├── config.ts
+│   │   ├── logger.ts
+│   │   └── morgan.ts
 │   ├── constants
 │   │   └── responses.ts
 │   ├── controllers
-│   │   ├── auth.ts
-│   │   └── pokemonBridge.ts
-│   ├── domain
-│   │   ├── entities
-│   │   │   └── Trainer.ts
-│   │   ├── models
-│   │   │   ├── login.ts
-│   │   │   ├── pokemon.ts
-│   │   │   └── trainer.ts
-│   │   ├── orm
-│   │   │   ├── pokemon.ts
-│   │   │   └── trainer.ts
-│   │   ├── repositories
-│   │   │   └── mongoDb.ts
-│   │   └── services
-│   │       ├── auth.ts
-│   │       └── pokemon.ts
+│   │   ├── auth.controller.ts
+│   │   └── pokemon.controller.ts
+│   ├── entities
+│   │   └── Trainer.ts
+│   ├── index.ts
+│   ├── interfaces
+│   │   ├── pokemon.ts
+│   │   └── trainer.ts
 │   ├── middlewares
-│   │   └── index.ts
+│   │   ├── error.ts
+│   │   ├── hashing.ts
+│   │   ├── rateLimiter.ts
+│   │   ├── token.ts
+│   │   └── validate.ts
 │   ├── routes
 │   │   └── v1
-│   │       └── index.ts
-│   ├── server
-│   │   └── index.ts
+│   ├── services
+│   │   ├── pokemon.service.ts
+│   │   └── trainer.service.ts
 │   ├── utils
+│   │   ├── ApiError.ts
 │   │   ├── jwt.ts
 │   │   ├── logger.ts
+│   │   ├── pick.ts
 │   │   └── pokemon.ts
 │   └── validators
-│       ├── login.ts
-│       ├── pokemon.ts
-│       └── trainer.ts
+│       ├── auth.validator.ts
+│       └── pokemon.validator.ts
 ├── tests
-│   └── integration
-│       └── routes
-│           ├── auth.spec.ts
-│           └── pokemon.spec.ts
+│   ├── integration
+│   │   ├── auth.spec.ts
+│   │   └── pokemon.spec.ts
+│   └── utils
+│       └── setupTestDB.ts
 └── tsconfig.json
 ```
 
