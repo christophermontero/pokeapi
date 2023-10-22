@@ -17,25 +17,25 @@
 - [Author](#autores)
 - [License](#License)
 
-#Project description
+# Project description
 
 This is an API for visualize all pokemons with their stats.
 
-##Architecture
+## Architecture
 
-###Use case diagram
+### Use case diagram
 
 ![use case diagram](https://github.com/christophermontero/rocketmon-api/blob/master/docs/diagrams/use-case-diagram.jpg?raw=true)
 
-###Component diagram
+### Component diagram
 
 ![component diagram](https://github.com/christophermontero/rocketmon-api/blob/master/docs/diagrams/component-diagram.jpg?raw=true)
 
-###Deployment diagram
+### Deployment diagram
 
 ![deployment diagram](https://github.com/christophermontero/rocketmon-api/blob/master/docs/diagrams/deployment-diagram.jpg?raw=true)
 
-##Endpoints
+## Endpoints
 
 ```
 * Auth:
@@ -46,7 +46,7 @@ This is an API for visualize all pokemons with their stats.
   * GET /api/v1/pokemon/:name
 ```
 
-##MongoDB documents structure
+## MongoDB documents structure
 
 - Trainer:
   - name: string,
@@ -54,7 +54,7 @@ This is an API for visualize all pokemons with their stats.
   - password: string,
   - team: string,
 
-#User guide
+# User guide
 
 Describe the project structure and how to use it.
 
@@ -123,7 +123,7 @@ Describe the project structure and how to use it.
 
 Chekc the API documentation [here](https://rocketmon-api.herokuapp.com/api/v1/docs)
 
-#Install guide
+# Install guide
 
 Below are the instructions to install and run the project en development mode.
 
@@ -134,16 +134,16 @@ npm install
 npm run dev
 ```
 
-##Requeriments
+## Requeriments
 
 - Node.js version 18 or higher [Node.js](https://nodejs.org/en/)
 - NPM version 8 or higher [NPM](https://www.npmjs.com/)
 - MongoDB version 4 or higher [MongoDB](https://www.mongodb.com/)
 
-#Author
+# Author
 
 - [Christopher Ortiz Montero](https://github.com/christophermontero)
 
-#License
+# License
 
 This project is under [Apache License](https://www.apache.org/licenses/LICENSE-2.0).
