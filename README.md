@@ -60,72 +60,7 @@ Describe the project structure and how to use it.
 
 ```bash
 .
-├── config
-│   ├── custom-environment-variables.json
-│   ├── default.json
-│   ├── production.json
-│   └── test.json
-├── coverage
-│   ├── clover.xml
-│   ├── coverage-final.json
-│   ├── lcov.info
-│   └── lcov-report
-│       ├── base.css
-│       ├── block-navigation.js
-│       ├── constants
-│       │   ├── index.html
-│       │   └── responses.ts.html
-│       ├── controllers
-│       │   ├── auth.ts.html
-│       │   ├── index.html
-│       │   └── pokemonBridge.ts.html
-│       ├── domain
-│       │   ├── entities
-│       │   │   ├── index.html
-│       │   │   └── Trainer.ts.html
-│       │   ├── orm
-│       │   │   ├── index.html
-│       │   │   ├── pokemon.ts.html
-│       │   │   └── trainer.ts.html
-│       │   ├── repositories
-│       │   │   ├── index.html
-│       │   │   └── mongoDb.ts.html
-│       │   └── services
-│       │       ├── auth.ts.html
-│       │       ├── index.html
-│       │       └── pokemon.ts.html
-│       ├── favicon.png
-│       ├── index.html
-│       ├── middlewares
-│       │   ├── index.html
-│       │   └── index.ts.html
-│       ├── prettify.css
-│       ├── prettify.js
-│       ├── routes
-│       │   └── v1
-│       │       ├── index.html
-│       │       └── index.ts.html
-│       ├── server
-│       │   ├── index.html
-│       │   └── index.ts.html
-│       ├── sort-arrow-sprite.png
-│       ├── sorter.js
-│       ├── utils
-│       │   ├── index.html
-│       │   ├── jwt.ts.html
-│       │   ├── logger.ts.html
-│       │   └── pokemon.ts.html
-│       └── validators
-│           ├── index.html
-│           ├── login.ts.html
-│           ├── pokemon.ts.html
-│           └── trainer.ts.html
-├── docs
-│   ├── diagrams
-│   │   ├── component-diagram.jpg
-│   │   ├── deployment-diagram.jpg
-│   │   └── use-case-diagram.jpg
-│   └── rocketmon-api-doc-v1.json
+├── ecosystem.config.js
 ├── jest.config.ts
 ├── LICENSE
 ├── nodemon.json
@@ -133,46 +68,48 @@ Describe the project structure and how to use it.
 ├── package-lock.json
 ├── README.md
 ├── src
+│   ├── app.ts
+│   ├── config
+│   │   ├── config.ts
+│   │   ├── logger.ts
+│   │   └── morgan.ts
 │   ├── constants
 │   │   └── responses.ts
 │   ├── controllers
-│   │   ├── auth.ts
-│   │   └── pokemonBridge.ts
-│   ├── domain
-│   │   ├── entities
-│   │   │   └── Trainer.ts
-│   │   ├── models
-│   │   │   ├── login.ts
-│   │   │   ├── pokemon.ts
-│   │   │   └── trainer.ts
-│   │   ├── orm
-│   │   │   ├── pokemon.ts
-│   │   │   └── trainer.ts
-│   │   ├── repositories
-│   │   │   └── mongoDb.ts
-│   │   └── services
-│   │       ├── auth.ts
-│   │       └── pokemon.ts
+│   │   ├── auth.controller.ts
+│   │   └── pokemon.controller.ts
+│   ├── entities
+│   │   └── Trainer.ts
+│   ├── index.ts
+│   ├── interfaces
+│   │   ├── pokemon.ts
+│   │   └── trainer.ts
 │   ├── middlewares
-│   │   └── index.ts
+│   │   ├── error.ts
+│   │   ├── hashing.ts
+│   │   ├── rateLimiter.ts
+│   │   ├── token.ts
+│   │   └── validate.ts
 │   ├── routes
 │   │   └── v1
-│   │       └── index.ts
-│   ├── server
-│   │   └── index.ts
+│   ├── services
+│   │   ├── pokemon.service.ts
+│   │   └── trainer.service.ts
 │   ├── utils
+│   │   ├── ApiError.ts
 │   │   ├── jwt.ts
 │   │   ├── logger.ts
+│   │   ├── pick.ts
 │   │   └── pokemon.ts
 │   └── validators
-│       ├── login.ts
-│       ├── pokemon.ts
-│       └── trainer.ts
+│       ├── auth.validator.ts
+│       └── pokemon.validator.ts
 ├── tests
-│   └── integration
-│       └── routes
-│           ├── auth.spec.ts
-│           └── pokemon.spec.ts
+│   ├── integration
+│   │   ├── auth.spec.ts
+│   │   └── pokemon.spec.ts
+│   └── utils
+│       └── setupTestDB.ts
 └── tsconfig.json
 ```
 
