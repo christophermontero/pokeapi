@@ -6,7 +6,7 @@
 ![repo size](https://img.shields.io/github/repo-size/christophermontero/rocketmon-api)
 ![watchers](https://img.shields.io/github/watchers/christophermontero/rocketmon-api?style=social)
 
-- [Content:](#content)
+## Table of content
 - [Project description](#project-description)
   - [Architecture](#architecture)
   - [Endpoints](#endpoints)
@@ -14,7 +14,7 @@
 - [User guide](#user-guide)
 - [Install guide](#install-guide)
   - [Requeriments](#requeriments)
-- [Author](#autores)
+- [Author](#author)
 - [License](#License)
 
 ## Project description
