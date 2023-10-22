@@ -3,7 +3,6 @@ import config from '../config/config';
 import logger from '../config/logger';
 
 const findAll = async (limit: string, offset: string) => {
-  logger.info(`PokemonORM.FindAll(limit: ${limit}, offset: ${offset})`);
   try {
     const pokemons = await fetch(
       `${config.pokemon.baseUrl}/pokemon?limit=${limit}&offset=${offset}`,
@@ -42,7 +41,6 @@ const findByName = async (name: any) => {
 };
 
 const findTypeByName = async (name: string) => {
-  logger.info(`PokemonORM.FindTypeByName(name: ${name})`);
   try {
     const typeDetails = await fetch(`${config.pokemon.baseUrl}/type/${name}`, {
       method: 'GET',
@@ -59,7 +57,6 @@ const findTypeByName = async (name: string) => {
 };
 
 const findPokemonSpeciesById = async (id: string) => {
-  logger.info(`PokemonORM.FindPokemonSpeciesById(id: ${id})`);
   try {
     const pokemonSpeciesDetails = await fetch(
       `${config.pokemon.baseUrl}/pokemon-species/${id}`,
@@ -79,7 +76,6 @@ const findPokemonSpeciesById = async (id: string) => {
 };
 
 const findPokemonEvolChainById = async (id: string) => {
-  logger.info(`PokemonORM.FindPokemonEvolChainById(id: ${id})`);
   try {
     const pokemonEvolutionChainDetails = await fetch(
       `${config.pokemon.baseUrl}/evolution-chain/${id}`,
