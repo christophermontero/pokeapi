@@ -23,7 +23,6 @@ const findAll = async (limit: string, offset: string) => {
 };
 
 const findByName = async (name: any) => {
-  logger.info(`PokemonORM.FindByName(name: ${name})`);
   try {
     const pokemonDetails = await fetch(
       `${config.pokemon.baseUrl}/pokemon/${name}`,
