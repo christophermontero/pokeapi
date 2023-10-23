@@ -10,10 +10,15 @@ setupTestDB();
 
 describe('/api/v1/auth', () => {
   describe('POST /signup', () => {
-    let name: string, nickname: string, team: string, password: string;
+    let email: string,
+      name: string,
+      nickname: string,
+      team: string,
+      password: string;
 
     const exec = () => {
       return request(server).post('/api/v1/auth/signup').send({
+        email,
         name,
         nickname,
         team,
@@ -22,9 +27,10 @@ describe('/api/v1/auth', () => {
     };
 
     beforeEach(() => {
+      email = 'goldenboy@mailinator.com';
       name = 'ashketchum';
       nickname = 'golder boy';
-      team = 'rojo';
+      team = 'red';
       password = 'Test*2023#';
     });
 
@@ -48,6 +54,7 @@ describe('/api/v1/auth', () => {
 
     it('should falied if user already exists', async () => {
       await Trainer.collection.insertOne({
+        email,
         name,
         nickname,
         team,
@@ -65,24 +72,25 @@ describe('/api/v1/auth', () => {
     });
   });
 
-  describe('POST /signup', () => {
-    let name: string, password: string;
+  describe('POST /signin', () => {
+    let email: string, password: string;
 
     const exec = () => {
       return request(server).post('/api/v1/auth/signin').send({
-        name,
+        email,
         password
       });
     };
 
     beforeEach(async () => {
-      name = 'ashketchum';
+      email = 'goldenboy@mailinator.com';
       password = 'Test*2023#';
 
       await Trainer.collection.insertOne({
+        email: 'goldenboy@mailinator.com',
         name: 'ashketchum',
         nickname: 'Golden boy',
-        team: 'rojo',
+        team: 'red',
         password: await bcrypt.hash(password, 10)
       });
     });
@@ -96,7 +104,7 @@ describe('/api/v1/auth', () => {
     });
 
     it('should falied if trainer not exists', async () => {
-      name = 'johndoe';
+      email = 'johndoe@mailinator.com';
       const res = await exec();
 
       expect(res.status).toBe(httpStatus.NOT_FOUND);
@@ -110,8 +118,8 @@ describe('/api/v1/auth', () => {
       );
     });
 
-    it('should falied if name is invalid', async () => {
-      name = 'John Doe';
+    it('should falied if email is invalid', async () => {
+      email = 'johndoe';
       const res = await exec();
 
       expect(res.status).toBe(httpStatus.BAD_REQUEST);
@@ -122,7 +130,7 @@ describe('/api/v1/auth', () => {
       password = 'Test*2023';
       const res = await exec();
 
-      expect(res.status).toBe(httpStatus.NOT_ACCEPTABLE);
+      expect(res.status).toBe(httpStatus.UNPROCESSABLE_ENTITY);
       expect(res.body).toHaveProperty(
         'code',
         httpResponses.INVALID_PASSWORD.code

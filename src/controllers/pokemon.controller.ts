@@ -9,7 +9,7 @@ import { buildPokemonDetails } from '../utils/pokemon';
 
 const getPokemons = async (req: Request, res: Response) => {
   try {
-    const trainer = await trainerService.findByName(req.body.user.name);
+    const trainer = await trainerService.findByEmail(req.body.user.email);
 
     if (!trainer) {
       return res.status(httpStatus.UNPROCESSABLE_ENTITY).json({
@@ -25,7 +25,7 @@ const getPokemons = async (req: Request, res: Response) => {
 
     const pokemonsGeneralInfo: IPokemonGeneralInfo[] = await Promise.all(
       pokemons.results.map((pokemon: any) =>
-        pokemonService.findByName(pokemon.name)
+        pokemonService.findByEmail(pokemon.name)
       )
     );
 
@@ -55,16 +55,16 @@ const getPokemons = async (req: Request, res: Response) => {
 
 const getPokemonsDetails = async (req: Request, res: Response) => {
   try {
-    const trainer = await trainerService.findByName(req.body.user.name);
+    const trainer = await trainerService.findByEmail(req.body.user.email);
 
     if (!trainer) {
-      return res.status(httpResponses.TRAINER_NOT_EXISTS.httpCode).json({
+      return res.status(httpStatus.NOT_FOUND).json({
         code: httpResponses.TRAINER_NOT_EXISTS.code,
         message: httpResponses.TRAINER_NOT_EXISTS.message
       });
     }
 
-    const pokemon = await pokemonService.findByName(req.params.name);
+    const pokemon = await pokemonService.findByEmail(req.params.name);
 
     if (!pokemon) {
       return res.status(httpResponses.POKEMON_NOT_EXISTS.httpCode).json({

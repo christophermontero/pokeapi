@@ -1,5 +1,4 @@
 import bcrypt from 'bcrypt';
-import colors from 'colors';
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 import _ from 'lodash';
@@ -12,12 +11,10 @@ import {
 import generateToken from '../utils/jwt';
 
 const signup = async (req: Request, res: Response) => {
-  const name = req.body.name,
-    nickname = req.body.nickname,
-    team = req.body.team,
-    hashedPassword = req.body.hashedPassword;
+  const { email, name, nickname, team, hashedPassword } = req.body;
+
   try {
-    const trainerAlreadyExists = await authService.findByName(name);
+    const trainerAlreadyExists = await authService.findByEmail(email);
 
     if (trainerAlreadyExists) {
       return res.status(httpStatus.CONFLICT).json({
@@ -26,11 +23,22 @@ const signup = async (req: Request, res: Response) => {
       });
     }
 
-    await authService.save(name, nickname, hashedPassword, team);
+    const trainer = await authService.save(
+      email,
+      name,
+      nickname,
+      hashedPassword,
+      team
+    );
+
+    const token = generateToken(trainer);
 
     return res.status(httpStatus.CREATED).json({
       code: httpResponses.CREATED.code,
-      message: httpResponses.CREATED.message
+      message: httpResponses.CREATED.message,
+      data: {
+        token
+      }
     });
   } catch (error: any) {
     logger.error(error.message);
@@ -43,10 +51,10 @@ const signup = async (req: Request, res: Response) => {
 };
 
 const signin = async (req: Request, res: Response) => {
-  const enteredPassword = req.body.password,
-    name = req.body.name;
+  const { email, password: enteredPassword } = req.body;
+
   try {
-    const trainer = await authService.findByName(name);
+    const trainer = await authService.findByEmail(email);
 
     if (!trainer) {
       return res.status(httpStatus.NOT_FOUND).json({
@@ -63,7 +71,7 @@ const signin = async (req: Request, res: Response) => {
     );
 
     if (!isPasswordValid) {
-      return res.status(httpStatus.NOT_ACCEPTABLE).json({
+      return res.status(httpStatus.UNPROCESSABLE_ENTITY).json({
         code: httpResponses.INVALID_PASSWORD.code,
         message: httpResponses.INVALID_PASSWORD.message
       });

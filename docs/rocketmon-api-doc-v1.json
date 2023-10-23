@@ -31,7 +31,7 @@
         "operationId": "post-auth-register-trainer",
         "responses": {
           "201": {
-            "description": "Created",
+            "description": "CREATED",
             "content": {
               "application/json": {
                 "schema": {
@@ -45,11 +45,26 @@
                   "properties": {
                     "code": {
                       "type": "string",
-                      "example": "SUCCESS"
+                      "example": "CREATED"
                     },
                     "message": {
                       "type": "string",
                       "example": "The request has completed successfully"
+                    },
+                    "data": {
+                      "type": "object",
+                      "x-stoplight": {
+                        "id": "ztmlzgvntuem8"
+                      },
+                      "properties": {
+                        "token": {
+                          "type": "string",
+                          "x-stoplight": {
+                            "id": "o1hid4cmm6bok"
+                          },
+                          "example": "eyJhbGciOipXVCJ9InR5cCI6IkJIUzI1NiIs.eyJpZXRtb25BUEkifQZCI6IjY1MzZiZmRkNWMxMzU1ZTQxMWY2OTkxMyIsIm5hbWUiOiJwcm9mZXNvcm9hayIsImlhdCI6MTY5ODA4Njg3NywiZXhwIjoxNjk4MTczMjc3LCJpc3MiOiJSb2Nr.S1ZiphtaVwndRMA9jFibzQScNUIvJqA3QIhnKmSF713"
+                        }
+                      }
                     }
                   }
                 }
@@ -66,9 +81,7 @@
             "$ref": "#/components/responses/INTERNAL_ERROR"
           }
         },
-        "tags": [
-          "auth"
-        ],
+        "tags": ["auth"],
         "description": "This service allows to register a new trainer.",
         "requestBody": {
           "content": {
@@ -80,7 +93,7 @@
                     "name": "Ashketchum",
                     "nickname": "panzerfaust",
                     "password": "Test*2023#",
-                    "team": "azul"
+                    "team": "blue"
                   }
                 },
                 "properties": {
@@ -88,8 +101,15 @@
                     "type": "string",
                     "example": "ashketchum",
                     "minLength": 2,
-                    "maxLength": 50,
-                    "pattern": "^[a-zA-Z0-9]{2,50}$"
+                    "maxLength": 50
+                  },
+                  "email": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "fjzhgvnp5ujlc"
+                    },
+                    "format": "email",
+                    "example": "goldenboy@mailinator.com"
                   },
                   "nickname": {
                     "type": "string",
@@ -106,19 +126,11 @@
                   },
                   "team": {
                     "type": "string",
-                    "enum": [
-                      "azul",
-                      "rojo",
-                      "amarillo"
-                    ],
-                    "example": "azul"
+                    "enum": ["blue", "red", "yellow"],
+                    "example": "blue"
                   }
                 },
-                "required": [
-                  "name",
-                  "password",
-                  "team"
-                ]
+                "required": ["name", "email", "password", "team"]
               }
             }
           },
@@ -173,8 +185,8 @@
           "400": {
             "$ref": "#/components/responses/BAD_REQUEST"
           },
-          "409": {
-            "$ref": "#/components/responses/USER_TAKEN"
+          "404": {
+            "$ref": "#/components/responses/TRAINER_NOT_EXISTS"
           },
           "422": {
             "$ref": "#/components/responses/INVALID_PASSWORD"
@@ -183,9 +195,7 @@
             "$ref": "#/components/responses/INTERNAL_ERROR"
           }
         },
-        "tags": [
-          "auth"
-        ],
+        "tags": ["auth"],
         "description": "This service allows to login a pokemon trainer.",
         "requestBody": {
           "content": {
@@ -199,12 +209,14 @@
                   }
                 },
                 "properties": {
-                  "name": {
+                  "email": {
                     "type": "string",
-                    "example": "ashketchum",
-                    "pattern": "^[a-zA-Z0-9]{2,50}$",
+                    "example": "goldenboy@mailinator.com",
                     "minLength": 2,
-                    "maxLength": 50
+                    "maxLength": 50,
+                    "x-stoplight": {
+                      "id": "cpl73j4kmm4su"
+                    }
                   },
                   "password": {
                     "type": "string",
@@ -223,9 +235,7 @@
     "/pokemon": {
       "get": {
         "summary": "Fetch all pokemons",
-        "tags": [
-          "pokemon"
-        ],
+        "tags": ["pokemon"],
         "responses": {
           "200": {
             "description": "OK",
@@ -242,423 +252,301 @@
                           "id": 51,
                           "name": "dugtrio",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/51.png",
-                          "types": [
-                            "ground"
-                          ]
+                          "types": ["ground"]
                         },
                         {
                           "id": 52,
                           "name": "meowth",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/52.png",
-                          "types": [
-                            "normal"
-                          ]
+                          "types": ["normal"]
                         },
                         {
                           "id": 53,
                           "name": "persian",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/53.png",
-                          "types": [
-                            "normal"
-                          ]
+                          "types": ["normal"]
                         },
                         {
                           "id": 54,
                           "name": "psyduck",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/54.png",
-                          "types": [
-                            "water"
-                          ]
+                          "types": ["water"]
                         },
                         {
                           "id": 55,
                           "name": "golduck",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/55.png",
-                          "types": [
-                            "water"
-                          ]
+                          "types": ["water"]
                         },
                         {
                           "id": 56,
                           "name": "mankey",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/56.png",
-                          "types": [
-                            "fighting"
-                          ]
+                          "types": ["fighting"]
                         },
                         {
                           "id": 57,
                           "name": "primeape",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/57.png",
-                          "types": [
-                            "fighting"
-                          ]
+                          "types": ["fighting"]
                         },
                         {
                           "id": 58,
                           "name": "growlithe",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/58.png",
-                          "types": [
-                            "fire"
-                          ]
+                          "types": ["fire"]
                         },
                         {
                           "id": 59,
                           "name": "arcanine",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/59.png",
-                          "types": [
-                            "fire"
-                          ]
+                          "types": ["fire"]
                         },
                         {
                           "id": 60,
                           "name": "poliwag",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/60.png",
-                          "types": [
-                            "water"
-                          ]
+                          "types": ["water"]
                         },
                         {
                           "id": 61,
                           "name": "poliwhirl",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/61.png",
-                          "types": [
-                            "water"
-                          ]
+                          "types": ["water"]
                         },
                         {
                           "id": 62,
                           "name": "poliwrath",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/62.png",
-                          "types": [
-                            "water",
-                            "fighting"
-                          ]
+                          "types": ["water", "fighting"]
                         },
                         {
                           "id": 63,
                           "name": "abra",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/63.png",
-                          "types": [
-                            "psychic"
-                          ]
+                          "types": ["psychic"]
                         },
                         {
                           "id": 64,
                           "name": "kadabra",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/64.png",
-                          "types": [
-                            "psychic"
-                          ]
+                          "types": ["psychic"]
                         },
                         {
                           "id": 65,
                           "name": "alakazam",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/65.png",
-                          "types": [
-                            "psychic"
-                          ]
+                          "types": ["psychic"]
                         },
                         {
                           "id": 66,
                           "name": "machop",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/66.png",
-                          "types": [
-                            "fighting"
-                          ]
+                          "types": ["fighting"]
                         },
                         {
                           "id": 67,
                           "name": "machoke",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/67.png",
-                          "types": [
-                            "fighting"
-                          ]
+                          "types": ["fighting"]
                         },
                         {
                           "id": 68,
                           "name": "machamp",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/68.png",
-                          "types": [
-                            "fighting"
-                          ]
+                          "types": ["fighting"]
                         },
                         {
                           "id": 69,
                           "name": "bellsprout",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/69.png",
-                          "types": [
-                            "grass",
-                            "poison"
-                          ]
+                          "types": ["grass", "poison"]
                         },
                         {
                           "id": 70,
                           "name": "weepinbell",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/70.png",
-                          "types": [
-                            "grass",
-                            "poison"
-                          ]
+                          "types": ["grass", "poison"]
                         },
                         {
                           "id": 71,
                           "name": "victreebel",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/71.png",
-                          "types": [
-                            "grass",
-                            "poison"
-                          ]
+                          "types": ["grass", "poison"]
                         },
                         {
                           "id": 72,
                           "name": "tentacool",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/72.png",
-                          "types": [
-                            "water",
-                            "poison"
-                          ]
+                          "types": ["water", "poison"]
                         },
                         {
                           "id": 73,
                           "name": "tentacruel",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/73.png",
-                          "types": [
-                            "water",
-                            "poison"
-                          ]
+                          "types": ["water", "poison"]
                         },
                         {
                           "id": 74,
                           "name": "geodude",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/74.png",
-                          "types": [
-                            "rock",
-                            "ground"
-                          ]
+                          "types": ["rock", "ground"]
                         },
                         {
                           "id": 75,
                           "name": "graveler",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/75.png",
-                          "types": [
-                            "rock",
-                            "ground"
-                          ]
+                          "types": ["rock", "ground"]
                         },
                         {
                           "id": 76,
                           "name": "golem",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/76.png",
-                          "types": [
-                            "rock",
-                            "ground"
-                          ]
+                          "types": ["rock", "ground"]
                         },
                         {
                           "id": 77,
                           "name": "ponyta",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/77.png",
-                          "types": [
-                            "fire"
-                          ]
+                          "types": ["fire"]
                         },
                         {
                           "id": 78,
                           "name": "rapidash",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/78.png",
-                          "types": [
-                            "fire"
-                          ]
+                          "types": ["fire"]
                         },
                         {
                           "id": 79,
                           "name": "slowpoke",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/79.png",
-                          "types": [
-                            "water",
-                            "psychic"
-                          ]
+                          "types": ["water", "psychic"]
                         },
                         {
                           "id": 80,
                           "name": "slowbro",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/80.png",
-                          "types": [
-                            "water",
-                            "psychic"
-                          ]
+                          "types": ["water", "psychic"]
                         },
                         {
                           "id": 81,
                           "name": "magnemite",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/81.png",
-                          "types": [
-                            "electric",
-                            "steel"
-                          ]
+                          "types": ["electric", "steel"]
                         },
                         {
                           "id": 82,
                           "name": "magneton",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/82.png",
-                          "types": [
-                            "electric",
-                            "steel"
-                          ]
+                          "types": ["electric", "steel"]
                         },
                         {
                           "id": 83,
                           "name": "farfetchd",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/83.png",
-                          "types": [
-                            "normal",
-                            "flying"
-                          ]
+                          "types": ["normal", "flying"]
                         },
                         {
                           "id": 84,
                           "name": "doduo",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/84.png",
-                          "types": [
-                            "normal",
-                            "flying"
-                          ]
+                          "types": ["normal", "flying"]
                         },
                         {
                           "id": 85,
                           "name": "dodrio",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/85.png",
-                          "types": [
-                            "normal",
-                            "flying"
-                          ]
+                          "types": ["normal", "flying"]
                         },
                         {
                           "id": 86,
                           "name": "seel",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/86.png",
-                          "types": [
-                            "water"
-                          ]
+                          "types": ["water"]
                         },
                         {
                           "id": 87,
                           "name": "dewgong",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/87.png",
-                          "types": [
-                            "water",
-                            "ice"
-                          ]
+                          "types": ["water", "ice"]
                         },
                         {
                           "id": 88,
                           "name": "grimer",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/88.png",
-                          "types": [
-                            "poison"
-                          ]
+                          "types": ["poison"]
                         },
                         {
                           "id": 89,
                           "name": "muk",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/89.png",
-                          "types": [
-                            "poison"
-                          ]
+                          "types": ["poison"]
                         },
                         {
                           "id": 90,
                           "name": "shellder",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/90.png",
-                          "types": [
-                            "water"
-                          ]
+                          "types": ["water"]
                         },
                         {
                           "id": 91,
                           "name": "cloyster",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/91.png",
-                          "types": [
-                            "water",
-                            "ice"
-                          ]
+                          "types": ["water", "ice"]
                         },
                         {
                           "id": 92,
                           "name": "gastly",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/92.png",
-                          "types": [
-                            "ghost",
-                            "poison"
-                          ]
+                          "types": ["ghost", "poison"]
                         },
                         {
                           "id": 93,
                           "name": "haunter",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/93.png",
-                          "types": [
-                            "ghost",
-                            "poison"
-                          ]
+                          "types": ["ghost", "poison"]
                         },
                         {
                           "id": 94,
                           "name": "gengar",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png",
-                          "types": [
-                            "ghost",
-                            "poison"
-                          ]
+                          "types": ["ghost", "poison"]
                         },
                         {
                           "id": 95,
                           "name": "onix",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/95.png",
-                          "types": [
-                            "rock",
-                            "ground"
-                          ]
+                          "types": ["rock", "ground"]
                         },
                         {
                           "id": 96,
                           "name": "drowzee",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/96.png",
-                          "types": [
-                            "psychic"
-                          ]
+                          "types": ["psychic"]
                         },
                         {
                           "id": 97,
                           "name": "hypno",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/97.png",
-                          "types": [
-                            "psychic"
-                          ]
+                          "types": ["psychic"]
                         },
                         {
                           "id": 98,
                           "name": "krabby",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/98.png",
-                          "types": [
-                            "water"
-                          ]
+                          "types": ["water"]
                         },
                         {
                           "id": 99,
                           "name": "kingler",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/99.png",
-                          "types": [
-                            "water"
-                          ]
+                          "types": ["water"]
                         },
                         {
                           "id": 100,
                           "name": "voltorb",
                           "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/100.png",
-                          "types": [
-                            "electric"
-                          ]
+                          "types": ["electric"]
                         }
                       ]
                     }
@@ -710,7 +598,7 @@
           "401": {
             "$ref": "#/components/responses/UNAUTHORIZED"
           },
-          "422": {
+          "404": {
             "$ref": "#/components/responses/TRAINER_NOT_EXISTS"
           }
         },
@@ -739,9 +627,7 @@
       ],
       "get": {
         "summary": "Fetch pokemon by name",
-        "tags": [
-          "pokemon"
-        ],
+        "tags": ["pokemon"],
         "responses": {
           "200": {
             "description": "OK",
@@ -765,10 +651,7 @@
                         ],
                         "height": 4,
                         "weight": 75,
-                        "types": [
-                          "rock",
-                          "water"
-                        ],
+                        "types": ["rock", "water"],
                         "strengths": [
                           "flying",
                           "bug",
@@ -956,10 +839,44 @@
             "$ref": "#/components/responses/UNAUTHORIZED"
           },
           "404": {
-            "$ref": "#/components/responses/POKEMON_NOT_EXISTS"
-          },
-          "422": {
-            "$ref": "#/components/responses/TRAINER_NOT_EXISTS"
+            "description": "NOT FOUND",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "code": "TRAINER_NOT_EXISTS",
+                      "message": "Trainer not exists"
+                    }
+                  },
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "example": "TRAINER_NOT_EXISTS"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Trainer not exists"
+                    }
+                  }
+                },
+                "examples": {
+                  "POKEMON_NOT_EXISTS": {
+                    "value": {
+                      "code": "POKEMON_NOT_EXISTS",
+                      "message": "Pokemon not exists"
+                    }
+                  },
+                  "TRAINER_NOT_EXISTS": {
+                    "value": {
+                      "code": "TRAINER_NOT_EXISTS",
+                      "message": "Trainer not exists"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "operationId": "get-pokemon-details",
@@ -983,7 +900,7 @@
     "schemas": {},
     "responses": {
       "USER_TAKEN": {
-        "description": "Conflict",
+        "description": "CONFLICT",
         "content": {
           "application/json": {
             "schema": {
@@ -1009,7 +926,7 @@
         }
       },
       "INTERNAL_ERROR": {
-        "description": "Internal error",
+        "description": "INTERNAL ERROR",
         "content": {
           "application/json": {
             "schema": {
@@ -1035,7 +952,7 @@
         }
       },
       "INVALID_PASSWORD": {
-        "description": "Unprocessable entity",
+        "description": "UNPROCESSABLE ENTITY",
         "content": {
           "application/json": {
             "schema": {
@@ -1060,34 +977,8 @@
           }
         }
       },
-      "USER_NOT_EXISTS": {
-        "description": "Not found",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "x-examples": {
-                "Example 1": {
-                  "code": "",
-                  "message": ""
-                }
-              },
-              "properties": {
-                "code": {
-                  "type": "string",
-                  "example": "USER_NOT_EXISTS"
-                },
-                "message": {
-                  "type": "string",
-                  "example": "User not exists"
-                }
-              }
-            }
-          }
-        }
-      },
       "BAD_REQUEST": {
-        "description": "Bad request",
+        "description": "BAD REQUEST",
         "content": {
           "application/json": {
             "schema": {
@@ -1189,34 +1080,8 @@
           }
         }
       },
-      "POKEMON_NOT_EXISTS": {
-        "description": "Not found",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "x-examples": {
-                "Example 1": {
-                  "code": "",
-                  "message": ""
-                }
-              },
-              "properties": {
-                "code": {
-                  "type": "string",
-                  "example": "POKEMON_NOT_EXISTS"
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Pokemon not exists"
-                }
-              }
-            }
-          }
-        }
-      },
       "TRAINER_NOT_EXISTS": {
-        "description": "Unprocessable entity",
+        "description": "NOT FOUND",
         "content": {
           "application/json": {
             "schema": {
@@ -1242,7 +1107,7 @@
         }
       },
       "UNAUTHORIZED": {
-        "description": "Unauthorized",
+        "description": "UNAUTHORIZED",
         "content": {
           "application/json": {
             "schema": {
@@ -1275,10 +1140,9 @@
         "required": false,
         "schema": {
           "type": "integer",
-          "default": 10,
           "minimum": 0,
           "maximum": 100,
-          "multipleOf": 10
+          "default": 10
         },
         "description": "Limit of pokemons per page"
       },
@@ -1289,7 +1153,8 @@
         "schema": {
           "type": "integer",
           "default": 0,
-          "minLength": 0
+          "minLength": 0,
+          "minimum": 0
         },
         "description": "Offset to next page"
       },
@@ -1300,7 +1165,9 @@
         "schema": {
           "type": "string",
           "example": "bulbasaur",
-          "pattern": "^[a-z]+$"
+          "pattern": "^[a-z-]+$",
+          "minLength": 2,
+          "maxLength": 50
         },
         "description": "Pokemon name"
       }
@@ -1308,10 +1175,12 @@
   },
   "tags": [
     {
-      "name": "auth"
+      "name": "auth",
+      "description": "Auth domain"
     },
     {
-      "name": "pokemon"
+      "name": "pokemon",
+      "description": "Pokemon domain"
     }
   ]
 }
