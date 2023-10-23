@@ -24,6 +24,11 @@ const httpResponses = {
     code: 'POKEMON_NOT_EXISTS',
     message: 'Pokemon not exists'
   },
+  TRAINER_NOT_EXISTS: {
+    httpCode: 404,
+    code: 'TRAINER_NOT_EXISTS',
+    message: 'Trainer not exists'
+  },
   USER_TAKEN: {
     httpCode: 409,
     code: 'USER_TAKEN',
@@ -33,11 +38,6 @@ const httpResponses = {
     httpCode: 422,
     code: 'INVALID_PASSWORD',
     message: 'Invalid password'
-  },
-  TRAINER_NOT_EXISTS: {
-    httpCode: 422,
-    code: 'TRAINER_NOT_EXISTS',
-    message: 'Trainer not exists'
   },
   INTERNAL_ERROR: {
     httpCode: 500,

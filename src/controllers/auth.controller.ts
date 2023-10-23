@@ -69,7 +69,7 @@ const signin = async (req: Request, res: Response) => {
     );
 
     if (!isPasswordValid) {
-      return res.status(httpStatus.NOT_ACCEPTABLE).json({
+      return res.status(httpStatus.UNPROCESSABLE_ENTITY).json({
         code: httpResponses.INVALID_PASSWORD.code,
         message: httpResponses.INVALID_PASSWORD.message
       });
