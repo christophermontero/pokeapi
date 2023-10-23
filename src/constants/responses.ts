@@ -6,7 +6,7 @@ const httpResponses = {
   },
   CREATED: {
     httpCode: 201,
-    code: 'SUCCESS',
+    code: 'CREATED',
     message: 'The request has completed successfully'
   },
   BAD_REQUEST: {
