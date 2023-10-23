@@ -13,7 +13,7 @@ const getPokemonByName = {
   params: Joi.object()
     .keys({
       name: Joi.string()
-        .regex(/^[a-z]+$/)
+        .regex(/^[a-z-]+$/)
         .required()
     })
     .required()
