@@ -13,7 +13,15 @@ const Trainer = mongoose.model(
       type: String,
       trim: true,
       lowercase: true,
-      required: false
+      required: false,
+      unique: true
+    },
+    email: {
+      type: String,
+      trim: true,
+      lowercase: true,
+      required: true,
+      unique: true
     },
     password: {
       type: String,
@@ -21,7 +29,7 @@ const Trainer = mongoose.model(
     },
     team: {
       type: String,
-      enum: ['rojo', 'azul', 'amarillo'],
+      enum: ['red', 'blue', 'yellow'],
       required: true
     },
     createdAt: {

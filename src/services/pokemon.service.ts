@@ -21,7 +21,7 @@ const findAll = async (limit: string, offset: string) => {
   }
 };
 
-const findByName = async (name: any) => {
+const findByEmail = async (name: any) => {
   try {
     const pokemonDetails = await fetch(
       `${config.pokemon.baseUrl}/pokemon/${name}`,
@@ -96,7 +96,7 @@ const findPokemonEvolChainById = async (id: string) => {
 
 export default {
   findAll,
-  findByName,
+  findByEmail,
   findTypeByName,
   findPokemonSpeciesById,
   findPokemonEvolChainById

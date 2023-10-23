@@ -2,9 +2,9 @@ import logger from '../config/logger';
 import Trainer from '../entities/Trainer';
 import { ITrainer } from '../interfaces/trainer';
 
-const findByName = async (name: string) => {
+const findByEmail = async (email: string) => {
   try {
-    return await Trainer.findOne({ name });
+    return await Trainer.findOne({ email });
   } catch (error: any) {
     logger.error(error.message);
     throw error;
@@ -12,12 +12,14 @@ const findByName = async (name: string) => {
 };
 
 const save = async (
+  email: string,
   name: string,
   nickname: string,
   password: string,
   team: string
 ) => {
   const trainer: ITrainer = {
+      email,
       name,
       nickname,
       password,
@@ -50,4 +52,4 @@ const update = async (trainer: ITrainer) => {
   }
 };
 
-export default { findByName, save, update };
+export default { findByEmail, save, update };
