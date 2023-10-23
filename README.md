@@ -50,6 +50,7 @@ This is an API for visualize all pokemons with their stats.
 ### MongoDB documents structure
 
 - Trainer:
+  - email: string,
   - name: string,
   - nickname: string,
   - password: string,
