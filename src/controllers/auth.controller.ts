@@ -12,6 +12,7 @@ import generateToken from '../utils/jwt';
 
 const signup = async (req: Request, res: Response) => {
   const { email, name, nickname, team, hashedPassword } = req.body;
+
   try {
     const trainerAlreadyExists = await authService.findByEmail(email);
 
@@ -50,7 +51,8 @@ const signup = async (req: Request, res: Response) => {
 };
 
 const signin = async (req: Request, res: Response) => {
-  const { email, enteredPassword } = req.body;
+  const { email, password: enteredPassword } = req.body;
+
   try {
     const trainer = await authService.findByEmail(email);
 

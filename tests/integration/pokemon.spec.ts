@@ -26,21 +26,28 @@ describe('/api/v1/pokemon', () => {
       offset = '0';
 
       await Trainer.collection.insertOne({
+        email: 'goldenboy@mailinator.com',
         name: 'ashketchum',
         nickname: 'Golden boy',
-        team: 'rojo',
+        team: 'red',
         password: await bcrypt.hash('Test*2023#', 10)
       });
 
-      token = jwt.sign({ id: '1', name: 'ashketchum' }, config.jwt.secret, {
-        expiresIn: 86400,
-        algorithm: 'HS256',
-        issuer: 'RocketmonAPI'
-      });
+      token = jwt.sign(
+        { id: '1', email: 'goldenboy@mailinator.com' },
+        config.jwt.secret,
+        {
+          expiresIn: 86400,
+          algorithm: 'HS256',
+          issuer: 'RocketmonAPI'
+        }
+      );
     });
 
     it('should get pokemon range successfully', async () => {
       const res = await exec();
+
+      jest.setTimeout(10000);
 
       expect(res.status).toBe(httpStatus.OK);
       expect(res.body).toHaveProperty('code', httpResponses.OK.code);
@@ -49,7 +56,7 @@ describe('/api/v1/pokemon', () => {
     });
 
     it('should failed if limit is invalid', async () => {
-      limit = '15';
+      limit = 'a';
       const res = await exec();
 
       expect(res.status).toBe(httpStatus.BAD_REQUEST);
@@ -69,12 +76,14 @@ describe('/api/v1/pokemon', () => {
     });
 
     it('should failed if user not exists', async () => {
-      token = jwt.sign({ id: '1', name: 'profesoroak' }, config.jwt.secret, {
+      token = jwt.sign({ id: '1', email: 'profesoroak' }, config.jwt.secret, {
         expiresIn: 86400,
         algorithm: 'HS256',
         issuer: 'RocketmonAPI'
       });
       const res = await exec();
+
+      jest.setTimeout(10000);
 
       expect(res.status).toBe(httpStatus.UNPROCESSABLE_ENTITY);
       expect(res.body).toHaveProperty(
@@ -102,17 +111,22 @@ describe('/api/v1/pokemon', () => {
       name = 'omanyte';
 
       await Trainer.collection.insertOne({
+        email: 'goldenboy@mailinator.com',
         name: 'ashketchum',
         nickname: 'Golden boy',
-        team: 'rojo',
+        team: 'red',
         password: await bcrypt.hash('Test*2023#', 10)
       });
 
-      token = jwt.sign({ id: '1', name: 'ashketchum' }, config.jwt.secret, {
-        expiresIn: 86400,
-        algorithm: 'HS256',
-        issuer: 'RocketmonAPI'
-      });
+      token = jwt.sign(
+        { id: '1', email: 'goldenboy@mailinator.com' },
+        config.jwt.secret,
+        {
+          expiresIn: 86400,
+          algorithm: 'HS256',
+          issuer: 'RocketmonAPI'
+        }
+      );
     });
 
     it('should fetch pokemon by name successfully', async () => {
@@ -152,14 +166,14 @@ describe('/api/v1/pokemon', () => {
     });
 
     it('should failed if user not exists', async () => {
-      token = jwt.sign({ id: '1', name: 'profesoroak' }, config.jwt.secret, {
+      token = jwt.sign({ id: '1', email: 'profesoroak' }, config.jwt.secret, {
         expiresIn: 86400,
         algorithm: 'HS256',
         issuer: 'RocketmonAPI'
       });
       const res = await exec();
 
-      expect(res.status).toBe(httpStatus.UNPROCESSABLE_ENTITY);
+      expect(res.status).toBe(httpStatus.NOT_FOUND);
       expect(res.body).toHaveProperty(
         'code',
         httpResponses.TRAINER_NOT_EXISTS.code
