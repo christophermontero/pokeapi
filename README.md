@@ -15,8 +15,8 @@
 - [User guide](#user-guide)
 - [Install guide](#install-guide)
   - [Requeriments](#requeriments)
-- [Author](#autores)
-- [License](#License)
+- [Author](#author)
+- [License](#license)
 
 ## Project description
 
