@@ -25,7 +25,7 @@ const getPokemons = async (req: Request, res: Response) => {
 
     const pokemonsGeneralInfo: IPokemonGeneralInfo[] = await Promise.all(
       pokemons.results.map((pokemon: any) =>
-        pokemonService.findByEmail(pokemon.name)
+        pokemonService.findByName(pokemon.name)
       )
     );
 
@@ -41,6 +41,7 @@ const getPokemons = async (req: Request, res: Response) => {
     return res.status(httpStatus.OK).json({
       code: httpResponses.OK.code,
       message: httpResponses.OK.message,
+      count: pokemons.count,
       data: processedPokemonsGeneralInfo
     });
   } catch (error: any) {
@@ -64,7 +65,7 @@ const getPokemonsDetails = async (req: Request, res: Response) => {
       });
     }
 
-    const pokemon = await pokemonService.findByEmail(req.params.name);
+    const pokemon = await pokemonService.findByName(req.params.name);
 
     if (!pokemon) {
       return res.status(httpResponses.POKEMON_NOT_EXISTS.httpCode).json({
