@@ -18,6 +18,7 @@ const Trainer = mongoose.model(
     },
     email: {
       type: String,
+      match: /^\S+@\S+\.\S+$/,
       trim: true,
       lowercase: true,
       required: true,
@@ -25,6 +26,7 @@ const Trainer = mongoose.model(
     },
     password: {
       type: String,
+      trim: true,
       required: true
     },
     team: {
