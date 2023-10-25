@@ -7,7 +7,7 @@ const signup = {
       email: Joi.string().email().required(),
       password: Joi.string()
         .regex(
-          /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,10}$/
+          /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,10}$/
         )
         .required(),
       team: Joi.string().valid('red', 'blue', 'yellow').required(),
@@ -22,7 +22,7 @@ const signin = {
       email: Joi.string().email().required(),
       password: Joi.string()
         .regex(
-          /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,10}$/
+          /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,10}$/
         )
         .required()
     })

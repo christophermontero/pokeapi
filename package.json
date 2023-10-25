@@ -59,6 +59,7 @@
     "winston": "~3.11.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.2.0",
     "@types/bcrypt": "~5.0.0",
     "@types/compression": "~1.7.4",
     "@types/cors": "~2.8.15",
