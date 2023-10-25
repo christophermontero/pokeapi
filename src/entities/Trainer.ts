@@ -27,8 +27,6 @@ const Trainer = mongoose.model(
     password: {
       type: String,
       trim: true,
-      match:
-        /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,10}$/,
       required: true
     },
     team: {
