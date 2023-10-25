@@ -4,17 +4,14 @@ import httpStatus from 'http-status';
 import _ from 'lodash';
 import logger from '../config/logger';
 import httpResponses from '../constants/responses';
-import {
-  default as authService,
-  default as trainerService
-} from '../services/trainer.service';
+import trainerService from '../services/trainer.service';
 import generateToken from '../utils/jwt';
 
 const signup = async (req: Request, res: Response) => {
   const { email, name, nickname, team, hashedPassword } = req.body;
 
   try {
-    const trainerAlreadyExists = await authService.findByEmail(email);
+    const trainerAlreadyExists = await trainerService.findByEmail(email);
 
     if (trainerAlreadyExists) {
       return res.status(httpStatus.CONFLICT).json({
@@ -23,7 +20,7 @@ const signup = async (req: Request, res: Response) => {
       });
     }
 
-    const trainer = await authService.save(
+    const trainer = await trainerService.save(
       email,
       name,
       nickname,
@@ -54,7 +51,7 @@ const signin = async (req: Request, res: Response) => {
   const { email, password: enteredPassword } = req.body;
 
   try {
-    const trainer = await authService.findByEmail(email);
+    const trainer = await trainerService.findByEmail(email);
 
     if (!trainer) {
       return res.status(httpStatus.NOT_FOUND).json({
