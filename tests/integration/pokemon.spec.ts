@@ -6,7 +6,7 @@ import server from '../../src/app';
 import config from '../../src/config/config';
 import httpResponses from '../../src/constants/responses';
 import Trainer from '../../src/entities/Trainer';
-import setupTestDB from '../utils/setupTestDB';
+import setupTestDB from '../utils/setupTest';
 
 setupTestDB();
 
