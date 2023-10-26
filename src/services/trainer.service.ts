@@ -38,7 +38,7 @@ const update = async (trainer: ITrainer) => {
   const lastConnection = new Date();
   try {
     return await Trainer.findOneAndUpdate(
-      { name: trainer.name },
+      { email: trainer.email },
       {
         lastConnection
       },
