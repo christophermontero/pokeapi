@@ -8,7 +8,7 @@ import ApiError from '../../../src/utils/ApiError';
 
 describe('Error middlewares', () => {
   describe('Error converter', () => {
-    test('should return the same ApiError object it was called with', () => {
+    test('should be return the same ApiError object it was called with', () => {
       const error = new ApiError(httpStatus.BAD_REQUEST, 'Any error');
       const next = jest.fn();
 
@@ -22,7 +22,7 @@ describe('Error middlewares', () => {
       expect(next).toHaveBeenCalledWith(error);
     });
 
-    test('should convert an Error to ApiError and preserve its status and message', () => {
+    test('should be convert an Error to ApiError and preserve its status and message', () => {
       const error = new Error('Any error') as any;
       error.statusCode = httpStatus.BAD_REQUEST;
       const next = jest.fn();
@@ -44,7 +44,7 @@ describe('Error middlewares', () => {
       );
     });
 
-    test('should convert an Error without status to ApiError with status 500', () => {
+    test('should be convert an Error without status to ApiError with status 500', () => {
       const error = new Error('Any error');
       const next = jest.fn();
 
@@ -65,7 +65,7 @@ describe('Error middlewares', () => {
       );
     });
 
-    test('should convert an Error without message to ApiError with default message of that http status', () => {
+    test('should be convert an Error without message to ApiError with default message of that http status', () => {
       const error = new Error() as any;
       error.statusCode = httpStatus.BAD_REQUEST;
       const next = jest.fn();
@@ -87,7 +87,7 @@ describe('Error middlewares', () => {
       );
     });
 
-    test('should convert a Mongoose error to ApiError with status 400 and preserve its message', () => {
+    test('should be convert a Mongoose error to ApiError with status 400 and preserve its message', () => {
       const error = new mongoose.Error('Any mongoose error');
       const next = jest.fn();
 
@@ -108,7 +108,7 @@ describe('Error middlewares', () => {
       );
     });
 
-    test('should convert any other object to ApiError with status 500 and its message', () => {
+    test('should be convert any other object to ApiError with status 500 and its message', () => {
       const error = {};
       const next = jest.fn();
 
@@ -137,7 +137,7 @@ describe('Error middlewares', () => {
       });
     });
 
-    test('should send proper error response and put the error message in res.locals', () => {
+    test('should be send proper error response and put the error message in res.locals', () => {
       const error = new ApiError(httpStatus.BAD_REQUEST, 'Any error');
       const res = httpMocks.createResponse();
       const sendSpy = jest.spyOn(res, 'send');
@@ -153,7 +153,7 @@ describe('Error middlewares', () => {
       expect(res.locals.errorMessage).toBe(error.message);
     });
 
-    test('should put the error stack in the response if in development mode', () => {
+    test('should be put the error stack in the response if in development mode', () => {
       config.env = 'development';
       const error = new ApiError(httpStatus.BAD_REQUEST, 'Any error');
       const res = httpMocks.createResponse();
@@ -171,7 +171,7 @@ describe('Error middlewares', () => {
       config.env = process.env.NODE_ENV;
     });
 
-    test('should send internal server error status and message if in production mode and error is not operational', () => {
+    test('should be send internal server error status and message if in production mode and error is not operational', () => {
       config.env = 'production';
       const error = new ApiError(httpStatus.BAD_REQUEST, 'Any error', false);
       const res = httpMocks.createResponse();
@@ -189,7 +189,7 @@ describe('Error middlewares', () => {
       config.env = process.env.NODE_ENV;
     });
 
-    test('should preserve original error status and message if in production mode and error is operational', () => {
+    test('should be preserve original error status and message if in production mode and error is operational', () => {
       config.env = 'production';
       const error = new ApiError(httpStatus.BAD_REQUEST, 'Any error');
       const res = httpMocks.createResponse();

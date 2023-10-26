@@ -15,11 +15,11 @@ describe('Trainer model', () => {
       };
     });
 
-    it('should correctly validate a valid user', async () => {
+    it('should be correctly validate a valid user', async () => {
       await expect(new Trainer(newTrainer).validate()).resolves.toBeUndefined();
     });
 
-    it('should throw a validation error if email is invalid', async () => {
+    it('should be throw a validation error if email is invalid', async () => {
       newTrainer.email = 'invalidEmail';
       await expect(new Trainer(newTrainer).validate()).rejects.toThrow();
     });
