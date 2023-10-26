@@ -8,6 +8,7 @@ import authValidator from '../../validators/auth.validator';
 const auth = Router();
 
 auth.get('/me', validateToken(), authController.profile);
+auth.get('/signout', validateToken(), authController.signout);
 auth.post(
   '/signup',
   [validate(authValidator.signup), hashingPassword()],

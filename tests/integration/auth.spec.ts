@@ -6,17 +6,19 @@ import server from '../../src/app';
 import config from '../../src/config/config';
 import httpResponses from '../../src/constants/responses';
 import Trainer from '../../src/entities/Trainer';
-import setupTestDB from '../utils/setupTestDB';
+import setupTestDB from '../utils/setupTest';
 
 setupTestDB();
 
 describe('/api/v1/auth', () => {
+  const baseURI = '/api/v1/auth';
+
   describe('GET /profile', () => {
     let token: string;
 
     const exec = () => {
       return request(server)
-        .get('/api/v1/auth/me')
+        .get(`${baseURI}/me`)
         .set('Authorization', `Bearer ${token}`);
     };
 
@@ -42,8 +44,6 @@ describe('/api/v1/auth', () => {
 
     it('should be get profile info successfully', async () => {
       const res = await exec();
-
-      jest.setTimeout(10000);
 
       expect(res.status).toBe(httpStatus.OK);
       expect(res.body).toHaveProperty('code', httpResponses.OK.code);
@@ -71,8 +71,6 @@ describe('/api/v1/auth', () => {
       });
       const res = await exec();
 
-      jest.setTimeout(10000);
-
       expect(res.status).toBe(httpStatus.NOT_FOUND);
       expect(res.body).toHaveProperty(
         'code',
@@ -93,7 +91,7 @@ describe('/api/v1/auth', () => {
       password: string;
 
     const exec = () => {
-      return request(server).post('/api/v1/auth/signup').send({
+      return request(server).post(`${baseURI}/signup`).send({
         email,
         name,
         nickname,
@@ -152,7 +150,7 @@ describe('/api/v1/auth', () => {
     let email: string, password: string;
 
     const exec = () => {
-      return request(server).post('/api/v1/auth/signin').send({
+      return request(server).post(`${baseURI}/signin`).send({
         email,
         password
       });
@@ -163,7 +161,7 @@ describe('/api/v1/auth', () => {
       password = 'Test*2023#';
 
       await Trainer.collection.insertOne({
-        email: 'goldenboy@mailinator.com',
+        email,
         name: 'ashketchum',
         nickname: 'Golden boy',
         team: 'red',
@@ -214,6 +212,75 @@ describe('/api/v1/auth', () => {
       expect(res.body).toHaveProperty(
         'message',
         httpResponses.INVALID_PASSWORD.message
+      );
+    });
+  });
+
+  describe('GET /signout', () => {
+    let token: string;
+
+    const exec = () => {
+      return request(server)
+        .get(`${baseURI}/signout`)
+        .set('Authorization', `Bearer ${token}`);
+    };
+
+    beforeEach(async () => {
+      await Trainer.collection.insertOne({
+        email: 'goldenboy@mailinator.com',
+        name: 'ashketchum',
+        nickname: 'Golden boy',
+        team: 'red',
+        password: await bcrypt.hash('Test*2023#', 10)
+      });
+
+      token = jwt.sign(
+        { id: '1', email: 'goldenboy@mailinator.com' },
+        config.jwt.secret,
+        {
+          expiresIn: 86400,
+          algorithm: 'HS256',
+          issuer: 'RocketmonAPI'
+        }
+      );
+    });
+
+    it('should be signout successfully', async () => {
+      const res = await exec();
+
+      jest.setTimeout(10000);
+
+      expect(res.status).toBe(httpStatus.NO_CONTENT);
+    });
+
+    it('should be failed if token is invalid', async () => {
+      token = 'invalidToken';
+      const res = await exec();
+
+      expect(res.status).toBe(httpStatus.UNAUTHORIZED);
+      expect(res.body).toHaveProperty('code', httpResponses.UNAUTHORIZED.code);
+      expect(res.body).toHaveProperty(
+        'message',
+        httpResponses.UNAUTHORIZED.message
+      );
+    });
+
+    it('should be failed if user not exists', async () => {
+      token = jwt.sign({ id: '1', email: 'profesoroak' }, config.jwt.secret, {
+        expiresIn: 86400,
+        algorithm: 'HS256',
+        issuer: 'RocketmonAPI'
+      });
+      const res = await exec();
+
+      expect(res.status).toBe(httpStatus.NOT_FOUND);
+      expect(res.body).toHaveProperty(
+        'code',
+        httpResponses.TRAINER_NOT_EXISTS.code
+      );
+      expect(res.body).toHaveProperty(
+        'message',
+        httpResponses.TRAINER_NOT_EXISTS.message
       );
     });
   });

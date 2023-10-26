@@ -3,7 +3,7 @@ import Joi from 'joi';
 const getPokemons = {
   query: Joi.object()
     .keys({
-      limit: Joi.number().integer().min(0).max(100).default(10),
+      limit: Joi.number().integer().min(0).max(360).default(9),
       offset: Joi.number().integer().min(0).default(0)
     })
     .optional()

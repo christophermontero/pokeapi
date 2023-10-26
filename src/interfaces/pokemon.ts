@@ -1,12 +1,3 @@
-export interface IGetPokemons {
-  limit: number;
-  offset: number;
-}
-
-export interface IGetPokemon {
-  name: string;
-}
-
 export interface IPokemonGeneralInfo {
   id: number;
   name: string;

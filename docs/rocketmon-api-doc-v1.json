@@ -980,6 +980,36 @@
           }
         ]
       }
+    },
+    "/auth/signout": {
+      "get": {
+        "summary": "Sign out",
+        "tags": ["auth"],
+        "responses": {
+          "204": {
+            "description": "NO CONTENT"
+          },
+          "401": {
+            "$ref": "#/components/responses/UNAUTHORIZED"
+          },
+          "404": {
+            "$ref": "#/components/responses/TRAINER_NOT_EXISTS"
+          },
+          "500": {
+            "$ref": "#/components/responses/INTERNAL_ERROR"
+          }
+        },
+        "operationId": "get-auth-signout",
+        "x-stoplight": {
+          "id": "37makdmmith72"
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "description": "This service it is responsible of logout pokemon trainer."
+      }
     }
   },
   "components": {

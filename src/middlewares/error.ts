@@ -24,7 +24,6 @@ const errorConverter = (
   next(error);
 };
 
-/* eslint-disable-nextline no-unused-vars */
 const errorHandler = (
   err: any | mongoose.Error,
   req: Request,

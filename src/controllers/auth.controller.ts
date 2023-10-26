@@ -105,8 +105,6 @@ const signin = async (req: Request, res: Response) => {
 
     const token = generateToken(trainer);
 
-    await trainerService.update(trainer);
-
     return res.status(httpStatus.OK).json({
       code: httpResponses.OK.code,
       message: httpResponses.OK.message,
@@ -122,4 +120,26 @@ const signin = async (req: Request, res: Response) => {
   }
 };
 
-export default { signup, signin, profile };
+const signout = async (req: Request, res: Response) => {
+  try {
+    const trainer = await trainerService.findByEmail(req.body.user.email);
+
+    if (!trainer) {
+      return res.status(httpStatus.NOT_FOUND).json({
+        code: httpResponses.TRAINER_NOT_EXISTS.code,
+        message: httpResponses.TRAINER_NOT_EXISTS.message
+      });
+    }
+
+    await trainerService.updateLastLogin(trainer);
+
+    return res.status(httpStatus.NO_CONTENT).json();
+  } catch (error) {
+    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+      code: httpResponses.INTERNAL_ERROR.code,
+      message: httpResponses.INTERNAL_ERROR.message
+    });
+  }
+};
+
+export default { profile, signup, signin, signout };
