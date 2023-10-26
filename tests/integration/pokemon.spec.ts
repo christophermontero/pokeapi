@@ -44,7 +44,7 @@ describe('/api/v1/pokemon', () => {
       );
     });
 
-    it('should get pokemon range successfully', async () => {
+    it('should be get pokemon range successfully', async () => {
       const res = await exec();
 
       jest.setTimeout(10000);
@@ -55,7 +55,7 @@ describe('/api/v1/pokemon', () => {
       expect(Array.isArray(res.body.data)).toBeTruthy();
     });
 
-    it('should failed if limit is invalid', async () => {
+    it('should be failed if limit is invalid', async () => {
       limit = 'a';
       const res = await exec();
 
@@ -63,7 +63,7 @@ describe('/api/v1/pokemon', () => {
       expect(res.body).toHaveProperty('message');
     });
 
-    it('should failed if token is invalid', async () => {
+    it('should be failed if token is invalid', async () => {
       token = 'invalidToken';
       const res = await exec();
 
@@ -75,7 +75,7 @@ describe('/api/v1/pokemon', () => {
       );
     });
 
-    it('should failed if user not exists', async () => {
+    it('should be failed if user not exists', async () => {
       token = jwt.sign({ id: '1', email: 'profesoroak' }, config.jwt.secret, {
         expiresIn: 86400,
         algorithm: 'HS256',
@@ -85,7 +85,7 @@ describe('/api/v1/pokemon', () => {
 
       jest.setTimeout(10000);
 
-      expect(res.status).toBe(httpStatus.UNPROCESSABLE_ENTITY);
+      expect(res.status).toBe(httpStatus.NOT_FOUND);
       expect(res.body).toHaveProperty(
         'code',
         httpResponses.TRAINER_NOT_EXISTS.code
@@ -129,7 +129,7 @@ describe('/api/v1/pokemon', () => {
       );
     });
 
-    it('should fetch pokemon by name successfully', async () => {
+    it('should be fetch pokemon by name successfully', async () => {
       const res = await exec();
 
       expect(res.status).toBe(httpStatus.OK);
@@ -138,7 +138,7 @@ describe('/api/v1/pokemon', () => {
       expect(typeof res.body.data === 'object').toBeTruthy();
     });
 
-    it('should failed if pokemon not exists', async () => {
+    it('should be failed if pokemon not exists', async () => {
       name = 'omanyt';
       const res = await exec();
 
@@ -153,7 +153,7 @@ describe('/api/v1/pokemon', () => {
       );
     });
 
-    it('should failed if token is invalid', async () => {
+    it('should be failed if token is invalid', async () => {
       token = 'invalidToken';
       const res = await exec();
 
@@ -165,7 +165,7 @@ describe('/api/v1/pokemon', () => {
       );
     });
 
-    it('should failed if user not exists', async () => {
+    it('should be failed if user not exists', async () => {
       token = jwt.sign({ id: '1', email: 'profesoroak' }, config.jwt.secret, {
         expiresIn: 86400,
         algorithm: 'HS256',

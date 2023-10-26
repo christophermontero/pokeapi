@@ -6,7 +6,8 @@
     "description": "# Introduction\nRocketmon is a backend for visualize pokemons",
     "contact": {
       "name": "Christopher Ortiz Montero",
-      "email": "cgortizm21@gmail.com"
+      "email": "cgortizm21@gmail.com",
+      "url": "https://github.com/christophermontero"
     },
     "license": {
       "name": "Apache 2.0",
@@ -93,7 +94,7 @@
                     "name": "Ashketchum",
                     "nickname": "panzerfaust",
                     "password": "Test*2023#",
-                    "team": "blue"
+                    "team": "azul"
                   }
                 },
                 "properties": {
@@ -881,6 +882,98 @@
         },
         "operationId": "get-pokemon-details",
         "description": "This service allows to fetch pokemon detail using its name.",
+        "security": [
+          {
+            "token": []
+          }
+        ]
+      }
+    },
+    "/auth/me": {
+      "get": {
+        "summary": "Get profile",
+        "tags": ["auth"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "code": "SUCCESS",
+                      "message": "The request has completed successfully",
+                      "data": {
+                        "trainer": {
+                          "email": "theprofesor@mailinator.com",
+                          "name": "oak",
+                          "nickname": "theprofesor",
+                          "team": "blue",
+                          "lastLogin": "2023-10-26T16:26:50.283Z"
+                        }
+                      }
+                    }
+                  },
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "example": "SUCCESS"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "The request has completed successfully"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "trainer": {
+                          "type": "object",
+                          "properties": {
+                            "email": {
+                              "type": "string",
+                              "example": "theprofesor@mailinator.com"
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "oak"
+                            },
+                            "nickname": {
+                              "type": "string",
+                              "example": "theprofesor"
+                            },
+                            "team": {
+                              "type": "string",
+                              "example": "blue"
+                            },
+                            "lastLogin": {
+                              "type": "string",
+                              "example": "2023-10-26T16:26:50.283Z"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UNAUTHORIZED"
+          },
+          "404": {
+            "$ref": "#/components/responses/TRAINER_NOT_EXISTS"
+          },
+          "500": {
+            "$ref": "#/components/responses/INTERNAL_ERROR"
+          }
+        },
+        "operationId": "get-auth-me",
+        "x-stoplight": {
+          "id": "p1z6mtcolxll2"
+        },
+        "description": "This service allows to fetch profile information.",
         "security": [
           {
             "token": []
