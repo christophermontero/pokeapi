@@ -24,10 +24,12 @@ const errorConverter = (
   next(error);
 };
 
+/* eslint-disable-nextline no-unused-vars */
 const errorHandler = (
   err: any | mongoose.Error,
   req: Request,
-  res: Response
+  res: Response,
+  next: NextFunction
 ) => {
   let { statusCode, message } = err;
   if (config.env === 'production' && !err.isOperational) {
