@@ -34,7 +34,7 @@ const save = async (
   }
 };
 
-const update = async (trainer: ITrainer) => {
+const updateLastLogin = async (trainer: ITrainer) => {
   const lastConnection = new Date();
   try {
     return await Trainer.findOneAndUpdate(
@@ -52,4 +52,4 @@ const update = async (trainer: ITrainer) => {
   }
 };
 
-export default { findByEmail, save, update };
+export default { findByEmail, save, updateLastLogin };

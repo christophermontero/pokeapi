@@ -105,8 +105,6 @@ const signin = async (req: Request, res: Response) => {
 
     const token = generateToken(trainer);
 
-    await trainerService.update(trainer);
-
     return res.status(httpStatus.OK).json({
       code: httpResponses.OK.code,
       message: httpResponses.OK.message,
@@ -133,7 +131,7 @@ const signout = async (req: Request, res: Response) => {
       });
     }
 
-    await trainerService.update(trainer);
+    await trainerService.updateLastLogin(trainer);
 
     return res.status(httpStatus.NO_CONTENT);
   } catch (error) {

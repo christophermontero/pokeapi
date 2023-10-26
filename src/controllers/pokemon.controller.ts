@@ -99,13 +99,13 @@ const getPokemonsDetails = async (req: Request, res: Response) => {
       evolution
     };
 
-    return res.status(httpResponses.OK.httpCode).json({
+    return res.status(httpStatus.OK).json({
       code: httpResponses.OK.code,
       message: httpResponses.OK.message,
       data: pokemonDetails
     });
   } catch (error) {
-    return res.status(httpResponses.INTERNAL_ERROR.httpCode).json({
+    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
       code: httpResponses.INTERNAL_ERROR.code,
       message: httpResponses.INTERNAL_ERROR.message
     });
