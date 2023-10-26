@@ -1,4 +1,3 @@
-import colors from 'colors';
 import config from '../config/config';
 import logger from '../config/logger';
 

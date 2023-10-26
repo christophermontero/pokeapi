@@ -1,5 +1,4 @@
 import bcrypt from 'bcrypt';
-import colors from 'colors';
 import { NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status';
 import logger from '../config/logger';
