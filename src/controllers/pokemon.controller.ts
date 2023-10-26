@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
-import logger from '../config/logger';
 import httpResponses from '../constants/responses';
 import { IPokemonDetails, IPokemonGeneralInfo } from '../interfaces/pokemon';
 import pokemonService from '../services/pokemon.service';
@@ -44,9 +43,7 @@ const getPokemons = async (req: Request, res: Response) => {
       count: pokemons.count,
       data: processedPokemonsGeneralInfo
     });
-  } catch (error: any) {
-    logger.error(error.message);
-
+  } catch (error) {
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
       code: httpResponses.INTERNAL_ERROR.code,
       message: httpResponses.INTERNAL_ERROR.message
@@ -107,9 +104,7 @@ const getPokemonsDetails = async (req: Request, res: Response) => {
       message: httpResponses.OK.message,
       data: pokemonDetails
     });
-  } catch (error: any) {
-    logger.error(`${error.message}`);
-
+  } catch (error) {
     return res.status(httpResponses.INTERNAL_ERROR.httpCode).json({
       code: httpResponses.INTERNAL_ERROR.code,
       message: httpResponses.INTERNAL_ERROR.message
