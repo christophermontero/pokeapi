@@ -6,7 +6,7 @@ import server from '../../src/app';
 import config from '../../src/config/config';
 import httpResponses from '../../src/constants/responses';
 import Trainer from '../../src/entities/Trainer';
-import setupTestDB from '../utils/setupTestDB';
+import setupTestDB from '../utils/setupTest';
 
 setupTestDB();
 
@@ -45,8 +45,6 @@ describe('/api/v1/auth', () => {
     it('should be get profile info successfully', async () => {
       const res = await exec();
 
-      jest.setTimeout(10000);
-
       expect(res.status).toBe(httpStatus.OK);
       expect(res.body).toHaveProperty('code', httpResponses.OK.code);
       expect(res.body).toHaveProperty('message', httpResponses.OK.message);
@@ -56,8 +54,6 @@ describe('/api/v1/auth', () => {
     it('should be failed if token is invalid', async () => {
       token = 'invalidToken';
       const res = await exec();
-
-      jest.setTimeout(10000);
 
       expect(res.status).toBe(httpStatus.UNAUTHORIZED);
       expect(res.body).toHaveProperty('code', httpResponses.UNAUTHORIZED.code);
@@ -74,8 +70,6 @@ describe('/api/v1/auth', () => {
         issuer: 'RocketmonAPI'
       });
       const res = await exec();
-
-      jest.setTimeout(10000);
 
       expect(res.status).toBe(httpStatus.NOT_FOUND);
       expect(res.body).toHaveProperty(
@@ -117,8 +111,6 @@ describe('/api/v1/auth', () => {
     it('should be register a new trainer successfully', async () => {
       const res = await exec();
 
-      jest.setTimeout(10000);
-
       expect(res.status).toBe(httpStatus.CREATED);
       expect(res.body).toMatchObject({
         code: httpResponses.CREATED.code,
@@ -129,8 +121,6 @@ describe('/api/v1/auth', () => {
     it('should be failed if password is invalid', async () => {
       password = '12345678';
       const res = await exec();
-
-      jest.setTimeout(10000);
 
       expect(res.status).toBe(httpStatus.BAD_REQUEST);
       expect(res.body).toHaveProperty('message');
@@ -146,8 +136,6 @@ describe('/api/v1/auth', () => {
       });
 
       const res = await exec();
-
-      jest.setTimeout(10000);
 
       expect(res.status).toBe(httpStatus.CONFLICT);
       expect(res.body).toHaveProperty('code', httpResponses.USER_TAKEN.code);
@@ -184,8 +172,6 @@ describe('/api/v1/auth', () => {
     it('should be login successfully', async () => {
       const res = await exec();
 
-      jest.setTimeout(10000);
-
       expect(res.status).toBe(httpStatus.OK);
       expect(res.body).toHaveProperty('code', httpResponses.OK.code);
       expect(res.body).toHaveProperty('message', httpResponses.OK.message);
@@ -194,8 +180,6 @@ describe('/api/v1/auth', () => {
     it('should be falied if trainer not exists', async () => {
       email = 'johndoe@mailinator.com';
       const res = await exec();
-
-      jest.setTimeout(10000);
 
       expect(res.status).toBe(httpStatus.NOT_FOUND);
       expect(res.body).toHaveProperty(
@@ -212,8 +196,6 @@ describe('/api/v1/auth', () => {
       email = 'johndoe';
       const res = await exec();
 
-      jest.setTimeout(10000);
-
       expect(res.status).toBe(httpStatus.BAD_REQUEST);
       expect(res.body).toHaveProperty('message');
     });
@@ -221,8 +203,6 @@ describe('/api/v1/auth', () => {
     it('should be failed if password not matches', async () => {
       password = 'Test*2023';
       const res = await exec();
-
-      jest.setTimeout(10000);
 
       expect(res.status).toBe(httpStatus.UNPROCESSABLE_ENTITY);
       expect(res.body).toHaveProperty(
@@ -265,19 +245,17 @@ describe('/api/v1/auth', () => {
       );
     });
 
-    // it('should be signout successfully', async () => {
-    //   const res = await exec();
+    it('should be signout successfully', async () => {
+      const res = await exec();
 
-    //   jest.setTimeout(10000);
+      jest.setTimeout(10000);
 
-    //   expect(res.status).toBe(httpStatus.NO_CONTENT);
-    // });
+      expect(res.status).toBe(httpStatus.NO_CONTENT);
+    });
 
     it('should be failed if token is invalid', async () => {
       token = 'invalidToken';
       const res = await exec();
-
-      jest.setTimeout(10000);
 
       expect(res.status).toBe(httpStatus.UNAUTHORIZED);
       expect(res.body).toHaveProperty('code', httpResponses.UNAUTHORIZED.code);
@@ -294,8 +272,6 @@ describe('/api/v1/auth', () => {
         issuer: 'RocketmonAPI'
       });
       const res = await exec();
-
-      jest.setTimeout(10000);
 
       expect(res.status).toBe(httpStatus.NOT_FOUND);
       expect(res.body).toHaveProperty(

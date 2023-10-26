@@ -11,12 +11,14 @@ import setupTestDB from '../utils/setupTestDB';
 setupTestDB();
 
 describe('/api/v1/pokemon', () => {
+  const baseURI = '/api/v1/pokemon';
+
   describe('POST /', () => {
     let limit: string, offset: string, token: string;
 
     const exec = () => {
       return request(server)
-        .get(`/api/v1/pokemon?limit=${limit}&offset=${offset}`)
+        .get(`${baseURI}?limit=${limit}&offset=${offset}`)
         .set('Authorization', `Bearer ${token}`)
         .send();
     };
@@ -102,7 +104,7 @@ describe('/api/v1/pokemon', () => {
 
     const exec = () => {
       return request(server)
-        .get(`/api/v1/pokemon/${name}`)
+        .get(`${baseURI}/${name}`)
         .set('Authorization', `Bearer ${token}`)
         .send();
     };

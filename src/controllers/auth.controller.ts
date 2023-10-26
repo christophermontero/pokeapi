@@ -133,7 +133,7 @@ const signout = async (req: Request, res: Response) => {
 
     await trainerService.updateLastLogin(trainer);
 
-    return res.status(httpStatus.NO_CONTENT);
+    return res.status(httpStatus.NO_CONTENT).json();
   } catch (error) {
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
       code: httpResponses.INTERNAL_ERROR.code,
