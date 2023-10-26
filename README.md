@@ -54,7 +54,7 @@ This is an API for visualize all pokemons with their stats.
   - name: string,
   - nickname: string,
   - password: string,
-  - team: string,
+  - team: string
 
 ## User guide
 

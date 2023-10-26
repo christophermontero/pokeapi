@@ -1,10 +1,10 @@
+import colors from 'colors';
 import { NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status';
 import mongoose from 'mongoose';
 import config from '../config/config';
 import logger from '../config/logger';
 import ApiError from '../utils/ApiError';
-import colors from 'colors';
 
 const errorConverter = (
   err: any | mongoose.Error,
@@ -24,6 +24,7 @@ const errorConverter = (
   next(error);
 };
 
+/* eslint-disable-nextline no-unused-vars */
 const errorHandler = (
   err: any | mongoose.Error,
   req: Request,

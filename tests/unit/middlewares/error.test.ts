@@ -141,9 +141,8 @@ describe('Error middlewares', () => {
       const error = new ApiError(httpStatus.BAD_REQUEST, 'Any error');
       const res = httpMocks.createResponse();
       const sendSpy = jest.spyOn(res, 'send');
-      const next = jest.fn();
 
-      err.errorHandler(error, httpMocks.createRequest(), res, next);
+      err.errorHandler(error, httpMocks.createRequest(), res, jest.fn());
 
       expect(sendSpy).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -159,9 +158,8 @@ describe('Error middlewares', () => {
       const error = new ApiError(httpStatus.BAD_REQUEST, 'Any error');
       const res = httpMocks.createResponse();
       const sendSpy = jest.spyOn(res, 'send');
-      const next = jest.fn();
 
-      err.errorHandler(error, httpMocks.createRequest(), res, next);
+      err.errorHandler(error, httpMocks.createRequest(), res, jest.fn());
 
       expect(sendSpy).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -178,9 +176,8 @@ describe('Error middlewares', () => {
       const error = new ApiError(httpStatus.BAD_REQUEST, 'Any error', false);
       const res = httpMocks.createResponse();
       const sendSpy = jest.spyOn(res, 'send');
-      const next = jest.fn();
 
-      err.errorHandler(error, httpMocks.createRequest(), res, next);
+      err.errorHandler(error, httpMocks.createRequest(), res, jest.fn());
 
       expect(sendSpy).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -197,9 +194,8 @@ describe('Error middlewares', () => {
       const error = new ApiError(httpStatus.BAD_REQUEST, 'Any error');
       const res = httpMocks.createResponse();
       const sendSpy = jest.spyOn(res, 'send');
-      const next = jest.fn();
 
-      err.errorHandler(error, httpMocks.createRequest(), res, next);
+      err.errorHandler(error, httpMocks.createRequest(), res, jest.fn());
 
       expect(sendSpy).toHaveBeenCalledWith(
         expect.objectContaining({
