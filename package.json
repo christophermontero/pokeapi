@@ -38,7 +38,7 @@
     "url": "https://github.com/christophermontero/rocketmon-api/issues"
   },
   "lint-staged": {
-    "**/*": "eslint --fix"
+    "**/*": "npx eslint --fix"
   },
   "homepage": "https://github.com/christophermontero/rocketmon-api#readme",
   "dependencies": {
