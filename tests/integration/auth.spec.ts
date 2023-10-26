@@ -159,7 +159,6 @@ describe('/api/v1/auth', () => {
     };
 
     beforeEach(async () => {
-      email = 'goldenboy@mailinator.com';
       password = 'Test*2023#';
 
       await Trainer.collection.insertOne({
@@ -214,6 +213,77 @@ describe('/api/v1/auth', () => {
       expect(res.body).toHaveProperty(
         'message',
         httpResponses.INVALID_PASSWORD.message
+      );
+    });
+  });
+
+  describe('POST /refresh-token', () => {
+    let token: string;
+
+    beforeEach(async () => {
+      await Trainer.collection.insertOne({
+        email: 'goldenboy@mailinator.com',
+        name: 'ashketchum',
+        nickname: 'Golden boy',
+        team: 'red',
+        password: await bcrypt.hash('Test*2023#', 10)
+      });
+
+      token = jwt.sign(
+        { id: '1', email: 'goldenboy@mailinator.com' },
+        config.jwt.secret,
+        {
+          expiresIn: 86400,
+          algorithm: 'HS256',
+          issuer: 'RocketmonAPI'
+        }
+      );
+    });
+
+    const exec = () => {
+      return request(server)
+        .get('/api/v1/auth/me')
+        .set('Authorization', `Bearer ${token}`);
+    };
+
+    it('should be signout successfully', async () => {
+      const res = await exec();
+
+      jest.setTimeout(10000);
+
+      expect(res.status).toBe(httpStatus.NO_CONTENT);
+    });
+
+    it('should be failed if token is invalid', async () => {
+      token = 'invalidToken';
+      const res = await exec();
+
+      expect(res.status).toBe(httpStatus.UNAUTHORIZED);
+      expect(res.body).toHaveProperty('code', httpResponses.UNAUTHORIZED.code);
+      expect(res.body).toHaveProperty(
+        'message',
+        httpResponses.UNAUTHORIZED.message
+      );
+    });
+
+    it('should be failed if user not exists', async () => {
+      token = jwt.sign({ id: '1', email: 'profesoroak' }, config.jwt.secret, {
+        expiresIn: 86400,
+        algorithm: 'HS256',
+        issuer: 'RocketmonAPI'
+      });
+      const res = await exec();
+
+      jest.setTimeout(10000);
+
+      expect(res.status).toBe(httpStatus.NOT_FOUND);
+      expect(res.body).toHaveProperty(
+        'code',
+        httpResponses.TRAINER_NOT_EXISTS.code
+      );
+      expect(res.body).toHaveProperty(
+        'message',
+        httpResponses.TRAINER_NOT_EXISTS.message
       );
     });
   });
