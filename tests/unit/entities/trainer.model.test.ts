@@ -1,4 +1,3 @@
-import { faker } from '@faker-js/faker';
 import Trainer from '../../../src/entities/Trainer';
 import { ITrainer } from '../../../src/interfaces/trainer';
 
@@ -8,8 +7,9 @@ describe('Trainer model', () => {
 
     beforeEach(() => {
       newTrainer = {
-        name: faker.internet.userName(),
-        email: faker.internet.email().toLowerCase(),
+        name: 'Ash Ketchum',
+        nickname: 'The golden boy',
+        email: 'goldenboy@mailinator.com',
         password: '1234567890',
         team: 'red'
       };

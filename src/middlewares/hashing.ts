@@ -4,11 +4,12 @@ import httpStatus from 'http-status';
 import logger from '../config/logger';
 import httpResponses from '../constants/responses';
 
+const SALT_ROUNDS = 10;
+
 const hashingPassword =
   () => async (req: Request, res: Response, next: NextFunction) => {
-    const saltRounds = 10;
     try {
-      const salt = await bcrypt.genSalt(saltRounds);
+      const salt = await bcrypt.genSalt(SALT_ROUNDS);
       const hashedPassword = await bcrypt.hash(req.body.password, salt);
       req.body = { ...req.body, hashedPassword };
       return next();
