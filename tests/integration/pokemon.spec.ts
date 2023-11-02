@@ -8,9 +8,8 @@ import httpResponses from '../../src/constants/responses';
 import Trainer from '../../src/entities/Trainer';
 import setupTestDB from '../utils/setupTest';
 
-setupTestDB();
-
 describe('/api/v1/pokemon', () => {
+  setupTestDB();
   const baseURI = '/api/v1/pokemon';
 
   describe('POST /', () => {
