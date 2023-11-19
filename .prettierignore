@@ -1,3 +1,5 @@
+docs/assets
 node_modules
 dist
 coverage
+README.md

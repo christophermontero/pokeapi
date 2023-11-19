@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { serve, setup } from 'swagger-ui-express';
-import * as swaggerDocument from '../../../docs/rocketmon-api-doc-v1.json';
+import * as swaggerDocument from '../../../docs/poke-api-doc-v1.json';
 import config from '../../config/config';
 import auth from './auth.route';
 import pokemon from './pokemon.route';
