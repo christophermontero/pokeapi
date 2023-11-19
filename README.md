@@ -1,3 +1,5 @@
+<p align="center"><img src="./docs/assets/pokelogo.png" alt="logo"></p>
+
 # Poke API
 
 ![last commit](https://img.shields.io/github/last-commit/christophermontero/pokeapi)
@@ -8,33 +10,43 @@
 
 ## Table of contents
 
-- [Project description](#project-description)
-  - [Architecture](#architecture)
-  - [Endpoints](#endpoints)
-  - [MongoDB documents structure](#mongodb-documents-structure)
-- [User guide](#user-guide)
-- [Install guide](#install-guide)
+- [Poke API](#poke-api)
+  - [Table of contents](#table-of-contents)
+  - [Project description](#project-description)
+    - [Features](#features)
+    - [Architecture](#architecture)
+      - [Use case diagram](#use-case-diagram)
+      - [Component diagram](#component-diagram)
+      - [Deployment diagram](#deployment-diagram)
+    - [Endpoints](#endpoints)
+    - [MongoDB documents structure](#mongodb-documents-structure)
+  - [User guide](#user-guide)
   - [Requeriments](#requeriments)
-- [Author](#author)
-- [License](#license)
+  - [Install guide](#install-guide)
+  - [Comments](#comments)
+  - [License](#license)
+  - [Author](#author)
 
 ## Project description
 
-This is an API for visualize all pokemons with their stats.
+Poke API is a comprehensive RESTful API designed to provide detailed information about Pokémon. It offers a wide range of data, including but not limited to, Pokémon characteristics, abilities, and statistics. This API is perfect for developers building applications that require Pokémon data.
+
+### Features
+- Comprehensive Pokémon Data: Access detailed information on Pokémon species, abilities, moves, and types.
 
 ### Architecture
 
 #### Use case diagram
 
-![use case diagram](https://github.com/christophermontero/pokeapi/blob/master/docs/diagrams/use-case-diagram.jpg?raw=true)
+![use case diagram](./docs/assets/diagrams/usecase.png)
 
 #### Component diagram
 
-![component diagram](https://github.com/christophermontero/pokeapi/blob/master/docs/diagrams/component-diagram.jpg?raw=true)
+![component diagram](./docs/assets/diagrams/component.png)
 
 #### Deployment diagram
 
-![deployment diagram](https://github.com/christophermontero/pokeapi/blob/master/docs/diagrams/deployment-diagram.jpg?raw=true)
+![deployment diagram](./docs/assets/diagrams/deployment.png)
 
 ### Endpoints
 
@@ -42,7 +54,9 @@ This is an API for visualize all pokemons with their stats.
 * Auth:
   * POST /api/v1/auth/signup
   * POST /api/v1/auth/signin
-* Pokemons:
+  * GET /api/v1/auth/signout
+  * GET /api/v1/auth/me
+* Pokemon:
   * GET /api/v1/pokemon
   * GET /api/v1/pokemon/:name
 ```
@@ -55,6 +69,8 @@ This is an API for visualize all pokemons with their stats.
   - nickname: string,
   - password: string,
   - team: string
+  - createdAt
+  - lastConnection
 
 ## User guide
 
@@ -62,12 +78,17 @@ Describe the project structure and how to use it.
 
 ```bash
 .
+├── docs
+│   ├── diagrams
+│   │   ├── component-diagram.jpg
+│   │   ├── deployment-diagram.jpg
+│   │   └── use-case-diagram.jpg
+│   └── poke-api-doc-v1.json
 ├── ecosystem.config.js
 ├── jest.config.ts
 ├── LICENSE
 ├── nodemon.json
 ├── package.json
-├── package-lock.json
 ├── README.md
 ├── src
 │   ├── app.ts
@@ -100,7 +121,6 @@ Describe the project structure and how to use it.
 │   ├── utils
 │   │   ├── ApiError.ts
 │   │   ├── jwt.ts
-│   │   ├── logger.ts
 │   │   ├── pick.ts
 │   │   └── pokemon.ts
 │   └── validators
@@ -110,12 +130,23 @@ Describe the project structure and how to use it.
 │   ├── integration
 │   │   ├── auth.spec.ts
 │   │   └── pokemon.spec.ts
+│   ├── unit
+│   │   ├── entities
+│   │   └── middlewares
 │   └── utils
-│       └── setupTestDB.ts
+│       └── setupTest.ts
 └── tsconfig.json
+
 ```
 
 Chekc the API documentation [here](https://pokeapi.herokuapp.com/api/v1/docs)
+
+
+## Requeriments
+
+- Node.js version 18 or higher [Node.js](https://nodejs.org/en/)
+- NPM version 8 or higher [NPM](https://www.npmjs.com/)
+- MongoDB version 4 or higher [MongoDB](https://www.mongodb.com/)
 
 ## Install guide
 
@@ -128,16 +159,14 @@ npm install
 npm run dev
 ```
 
-### Requeriments
+## Comments
 
-- Node.js version 18 or higher [Node.js](https://nodejs.org/en/)
-- NPM version 8 or higher [NPM](https://www.npmjs.com/)
-- MongoDB version 4 or higher [MongoDB](https://www.mongodb.com/)
-
-## Author
-
-- [Christopher Ortiz Montero](https://github.com/christophermontero)
+If you have any feedback, please reach out at cgortizm21@gmail.com
 
 ## License
 
 This project is under [Apache License](https://www.apache.org/licenses/LICENSE-2.0).
+
+## Author
+
+[@christophermontero](https://github.com/christophermontero)
