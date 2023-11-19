@@ -1,5 +1,5 @@
 {
-  "name": "rocketmon-api",
+  "name": "pokeapi",
   "version": "1.0.0",
   "description": "This is an API for visualize all pokemons with their stats",
   "main": "src/index.ts",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/christophermontero/rocketmon-api.git"
+    "url": "https://github.com/christophermontero/pokeapi.git"
   },
   "keywords": [
     "api",
@@ -35,12 +35,12 @@
   "author": "giocom",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/christophermontero/rocketmon-api/issues"
+    "url": "https://github.com/christophermontero/pokeapi/issues"
   },
   "lint-staged": {
     "*": "eslint . --fix"
   },
-  "homepage": "https://github.com/christophermontero/rocketmon-api#readme",
+  "homepage": "https://github.com/christophermontero/pokeapi/blob/master/README.md",
   "dependencies": {
     "bcrypt": "~5.1.0",
     "colors": "~1.4.0",

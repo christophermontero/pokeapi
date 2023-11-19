@@ -1,4 +1,4 @@
-name: rocketmon-pipeline
+name: pokeapi-pipeline
 
 on:
   push:

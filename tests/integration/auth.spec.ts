@@ -36,7 +36,7 @@ describe('/api/v1/auth', () => {
         {
           expiresIn: 86400,
           algorithm: 'HS256',
-          issuer: 'RocketmonAPI'
+          issuer: 'PokeAPI'
         }
       );
     });
@@ -66,7 +66,7 @@ describe('/api/v1/auth', () => {
       token = jwt.sign({ id: '1', email: 'profesoroak' }, config.jwt.secret, {
         expiresIn: 86400,
         algorithm: 'HS256',
-        issuer: 'RocketmonAPI'
+        issuer: 'PokeAPI'
       });
       const res = await exec();
 
@@ -239,7 +239,7 @@ describe('/api/v1/auth', () => {
         {
           expiresIn: 86400,
           algorithm: 'HS256',
-          issuer: 'RocketmonAPI'
+          issuer: 'PokeAPI'
         }
       );
     });
@@ -268,7 +268,7 @@ describe('/api/v1/auth', () => {
       token = jwt.sign({ id: '1', email: 'profesoroak' }, config.jwt.secret, {
         expiresIn: 86400,
         algorithm: 'HS256',
-        issuer: 'RocketmonAPI'
+        issuer: 'PokeAPI'
       });
       const res = await exec();
 

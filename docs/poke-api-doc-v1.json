@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Rocketmon API",
+    "title": "Poke API",
     "version": "1.0",
-    "description": "# Introduction\nRocketmon is a backend for visualize pokemons",
+    "description": "# Introduction\nPoke API is a backend for visualize pokemons",
     "contact": {
       "name": "Christopher Ortiz Montero",
       "email": "cgortizm21@gmail.com",
@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://rocketmon-api.herokuapp.com/api/v1",
+      "url": "https://pokeapi.herokuapp.com/api/v1",
       "description": "production"
     },
     {

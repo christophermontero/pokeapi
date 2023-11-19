@@ -2,3 +2,4 @@ node_modules
 dist
 ecosystem.config.js
 coverage
+README.md

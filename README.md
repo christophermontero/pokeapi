@@ -1,10 +1,10 @@
-# Rocketmon API
+# Poke API
 
-![last commit](https://img.shields.io/github/last-commit/christophermontero/rocketmon-api)
-![license](https://img.shields.io/github/license/christophermontero/rocketmon-api)
-![build](https://img.shields.io/github/actions/workflow/status/christophermontero/rocketmon-api/pipeline.yml)
-![repo size](https://img.shields.io/github/repo-size/christophermontero/rocketmon-api)
-![watchers](https://img.shields.io/github/watchers/christophermontero/rocketmon-api?style=social)
+![last commit](https://img.shields.io/github/last-commit/christophermontero/pokeapi)
+![license](https://img.shields.io/github/license/christophermontero/pokeapi)
+![build](https://img.shields.io/github/actions/workflow/status/christophermontero/pokeapi/pipeline.yml)
+![repo size](https://img.shields.io/github/repo-size/christophermontero/pokeapi)
+![watchers](https://img.shields.io/github/watchers/christophermontero/pokeapi?style=social)
 
 ## Table of contents
 
@@ -26,15 +26,15 @@ This is an API for visualize all pokemons with their stats.
 
 #### Use case diagram
 
-![use case diagram](https://github.com/christophermontero/rocketmon-api/blob/master/docs/diagrams/use-case-diagram.jpg?raw=true)
+![use case diagram](https://github.com/christophermontero/pokeapi/blob/master/docs/diagrams/use-case-diagram.jpg?raw=true)
 
 #### Component diagram
 
-![component diagram](https://github.com/christophermontero/rocketmon-api/blob/master/docs/diagrams/component-diagram.jpg?raw=true)
+![component diagram](https://github.com/christophermontero/pokeapi/blob/master/docs/diagrams/component-diagram.jpg?raw=true)
 
 #### Deployment diagram
 
-![deployment diagram](https://github.com/christophermontero/rocketmon-api/blob/master/docs/diagrams/deployment-diagram.jpg?raw=true)
+![deployment diagram](https://github.com/christophermontero/pokeapi/blob/master/docs/diagrams/deployment-diagram.jpg?raw=true)
 
 ### Endpoints
 
@@ -115,15 +115,15 @@ Describe the project structure and how to use it.
 └── tsconfig.json
 ```
 
-Chekc the API documentation [here](https://rocketmon-api.herokuapp.com/api/v1/docs)
+Chekc the API documentation [here](https://pokeapi.herokuapp.com/api/v1/docs)
 
 ## Install guide
 
 Below are the instructions to install and run the project en development mode.
 
 ```bash
-git clone https://github.com/christophermontero/rocketmon-api.git
-cd rocketmon-api
+git clone https://github.com/christophermontero/pokeapi.git
+cd pokeapi
 npm install
 npm run dev
 ```
