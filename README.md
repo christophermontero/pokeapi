@@ -79,10 +79,12 @@ Describe the project structure and how to use it.
 ```bash
 .
 ├── docs
-│   ├── diagrams
-│   │   ├── component-diagram.jpg
-│   │   ├── deployment-diagram.jpg
-│   │   └── use-case-diagram.jpg
+│   ├── assets
+│   │   ├── diagrams
+│   │   │   ├── component.png
+│   │   │   ├── deployment.png
+│   │   │   ├── usecase.png
+│   │   ├── pokelogo.png
 │   └── poke-api-doc-v1.json
 ├── ecosystem.config.js
 ├── jest.config.ts
