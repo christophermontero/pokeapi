@@ -69,8 +69,8 @@ Poke API is a comprehensive RESTful API designed to provide detailed information
   - nickname: string,
   - password: string,
   - team: string
-  - createdAt
-  - lastConnection
+  - createdAt: date
+  - lastConnection: date
 
 ## User guide
 
