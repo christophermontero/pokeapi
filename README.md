@@ -1,17 +1,14 @@
 <p align="center"><img src="./docs/assets/pokelogo.png" alt="logo"></p>
 
-# Poke API
-
 ![last commit](https://img.shields.io/github/last-commit/christophermontero/pokeapi)
 ![license](https://img.shields.io/github/license/christophermontero/pokeapi)
 ![build](https://img.shields.io/github/actions/workflow/status/christophermontero/pokeapi/pipeline.yml)
 ![repo size](https://img.shields.io/github/repo-size/christophermontero/pokeapi)
 ![watchers](https://img.shields.io/github/watchers/christophermontero/pokeapi?style=social)
 
-## Table of contents
+# Poke API
 
 - [Poke API](#poke-api)
-  - [Table of contents](#table-of-contents)
   - [Project description](#project-description)
     - [Features](#features)
     - [Architecture](#architecture)
