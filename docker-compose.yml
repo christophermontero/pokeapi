@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  pokeapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: pokeapi
+    container_name: pokeapi-dev
+    depends_on:
+      - mongodb
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/pokeapi
+    networks:
+      - pokenetwork
+    environment:
+      - MONGODB_URL=mongodb://mongodb:27017/pokedb
+  mongodb:
+    image: mongo:4.2.1-bionic
+    ports:
+      - '27017:27017'
+    volumes:
+      - pokedb:/data/db
+    networks:
+      - pokenetwork
+
+volumes:
+  pokedb:
+
+networks:
+  pokenetwork:

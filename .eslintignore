@@ -4,3 +4,6 @@ dist
 ecosystem.config.js
 coverage
 README.md
+Dockerfile
+.dockerignore
+*.yml

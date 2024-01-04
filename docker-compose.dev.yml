@@ -1,0 +1,6 @@
+version: '3'
+
+services:
+  pokeapi:
+    container_name: pokeapi-dev
+    command: yarn dev -L
